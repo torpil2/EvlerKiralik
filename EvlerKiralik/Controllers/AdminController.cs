@@ -28,6 +28,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis.Differencing;
+using NuGet.Protocol;
 
 namespace EvlerKiralik.Controllers
 {
@@ -45,9 +46,15 @@ namespace EvlerKiralik.Controllers
 
         public IActionResult Index()
         {
+           
+            _database.ChangeTracker.DetectChanges();
+            var deneme = _database.ChangeTracker.DebugView.LongView.ToList();
 
-            return View();
+
+
+            return View(deneme);
         }
+        
 
 
         
@@ -402,16 +409,23 @@ namespace EvlerKiralik.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditUserAct(User user)
+        public async Task<ActionResult> EditUserAct(int userId,string userMail,string userName,string userPassword,string userType)
         {
-            var edituser = _database.Users.Where(x=>x.UserId== user.UserId).SingleOrDefault();
-
-            edituser.UserName = user.UserName;
-            edituser.UserMail = user.UserMail;
-            edituser.UserPassword = user.UserPassword;
-            edituser.UserType = user.UserType;
-            await _database.SaveChangesAsync();
-            return View("UsersView","Admin");
+            var edituser = _database.Users.Where(x=>x.UserId== userId).FirstOrDefault();
+            if(edituser!= null)
+            {
+                edituser.UserName = userName;
+                edituser.UserMail = userMail;
+                edituser.UserPassword = userPassword;
+                edituser.UserType = userType;
+                _database.Users.Update(edituser);
+                await _database.SaveChangesAsync();
+                return RedirectToAction("UsersView", "Admin");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

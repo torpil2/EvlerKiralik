@@ -19,22 +19,22 @@
     <form method="post" action="/Admin/EditUserAct" style="width:25%;">
 
         <label>Kullanıcı ID</label>
-        <input type="text" class="form-control" disabled value="@Model.UserId"  />
+        <input type="text" class="form-control" name="userId"  value="@Model.UserId" readonly />
 
         <label>Kullanıcı mail</label>
-        <input class="form-control" type="text" value="@Model.UserMail" />
+        <input class="form-control" type="text" name="userMail" value="@Model.UserMail" />
 
         <label>Kullanıcı adı</label>
-        <input class="form-control" type="text" value="@Model.UserName" />
+        <input class="form-control" type="text" name="userName" value="@Model.UserName" />
 
 
         <label>Kullanıcı Şifresi</label>
-        <input class="form-control" type="text" value="@Model.UserPassword" />
+        <input class="form-control" type="text" name="userPassword" value="@Model.UserPassword" />
            
 
         
         <label>User Type</label>
-        <input list="usertypelist" name="silinecekodasayi" style="width:100%;" placeholder="Sonra Düzenlenecek" autocomplete="off" />
+        <input list="usertypelist" name="userType"  style="width:100%;" placeholder="Sonra Düzenlenecek" autocomplete="off" />
             <datalist id="usertypelist" autocomplete="off" >
             
          

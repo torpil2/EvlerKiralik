@@ -56,10 +56,68 @@
     // Your code to run since DOM is loaded and ready
     });
 </script>
+
+
+    <script>
+        function LoginFormAc() {
+            var logform = document.getElementById("loginform")
+            if (logform.style.display == "none") {
+                logform.style.display = "block";
+            }
+            else if (logform.style.display == "block") {
+                logform.style.display = "none";
+            }
+        }
+</script>
+
+
+<div id="loginform" class="loginform" style="display:none;">
+    <div id="logortalama" style="position: absolute; top: 30%; left: 35%;">
+        <form action="/Login/Login" method="post">
+            <label>KULLANICI ADI</label>
+            <input type="text" class="form-control" name="txtUserName" placeholder="userName" />
+            <label>ŞİFRE</label>
+            <input type="text" class="form-control" name="txtPassword" placeholder="password" />
+
+
+
+            <button class="btn btn-success" type="submit"> Giriş Yap</button>
+
+        </form>
+    </div>
+</div> 
+
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
         <div class="header_img"> <img src="/imgs/kare.png" alt=""> </div>
+
+        <label id="logindiv" style="float:right !important;position:absolute;left:88%;">
+            @if (User.Identity.Name != null)
+            {
+
+                <a style="background-color:violet;">  @User.Identity.Name</a>
+                <a style="background-color:violet;">@User.Claims.FirstOrDefault(c => c.Type == "UserMail").Value</a>
+
+
+            }
+            else
+            {
+                <button style="border-radius:15px;" onclick="LoginFormAc()">Giriş Yapınız</button>
+
+
+            }
+
+            @if (User.Identity.Name != null)
+            {
+                <div style="float:right !important;height:auto;position:absolute;left:60% !important;">
+                    <form method="post" action="/Login/LogoutAct">
+                        <button class="btn btn-info">Logout</button>
+
+                    </form>
+                </div>
+            }
+        </label>
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">

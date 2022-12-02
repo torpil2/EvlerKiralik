@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1djCPD01ZCMKJIrYbAXnjSGUpuxg9VFEauTZ19qTjV2vALTsOk78e/s7NkmmFxTIOoqkNUIfFsMkq1qNhukyZw==",
+  "dgSpecHash": "mHsp//Ru4nqS7U/MQEvdGaiDBzduRGLs8FXGg8tVo51Snr9XOKWU7i+JLsp3kB/C9vuB2Ygj7AbiQK5MF7Ynkw==",
   "success": true,
-  "projectFilePath": "D:\\evlerkiralik\\EvlerKiralik\\EvlerKiralik\\EvlerKiralik.csproj",
+  "projectFilePath": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\EvlerKiralik.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bugra\\.nuget\\packages\\bootstrap\\5.2.2\\bootstrap.5.2.2.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\font.awesome\\5.15.4\\font.awesome.5.15.4.nupkg.sha512",
