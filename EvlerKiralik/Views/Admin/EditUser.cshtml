@@ -1,0 +1,50 @@
+﻿@model EvlerKiralik.DAL.Entities.User
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    label{
+        color:white;
+        margin-top:1em;
+        font-weight:600;
+        text-decoration:underline;
+        margin-bottom:auto;
+        
+    }
+</style>
+
+<div class="container-fluid d-grid gap-2 d-md-flex justify-content-md-start" style="width:100%;margin-top:5em;padding:1em;">
+    <form method="post" action="/Admin/EditUserAct" style="width:25%;">
+
+        <label>Kullanıcı ID</label>
+        <input type="text" class="form-control" disabled value="@Model.UserId"  />
+
+        <label>Kullanıcı mail</label>
+        <input class="form-control" type="text" value="@Model.UserMail" />
+
+        <label>Kullanıcı adı</label>
+        <input class="form-control" type="text" value="@Model.UserName" />
+
+
+        <label>Kullanıcı Şifresi</label>
+        <input class="form-control" type="text" value="@Model.UserPassword" />
+           
+
+        
+        <label>User Type</label>
+        <input list="usertypelist" name="silinecekodasayi" style="width:100%;" placeholder="Sonra Düzenlenecek" autocomplete="off" />
+            <datalist id="usertypelist" autocomplete="off" >
+            
+         
+                <option selected>Deneme </option>
+           
+
+        </datalist>
+
+        <button type="submit" class="btn btn-warning btn-block" style="margin-top:1.5em;" > Düzenle</button>
+    </form>
+</div>
+
+

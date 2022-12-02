@@ -1,0 +1,377 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="@Url.Content("~/css/adminsite.css")" asp-append-version="true" />
+
+@section scripts
+{
+@*<script>
+
+ 
+    var divsToHide = document.getElementsByClassName("row"); //divsToHide is an array
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.visibility = "hidden"; // or
+        divsToHide[i].style.display = "none"; // depending on what you're doing
+    }
+
+</script>*@
+
+<script>
+        $("#filterTextBox").on('keyup', function () {
+            var search = $(this).val().toLowerCase();
+            $(".row").show().filter(function () {
+                return $(this).text().toLowerCase().indexOf(search) < 0;
+            }).hide();
+        });
+
+</script>
+    <script>
+       
+        function addname(val) {
+            doc
+            document.getElementById().setAttribute("name","silinecekoda");
+        }
+    </script>
+
+}
+
+<div class="" style="align-content:center;margin-left:1.5%;border:1px dotted violet;width:30%;">
+
+    <label id="editcategoryitem" >
+        <h2>Kategori Düzenleme</h2>
+        <a>Silinecek Kategori Arama</a>
+
+    <input type="text" id="filterTextBox" style="width:50%;" />
+</label>
+</div>
+
+
+
+<div class="container-fluid d-grid gap-2 d-md-flex justify-content-md-start" style="display:flex;flex-direction:row;align-content:center;align-items:center;width:100%">
+    
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Oda Sayısı Liste</a>
+
+        </label>
+        <form action="/Admin/OdaSayiSil" method="post" style="width:50%;height:50%;">
+            <input list="odalist" name="silinecekodasayi" style="width:100%;height:50%;" placeholder="Oda Sayısı List" autocomplete="off" />
+            <datalist id="odalist" autocomplete="off" >
+            
+            @foreach (OdaSayisi OdaSay in Model.OdaSayiListe)
+            {
+                <option  >@OdaSay.OdaSayisi1 </option>
+            }
+
+        </datalist>
+         <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+        <form style="width:50%;" action="/Admin/OdaSayiEkle" method="post">
+            <input type="text" name="odasayi" class="form-control" autocomplete="off" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+
+       <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Bina Yaşı Liste</a>
+
+        </label>
+        <form action="/Admin/BinaYasiSil" method="post" style="width:50%;height:50%;">
+            <input list="binalist" name="silinecekbinayasi" style="width:100%;height:50%;" placeholder="Bİna Yasi List" autocomplete="off" />
+            <datalist id="binalist" autocomplete="off">
+            @foreach (BinaYasi Binayas in Model.BinayasiListe)
+            {
+                    <option >@Binayas.BinaYasi1 </option>
+            }
+        </datalist>
+        <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+        <form style="width:50%;" action="/Admin/BinyaYasiEkle" method="post">
+            <input type="text" class="form-control" name="binayasi" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+
+
+
+      <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Daire Kat Liste</a>
+
+        </label>
+        <form action="/Admin/DaireKatSil" method="post" style="width:50%;height:50%;">
+            <input list="dairekatlist" name="silinecekdairekat" style="width:100%;height:50%;" placeholder="Daire Kat List" autocomplete="off" />
+            <datalist id="dairekatlist" autocomplete="off">
+            @foreach (DaireKat DaireKa in Model.DaireKatListe)
+            {
+                <option>@DaireKa.DaireKat1 </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/DaireKatEkle">
+            <input type="text" name="dairekat" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+</div>
+
+
+
+<div class="container-fluid  d-grid gap-2 d-md-flex justify-content-md-start" style="display:flex;flex-direction:row;align-content:center;align-items:center;width:100%">
+
+  
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Isıtma Tür Liste</a>
+
+        </label>
+        <form action="/Admin/IsitmaTurSil" method="post" style="width:50%;height:50%;">
+            <input list="isitmaturlist" name="silinecekisitmatur" style="width:100%;height:50%;" placeholder="Isıtma Tür List" autocomplete="off" />
+            <datalist id="isitmaturlist" autocomplete="off">
+            @foreach (IsitmaTur IsitmaTu in Model.IsitmaListe)
+            {
+                <option>@IsitmaTu.IsitmaTur1 </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/IsitmaTurEkle">
+            <input type="text" name="isitmatur" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Banyo Sayısı Liste</a>
+
+        </label>
+        <form action="/Admin/BanyoSayıSil" method="post" style="width:50%;height:50%;">
+            <input list="banyosayilist" name="silinecekbanyosayi" style="width:100%;height:50%;" placeholder="Isıtma Tür List" autocomplete="off" />
+            <datalist id="banyosayilist" autocomplete="off">
+            @foreach (BanyoSayi BanyoSay in Model.BanyoSayiListe)
+            {
+                <option >@BanyoSay.BanyoSayi1 </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+       
+        </form>
+        <form style="width:50%;" method="post" action="/Admin/BanyoSayıEkle">
+            <input type="text" name="banyosayi" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Balkon Sayısı Liste</a>
+
+        </label>
+        <form action="/Admin/BalkonSayıSil" method="post" style="width:50%;height:50%;">
+            <input list="balkonsayilist" name="silinecekbalkonsayi" style="width:100%;height:50%;" placeholder="Balkon Sayı List" autocomplete="off" />
+            <datalist id="balkonsayilist" autocomplete="off">
+            @foreach (BalkonSayi Balkonsay in Model.BalkonSayiListe)
+            {
+                <option >@Balkonsay.BalkonSayi1 </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/BalkonSayıEkle">
+            <input type="text" name="balkonsayi" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+</div>
+
+
+
+<div class="container-fluid  d-grid gap-2 d-md-flex justify-content-md-start" style="display:flex;flex-direction:row;align-content:center;align-items:center;width:100%">
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Eşyalı Check Liste</a>
+
+        </label>
+        <form action="/Admin/EsyaliCheckSil" method="post" style="width:50%;height:50%;">
+            <input list="esyalichecklist" name="silinecekesyalicheck" style="width:100%;height:50%;" placeholder="Eşyalı Check List" autocomplete="off" />
+            <datalist id="esyalichecklist" autocomplete="off">
+            @foreach (IsEsyali IsEsyal in Model.EsyaliCheckListe)
+            {
+                <option>@IsEsyal.IsEsyali1 </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/EsyaliCheckEkle">
+            <input type="text" name="esyalicheck" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Site Check Liste</a>
+
+        </label>
+        <form action="/Admin/SiteCheckSil" method="post" style="width:50%;height:50%;">
+            <input list="sitechecklist" name="silineceksitecheck" style="width:100%;height:50%;" placeholder="Site Check List" autocomplete="off" />
+            <datalist id="sitechecklist" autocomplete="off">
+            @foreach (IsinSite IsinSit in Model.SiteCheckListe)
+            {
+                <option>@IsinSit.IsinSite1 </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+        <form style="width:50%;" method="post" action="/Admin/SiteCheckEkle">
+            <input type="text" name="sitecheck" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Kimden Liste</a>
+
+        </label>
+        <form action="/Admin/KimdenListeSil" method="post" style="width:50%;height:50%;">
+            <input list="kimdenlist" name="silinecekkimden" style="width:100%;height:50%;" placeholder="Kimden List" autocomplete="off" />
+            <datalist id="kimdenlist" autocomplete="off">
+            @foreach (Kimden KimdenList in Model.KimdenListe)
+            {
+                <option >@KimdenList.KimdenAdi </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/KimdenListeEkle">
+            <input type="text" name="kimden" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+ 
+</div>
+
+
+<div class="container-fluid d-grid gap-2 d-md-flex justify-content-md-start" style="display:flex;flex-direction:row;align-content:center;align-items:center;width:100%">
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Ödeme Tür Liste</a>
+
+        </label>
+        <form action="/Admin/OdemeTurSil" method="post" style="width:50%;height:50%;">
+            <input list="odemeturlist" name="silinecekodemetur" style="width:100%;height:50%;" placeholder="Odeme Tur List" autocomplete="off" />
+            <datalist id="odemeturlist" autocomplete="off">
+            @foreach (OdemeTur OdemeTurList in Model.OdemeTurListe)
+            {
+                <option>@OdemeTurList.OdemeTurName </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/OdemeTurEkle">
+            <input type="text" name="odemetur" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Boost Tip Liste</a>
+
+        </label>
+        <form action="/Admin/BoostTipSil" method="post" style="width:50%;height:50%;">
+            <input list="boostTipList" name="silinecekBoostTip" style="width:100%;height:50%;" placeholder="Boost Tip List" autocomplete="off" />
+            <datalist id="boostTipList" autocomplete="off">
+            @foreach (BoostTip BoostTipList in Model.BoostTipListe)
+            {
+                <option>@BoostTipList.BoostTipAdi </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/BoostTipEkle">
+            <input type="text" name="boostTip" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+
+
+    <div class="row" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>Ev Türleri Liste</a>
+
+        </label>
+        <form action="/Admin/EvTipSil" method="post" style="width:50%;height:50%;">
+            <input list="evtiplist" name="silinecekEvTip" style="width:100%;height:50%;" placeholder="Ev Tip List" autocomplete="off" />
+            <datalist id="evtiplist" autocomplete="off">
+            @foreach (EvTip EvTipListe in Model.EvTipListe)
+            {
+                <option>@EvTipListe.EvTipName </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/EvTipEkle">
+            <input type="text" name="evTip" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+    </div>
+   
+    </div>
+
+
+
+<div class="container-fluid d-grid gap-2 d-md-flex justify-content-md-start" style="display:flex;flex-direction:row;align-content:center;align-items:center;width:100%">
+
+    <div class="row" style="border:3px solid white;margin:1em;width:30%;align-content:center; ">
+        <label id="editcategoryitem">
+            <a>Toplam Kat Liste</a>
+        </label>
+        <form action="/Admin/ToplamKatSil" method="post" style="width:50%;height:50%;">
+            <input list="toplamkatlist" name="silinecekToplamKat" style="width:100%;height:50%;" placeholder="Site Check List" autocomplete="off" />
+            <datalist id="toplamkatlist" autocomplete="off">
+            @foreach (ToplamKat ToplamKatList in Model.ToplamKatListe)
+            {
+                <option >@ToplamKatList.ToplamKatAdi </option>
+            }
+        </datalist>
+            <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+
+        <form style="width:50%;" method="post" action="/Admin/ToplamKatEkle">
+            <input type="text" name="toplamKat" class="form-control" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+
+    </div>
+
+
+</div>
+

@@ -1,0 +1,236 @@
+
+
+
+.select2 {
+    margin-top: 1rem !important;
+    width:16em !important;    
+    margin-left:auto !important;
+    margin-right:auto !important;
+    margin-bottom:1rem !important;
+    font-size:0.86em;
+    position:absolute;        
+    
+}
+
+.select2-selection__rendered {
+    line-height: 31px !important;
+}
+
+.select2-selection {
+    height: 2rem !important;
+}
+.select2-dropdown {
+   font-size:12px !important;
+
+}
+.select2-selection__choice  {
+    font-size:12px;
+    height:30px !important;
+    
+    
+    padding:0 !important;
+}
+.select2-selection--multiple
+{
+    height:30px !important;
+ 
+}
+
+#topnavbar {
+    background-color: #3e4444;
+    width: 100%;
+    border-radius: 3em;
+    z-index:3;
+}
+#ortalamadiv {
+    align-items:center;
+   margin-left:5%
+}
+.card{
+   margin-right:2rem;
+   width:20em !important;
+   font-size:15px !important;
+   padding:0 
+   
+   
+}
+.card-text
+{
+    height:8rem;        
+
+}
+
+
+.sticky {
+    top: 0;
+    width: 100%;
+    align-items: center;
+    position: fixed;
+    z-index: 3;
+}
+
+   
+   /*table PAGE DENEME */
+body {
+    background: #252525;
+    font-family: "Lato", sans-serif;
+}
+
+h2 {
+    color: #000;
+    text-align: center;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.warpper {
+    display: flex;
+    flex-direction: column;
+   /* align-items:center;*/
+    
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-right: -6rem;
+    background: #eca1a6;
+    display: inline-block;
+    color: #fff;
+    border-radius: 3px 3px 0px 0px;
+    box-shadow: 0 0.5rem 0.8rem #00000080;
+    width: 18em;
+    font-family: 'Times New Roman', Times, serif;
+    border: 3px solid black;
+    border-radius: 50px;
+   
+    transition: all 500ms;
+}
+    .tab:hover {
+        transform: translateX(-1rem);      
+        transition: all 500ms;
+        z-index:3;
+    }
+
+.tabs {
+    margin-top: 0.7rem;
+    margin: 0 auto;
+    align-self: center;
+    height:3.5em;
+  
+    
+}
+
+#ilanolusturdiv
+{
+    background-color:red;
+
+    
+}
+
+#ilanform
+{  
+   display:inline !important;
+}
+
+.loginform {
+    background-color: red;
+    height: 50%;
+    width: 50em;
+    z-index: 999;
+    position: fixed;
+    left: 50%;
+    top: 5%;
+    transform: translate(-50%, 5%);
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    border-radius: 50px;
+}
+.form-control{
+  margin:0.7em;
+  display:inline;
+  width:15%;
+  
+}
+.form-control-sm
+{
+    display:inline !important;
+}
+
+
+.panels {
+   
+    background: #fff;
+    box-shadow: 0 1rem 1rem #eca1a6;
+    min-height: 40rem;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 15px;
+    align-items:center;*/
+   
+}
+
+.panel {
+    width:90%;
+    display: none;
+    animation: fadein 0.8s;
+    margin:0 auto;
+  /*  align-items:center;*/
+    
+    
+}
+img {
+ 
+    width: 22.063rem;
+    
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.panel-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.radio {
+    display: none;
+}
+
+#one:checked ~ .panels #one-panel,
+#two:checked ~ .panels #two-panel,
+#three:checked ~ .panels #three-panel,
+#four:checked ~ .panels #four-panel {
+    display: block;
+}
+
+#one:checked ~ .tabs #one-tab,
+#two:checked ~ .tabs #two-tab,
+#three:checked ~ .tabs #three-tab,
+#four:checked ~ .tabs #four-tab {
+    background: #fff;
+    color: #000;
+    border-top: 3px solid #32557f;
+}
+#one:checked ~ #topnavbar{
+    display:block;
+}
+#two:checked ~ #topnavbar,
+#three:checked ~ #topnavbar,
+#four:checked ~ #topnavbar 
+{
+    display:none;
+}
+
+
+
+

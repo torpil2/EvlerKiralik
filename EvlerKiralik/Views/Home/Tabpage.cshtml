@@ -1,0 +1,626 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@model dynamic
+@{
+    ViewData["Title"] = "Tabpage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" />
+
+
+@section    Scripts{
+   
+    <script>
+        $(function () {
+            $('#brow1').change(function () {
+                var id = $('#brow1').val();
+                $.ajax({
+                    url: '/Home/ilcegetir',
+                    data: { p: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#brow2').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#brow2').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('#brow2').change(function () {
+                var id = $('#brow2').val();
+                $.ajax({
+                    url: '/Home/mahallegetir',
+                    data: { m: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#brow3').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#brow3').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#brow3').change(function () {
+                var id = $('#brow3').val();
+                $.ajax({
+                    url: '/Home/sokakgetir',
+                    data: { k: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#brow4').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#brow4').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    @*KİRALAMA JSON *@
+
+    <script>
+        $(function () {
+            $('#ilan1').change(function () {
+                var id = $('#ilan1').val();
+                $.ajax({
+                    url: '/Home/ilcegetirilan',
+                    data: { a: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#ilan2').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#ilan2').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('#ilan2').change(function () {
+                var id = $('#ilan2').val();
+                $.ajax({
+                    url: '/Home/mahallegetirilan',
+                    data: { b: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#ilan3').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#ilan3').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#ilan3').change(function () {
+                var id = $('#ilan3').val();
+                $.ajax({
+                    url: '/Home/sokakgetirilan',
+                    data: { c: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#ilan4').empty();
+                        for (var i = 0; i < data.length; i++) {                           
+                            $('#ilan4').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    @*    ARAMALI SEARCH BAR FİXLENECEK
+
+       <script>
+        $(document).ready(function () {
+            $('.search').select2({
+                width: 'resolve',
+                autofocus: 'true'
+
+
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.search2').select2({
+                width: 'resolve',
+                autofocus: 'true'
+
+
+            });
+        });
+    </script>
+    
+    <script>
+        let forceFocusFn = function () {
+            // Gets the search input of the opened select2
+            var searchInput = document.querySelector('.select2-container--open .select2-search__field');
+            // If exists
+            if (searchInput)
+                searchInput.focus(); // focus
+        };
+
+        // Every time a select2 is opened
+        $(document).on('select2:open', () => {
+            // We use a timeout because when a select2 is already opened and you open a new one, it has to wait to find the appropiate
+            setTimeout(() => forceFocusFn(), 200);
+        });
+
+
+    </script>*@
+
+    <script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("topnavbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+
+<script>
+    function LoginFormAc()
+    {
+        var logform = document.getElementById("loginform")
+            if (logform.style.display == "none")
+            {
+                logform.style.display = "block";
+            }
+            else if(logform.style.display =="block")
+            {
+                logform.style.display = "none";
+            }
+    }
+</script>
+
+<script>
+    $(function() {
+  $("#but1").click(function() {
+    $(".fullscreen-container").fadeTo(200, 1);
+  });
+  $("#but2").click(function() {
+    $(".fullscreen-container").fadeOut(200);
+  });
+});
+</script>
+}
+
+<div id="loginform" class="loginform" style="display:none;">
+    <div id="logortalama" style="position: absolute; top: 30%; left: 35%;">
+        <form action="/Login/Login" method="post">
+            <label>KULLANICI ADI</label>
+            <input type="text" class="form-control" name="txtUserName" placeholder="userName" />
+            <label>ŞİFRE</label>
+            <input type="text" class="form-control" name="txtPassword" placeholder="password" />
+
+
+
+            <button class="btn btn-success" type="submit"> Giriş Yap</button>
+
+        </form>
+    </div>
+</div>
+
+<div class="warpper">
+    <input class="radio" id="one" name="group" type="radio" checked>
+    <input class="radio" id="two" name="group" type="radio">
+    <input class="radio" id="three" name="group" type="radio">
+    <input class="radio" id="four" name="group" type="radio">
+     
+  
+    <div class="tabs">
+     
+        <label class="tab" id="one-tab" for="one">Kiralık Ev Bul</label>
+        <label class="tab" id="two-tab" for="two">Evini Kirala</label>
+        <label class="tab" id="three-tab" for="three">Evime Arkadaş Arıyorum</label>
+        <label class="tab" id="four-tab" for="four">Evime Arkadaş Arıyorum</label>
+
+        <label id="logindiv" style="float:right !important;position:absolute;left:88%;">
+            @if (User.Identity.Name != null)
+            {
+
+                <a style="background-color:violet;">  @User.Identity.Name</a>
+                <a style="background-color:violet;">@User.Claims.FirstOrDefault(c => c.Type == "UserMail").Value</a>
+
+
+            }
+            else
+            {
+                <button style="border-radius:15px;" onclick="LoginFormAc()">Giriş Yapınız</button>
+
+                
+            }
+
+            @if (User.Identity.Name != null)
+            {
+                <div style="float:right !important;height:auto;position:absolute;left:60% !important;">
+                    <form method="post" action="/Login/LogoutAct">
+                        <button class="btn btn-info">Logout</button>
+
+                    </form>
+                </div>
+            }
+        </label>
+
+
+        
+    </div>
+
+  
+  
+   
+
+    <div id="topnavbar">
+        <div id="ortalamadiv">
+        <form class="ilanverme">
+
+                   
+            @*İLLER*@ 
+
+            <select id="brow1" class="search form-control form-control-sm">
+                <option selected">İl Seçiniz</option>
+
+                @foreach (Iller il in Model.IlListesi)
+                {
+
+                    <option id="@il.IlId" value="@il.IlId">@il.İlAdi </option>
+                }
+            </select>
+
+            @* İLÇELER*@
+
+            <select id="brow2" class="search form-control form-control-sm">
+                <option selected">İlçe Seçiniz</option>
+            </select>
+
+
+            @* MAHALLELER*@
+
+                <select id="brow3" class="search form-control form-control-sm" >
+                <option selected">Mahalle Seçiniz</option>
+            </select>
+
+            @* SOKAKLAR*@
+                <select id="brow4" class="search form-control form-control-sm" multiple="multiple">
+                <option selected">Sokak Seçiniz</option>
+            </select>
+
+            <button class="btn btn-success"> FİLTRELE</button>
+
+        </form>
+        </div>
+    </div>
+    <div class="panels">
+        @*TWO PANEL ONE PANEL OLUCAk*@
+        <div class="panel" id="two-panel">
+            <div class="row" id="kiralikevler">
+
+            <div class="card" style="width: 18rem;border-radius:10px;">
+                <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
+                <div class="card-body" >
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
+                </div>
+            </div>
+              <div class="card" style="width: 18rem;border-radius:10px;">
+                <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
+                <div class="card-body" >
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
+                </div>
+            </div>
+                <div class="card" style="width: 18rem;border-radius:10px;">
+                    <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;border-radius:10px;">
+                    <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
+                    </div>
+                </div>
+
+
+                <div class="card" style="width: 18rem;border-radius:10px;">
+                    <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                      
+                        </p>
+                        <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
+                    </div>
+                </div>
+            
+
+
+            </div>
+
+            The standard Lorem Ipsum passage, used since the 1500s
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+            Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+
+            1914 translation by H. Rackham
+            "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+
+            Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+
+            1914 translation by H. Rackham
+            "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+
+
+            The standard Lorem Ipsum passage, used since the 1500s
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+            Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+
+            1914 translation by H. Rackham
+            "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+
+            Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+
+            1914 translation by H. Rackham
+            "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+
+            The standard Lorem Ipsum passage, used since the 1500s
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+            Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+
+            1914 translation by H. Rackham
+            "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+
+            Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+
+            1914 translation by H. Rackham
+            "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+
+
+
+
+
+
+        </div>
+        <div class="panel" id="one-panel">
+            <div class="panel-title">İlan Oluştur</div>
+            <div id="ilanolusturdiv">
+            <form id="ilanform" class="form-inline">
+
+
+                    <div class="form-group">
+                    <label for="exampleFormControlInput1">İlan Adı</label>
+                    <input type="text" class="form-control " id="exampleFormControlInput1" placeholder="name@example.com">
+                
+
+                    
+                    <label for="exampleFormControlInput1">M2 BRUT</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+               
+
+                   
+                        <label for="exampleFormControlInput1">M2 NEt</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                   
+
+             
+
+
+                
+                    <label for="exampleFormControlSelect1">ODA SAYISI</label>
+                    <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                
+                        </div>
+                
+               
+                    <label for="exampleFormControlSelect1">Bina YAŞI</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                
+
+                    
+                    <label for="exampleFormControlSelect1">Bulunduğu Kat</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <label for="exampleFormControlSelect1">Isıtma Türü</label>
+                    <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+
+                    <div class="form-group">
+                        
+                        <label for="exampleFormControlSelect1">Banyo Sayısı</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>                   
+
+
+                
+                        <label for="exampleFormControlSelect1">Balkon(sayı ile)</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                   
+                     
+                        <label for="exampleFormControlSelect1">Eşyalı</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>                   
+
+                    
+                        <label for="exampleFormControlSelect1">Site İçersiinde</label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Aidat Tutarı</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">          
+                        
+                  
+                        <label for="exampleFormControlSelect1">Kimden(sahibi,emlakçı)</label>
+                        <select class="form-control-sm" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>                   
+                        
+                    
+                        <label for="exampleFormControlInput1">Kira Tutarı</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">                   
+
+                      
+                        <label for="exampleFormControlInput1">Komisyon Tutarı(var ise)</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+
+                    @*İLLER*@
+
+                    <select id="ilan1" class="search2 form-control form-control-sm">
+                        <option selected">İl Seçiniz</option>
+
+                        @foreach (Iller ililan in Model.IlListesiIlan)
+                        {
+
+                            <option id="@ililan.IlId" value="@ililan.IlId">@ililan.İlAdi </option>
+                        }
+                    </select>
+
+                    @* İLÇELER*@
+
+                    <select id="ilan2" class="search2 form-control form-control-sm">
+                        <option selected">İlçe Seçiniz</option>
+                    </select>
+
+
+                    @* MAHALLELER*@
+
+                    <select id="ilan3" class="search2 form-control form-control-sm">
+                        <option selected">Mahalle Seçiniz</option>
+                    </select>
+
+                    @* SOKAKLAR*@
+                    <select id="ilan4" class="search2 form-control form-control-sm">
+                        <option selected">Sokak Seçiniz</option>
+                    </select>
+
+
+                        
+
+            
+                     
+              
+            </form>
+            </div>
+        </div>
+        <div class="panel" id="three-panel">
+            <div class="panel-title">Title3</div>
+            <p>Content3</p>
+        </div>
+        <div class="panel" id="four-panel">
+            <div class="panel-title">Title4</div>
+            
+        </div>
+    </div>
+</div>

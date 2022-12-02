@@ -1,0 +1,70 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "UsersView";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/css/table.css")" asp-append-version="true" />
+@section scripts
+	{
+	<script>
+		function searchTable() {
+			var input, filter, found, table, tr, td, i, j;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("UserTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td");
+				for (j = 0; j < td.length; j++) {
+					if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+						found = true;
+					}
+				}
+				if (found) {
+					tr[i].style.display = "";
+					found = false;
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	</script>
+}
+<label id="editcategoryitem"  style="margin-left:1%;margin-bottom:1em;">Kullanıcı Ara
+<input type="text" id="search" onkeyup="searchTable()" />
+</label>
+<div class="container-fluid d-grid gap-2 d-md-flex justify-content-md-start">
+	
+	<table id="UserTable">
+
+
+	<thead>
+		<tr>
+			<td>User Id</td>
+			<td>UserName</td>
+			<td>UserMail</td>
+			<td>UserType</td>
+			<td>Last Login</td>
+			<td>Edit</td>
+		</tr>
+	</thead>
+		<tbody >
+	
+		@foreach (User user in Model.UserList)
+		{
+			<tr>
+				<td>@user.UserId</td>
+				<td>@user.UserName</td>
+				<td>@user.UserMail</td>
+				<td>@user.UserType</td>
+				<td>@user.LastLogin</td>
+				<td><a href="/Admin/EditUser/@user.UserId">Düzenle</a></td>
+			</tr>
+		}
+	</tbody>
+</table>
+</div>
