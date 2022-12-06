@@ -40,7 +40,13 @@
 
 
 
+   
     @await RenderSectionAsync("Scripts", required: false)
+                 <script>
+         $(document).ready(function () {
+             $('#summernote').summernote();
+                    });
+                        </script>
 
 </body>
 </html>

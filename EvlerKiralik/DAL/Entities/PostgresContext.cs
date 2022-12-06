@@ -252,11 +252,13 @@ public partial class PostgresContext : DbContext
 
         modelBuilder.Entity<KirayaVerme>(entity =>
         {
-            entity.HasKey(e => e.IlanIlce).HasName("Kiraya_Verme_pkey");
+            entity.HasKey(e => e.IlanId).HasName("Kiraya_Verme_pkey");
 
             entity.ToTable("Kiraya_Verme");
 
-            entity.Property(e => e.IlanIlce).HasColumnName("ilan_ilce");
+            entity.Property(e => e.IlanId)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("ilan_id");
             entity.Property(e => e.Aciklama).HasColumnName("aciklama");
             entity.Property(e => e.Aidat).HasColumnName("aidat");
             entity.Property(e => e.Balkon).HasColumnName("balkon");
@@ -271,11 +273,8 @@ public partial class PostgresContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("ilan_adi");
             entity.Property(e => e.IlanDate).HasColumnName("ilan_date");
-            entity.Property(e => e.IlanId)
-                .ValueGeneratedOnAdd()
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("ilan_id");
             entity.Property(e => e.IlanIl).HasColumnName("ilan_il");
+            entity.Property(e => e.IlanIlce).HasColumnName("ilan_ilce");
             entity.Property(e => e.IlanMahalle).HasColumnName("ilan_mahalle");
             entity.Property(e => e.IlanSokak).HasColumnName("ilan_sokak");
             entity.Property(e => e.IsitmaTuru).HasColumnName("isitma_turu");
@@ -347,7 +346,9 @@ public partial class PostgresContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("resim_id");
             entity.Property(e => e.IsKapak).HasColumnName("is_kapak");
+            entity.Property(e => e.IsProfile).HasColumnName("is_profile");
             entity.Property(e => e.PostId).HasColumnName("post_id");
+            entity.Property(e => e.ResimName).HasColumnName("resim_name");
             entity.Property(e => e.ResimPath).HasColumnName("resim_path");
             entity.Property(e => e.ResimSira).HasColumnName("resim_sira");
             entity.Property(e => e.UploadDate).HasColumnName("upload_date");

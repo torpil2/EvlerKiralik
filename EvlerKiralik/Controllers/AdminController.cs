@@ -55,10 +55,7 @@ namespace EvlerKiralik.Controllers
             return View(deneme);
         }
         
-
-
-        
-
+                        
 
 
         public IActionResult Categories()

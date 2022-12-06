@@ -18,4 +18,8 @@ public partial class Picture
     public int? ResimSira { get; set; }
 
     public DateOnly? UploadDate { get; set; }
+
+    public string? ResimName { get; set; }
+
+    public bool? IsProfile { get; set; }
 }

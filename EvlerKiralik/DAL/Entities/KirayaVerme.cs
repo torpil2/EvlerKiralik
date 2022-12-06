@@ -7,15 +7,13 @@ public partial class KirayaVerme
 {
     public int IlanId { get; set; }
 
-    public string IlanAdi { get; set; } = null!;
+    public string? IlanAdi { get; set; }
 
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
 
     public DateOnly? IlanDate { get; set; }
 
     public string? IlanIl { get; set; }
-
-    public string IlanIlce { get; set; } = null!;
 
     public string? IlanMahalle { get; set; }
 
@@ -58,4 +56,6 @@ public partial class KirayaVerme
     public string? EvTip { get; set; }
 
     public string? ToplamKat { get; set; }
+
+    public string? IlanIlce { get; set; }
 }
