@@ -27,8 +27,8 @@ using NuGet.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.IO;
-
-
+using NuGet.Packaging.Signing;
+using System.Security.Principal;
 
 namespace EvlerKiralik.Controllers
 {
@@ -37,6 +37,7 @@ namespace EvlerKiralik.Controllers
     {
         public PostgresContext _database;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHttpContextAccessor accessor;
 
 
 
@@ -303,16 +304,33 @@ namespace EvlerKiralik.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> KiralikIlanOlustur(int iladi)
+        public async Task<IActionResult> KiralikIlanOlustur(int ilanil, int ilanilce, int ilanmahalle, int ilansokak)
 
         {
             KirayaVerme ilan = new KirayaVerme();
-            var ilanili = from o in _database.Illers where o.IlId == iladi select o.İlAdi;
+            var ilanili = from o in _database.Illers where o.IlId == ilanil select o.İlAdi;
+            var ilceadi = from b in _database.Ilcelers where b.IlceId == ilanilce select b.IlceAdi;
+            var mahalledadi = from c in _database.Mahallelers where c.MahalleId == ilanmahalle select c.MahalleAdi;
+            var sokakadi = from d in _database.Sokaklars where d.SokakId == ilansokak select d.SokakAdi;
+            var currentuser = User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+       
             //ez game ez life
 
             ilan.IlanIl = ilanili.FirstOrDefault();
+            ilan.IlanIlce = ilceadi.FirstOrDefault();
+            ilan.IlanMahalle = mahalledadi.FirstOrDefault();
+            ilan.IlanSokak = sokakadi.FirstOrDefault();
+            ilan.IlanDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
+            ilan.UserId = Convert.ToInt32(currentuser);
+
+
             await _database.AddAsync(ilan);
-           await _database.SaveChangesAsync();
+           
+
+
+
+
+            await _database.SaveChangesAsync();
           
 
             //return RedirectToAction("TabPage","Home");,

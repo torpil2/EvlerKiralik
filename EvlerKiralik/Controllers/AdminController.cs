@@ -46,13 +46,18 @@ namespace EvlerKiralik.Controllers
 
         public IActionResult Index()
         {
+
+            dynamic model = new ExpandoObject();
+            model.KirayaVermeList = _database.KirayaVermes.ToList();
+            model.UserList = _database.Users.ToList();
            
-            _database.ChangeTracker.DetectChanges();
-            var deneme = _database.ChangeTracker.DebugView.LongView.ToList();
+	
 
 
 
-            return View(deneme);
+
+
+			return View(model);
         }
         
                         

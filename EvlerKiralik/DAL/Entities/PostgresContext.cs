@@ -272,7 +272,9 @@ public partial class PostgresContext : DbContext
                 .HasMaxLength(100)
                 .IsFixedLength()
                 .HasColumnName("ilan_adi");
-            entity.Property(e => e.IlanDate).HasColumnName("ilan_date");
+            entity.Property(e => e.IlanDate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("ilan_date");
             entity.Property(e => e.IlanIl).HasColumnName("ilan_il");
             entity.Property(e => e.IlanIlce).HasColumnName("ilan_ilce");
             entity.Property(e => e.IlanMahalle).HasColumnName("ilan_mahalle");

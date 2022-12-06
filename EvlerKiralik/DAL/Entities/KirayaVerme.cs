@@ -11,7 +11,7 @@ public partial class KirayaVerme
 
     public int? UserId { get; set; }
 
-    public DateOnly? IlanDate { get; set; }
+    public DateTime? IlanDate { get; set; }
 
     public string? IlanIl { get; set; }
 

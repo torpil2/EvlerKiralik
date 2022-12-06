@@ -1,8 +1,44 @@
-﻿@model IEnumerable<EvlerKiralik.DAL.Entities.PostgresContext>
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
+<link rel="stylesheet" href="@Url.Content("~/css/table.css")" asp-append-version="true" />
 
+
+<table id="UserTable">
+
+
+	<thead>
+		<tr>
+			<td>ilan adi</td>
+			<td>UserName</td>
+			<td>ilandate</td>
+	
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (KirayaVerme kirayaverme in Model.KirayaVermeList)
+		{
+			<tr>
+				<td>@kirayaverme.IlanAdi</td>
+
+				<td>@foreach (User user in Model.UserList)
+					{
+						if(user.UserId==kirayaverme.UserId)
+						{
+							@user.UserName
+						}
+					
+					} </td>
+				<td>@kirayaverme.IlanDate </td>
+			
+			</tr>
+		}
+	</tbody>
+</table>
