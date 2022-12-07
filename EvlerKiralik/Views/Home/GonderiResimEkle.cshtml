@@ -1,0 +1,122 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+  
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 5px;
+  text-align: center;
+}
+div.col{
+    height:15em;
+    width:2em;
+    border:1px solid red;
+    padding:0;
+    text-align: center;
+
+}
+div.row
+{
+      overflow-x : scroll;
+}
+.bellnumbers{
+position: absolute;
+font-size:1.2em;
+background-color:black;
+margin : 0 auto;
+padding:0.1em;
+padding-left:0;
+color:#fff;
+
+}
+.bell{
+    display: inline-block;
+    position: relative;
+    
+}
+div.col-6
+{
+    height:20em;
+    width:23em;
+    border:2px solid green;
+        text-align: center;
+}
+div.resimsirala
+{
+    color:white;
+}
+</style>
+
+<div class=resimsirala>
+    <Span>Resim Sırala</Span>
+    <div class="container-fluid">
+        <div class="row">
+        <div class=col-6><img src="/imgs/kare.png"/> </div>
+  
+      
+    <div class="col"> <img src="/imgs/kare.png"/> </div>
+    <div class="col">Column</div>  
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+  </div>
+
+  <div class = "row">
+<div class="gallery">
+  <a target="_blank" href="img_5terre.jpg">
+    <img src="/imgs/kare.png" alt="Cinque Terre" width="600" height="400">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+<div class="gallery">
+  <a target="_blank" href="img_forest.jpg">
+    <img src="/imgs/kare.png" alt="Forest" width="600" height="400">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+<div class="gallery">
+    <span class="bell">
+  <a target="_blank" href="img_lights.jpg">
+       <span class=bellnumbers>10</span>
+    <img src="/imgs/kare.png" alt="Northern Lights" width="600" height="400">
+   </span>
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+<div class="gallery">
+  <a target="_blank" href="img_mountains.jpg">
+    <img src="/imgs/kare.png" alt="Mountains" width="600" height="400">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+  </div>
+</div>
+</div>
+  <form method="post" action="/Home/ImagesUpload" enctype="multipart/form-data">
+                <input type="file"  multiple name="ifiles" id="gallery-photo-add">
+                <input class="btn btn-success" id="yukleme"  type="submit" value="Çoklu Yükle" disabled>
+  </form>
+</div>
+ 
+  </div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NCuV/EfW7pqJ6GPhZo6eSOHcv64rbOV/fyUdfbl1R9c=",
+  "Hash": "CcxY/P48kSYcfuF1TGcE+pU2KYI51bCOmDMKBUt+Gt0=",
   "Source": "EvlerKiralik",
   "BasePath": "_content/EvlerKiralik",
   "Mode": "Default",
@@ -1511,23 +1511,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imgs\\denemeresim.jpg"
-    },
-    {
-      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\indir.jpg",
-      "SourceId": "EvlerKiralik",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
-      "BasePath": "_content/EvlerKiralik",
-      "RelativePath": "imgs/indir.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imgs\\indir.jpg"
     },
     {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kare.png",

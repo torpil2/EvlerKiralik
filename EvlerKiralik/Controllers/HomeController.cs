@@ -201,6 +201,7 @@ namespace EvlerKiralik.Controllers
             model.EvTipListe = _database.EvTips.ToList();//1
             model.ToplamKatListe = _database.ToplamKats.ToList();//8
             model.ImageListe = _database.Pictures.ToList();
+            model.KirayaVermeList = _database.KirayaVermes.ToList();
 
             return View(model);
         }
@@ -237,33 +238,43 @@ namespace EvlerKiralik.Controllers
         [HttpPost]
         public async Task<ActionResult> DeleteImage(int silinecekresimid, Picture pic)
         {
-            string filedirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs/");
-            ViewBag.filelist = Directory.EnumerateFiles(filedirectory, "*", SearchOption.AllDirectories).Select(Path.GetFileName);
-            var silinecekresim = from o in _database.Pictures where o.ResimId == silinecekresimid select o;
-            foreach (var resim in silinecekresim)
+            try
             {
 
 
-                var file = resim.ResimName;
-
-                string webRootPath = _webHostEnvironment.WebRootPath;
-                var filename = "";
-                filename = file;
-                var fullpath = webRootPath + "/imgs/" + file;
-
-                if (System.IO.File.Exists(fullpath))
+                string filedirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs/");
+                ViewBag.filelist = Directory.EnumerateFiles(filedirectory, "*", SearchOption.AllDirectories).Select(Path.GetFileName);
+                var silinecekresim = from o in _database.Pictures where o.ResimId == silinecekresimid select o;
+                foreach (var resim in silinecekresim)
                 {
-                    _database.Pictures.Remove(resim);
 
-                    System.IO.File.Delete(fullpath);
-                    //ViewBag.deleteSuccess = "true";
 
+                    var file = resim.ResimName;
+
+                    string webRootPath = _webHostEnvironment.WebRootPath;
+                    var filename = "";
+                    filename = file;
+                    var fullpath = webRootPath + "/imgs/" + file;
+
+                    if (System.IO.File.Exists(fullpath))
+                    {
+                        _database.Pictures.Remove(resim);
+
+                        System.IO.File.Delete(fullpath);
+                        //ViewBag.deleteSuccess = "true";
+
+                    }
                 }
-            }
-            _database.SaveChangesAsync();
+                _database.SaveChangesAsync();
 
-            return RedirectToAction("TabPage", "Home");
-        }
+
+                return RedirectToAction("TabPage", "Home");
+            }catch  (Exception ex)
+			{
+				return RedirectToAction("TabPage", "Home");
+			}
+
+		}
 
 
         [HttpPost]
@@ -304,7 +315,10 @@ namespace EvlerKiralik.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> KiralikIlanOlustur(int ilanil, int ilanilce, int ilanmahalle, int ilansokak)
+        public async Task<IActionResult> KiralikIlanOlustur(int ilanil, int ilanilce, 
+            int ilanmahalle, int ilansokak,string ilanadi,string ilanVerEvTip,string ilanVerOdaSayi,
+            string ilanVerBanyoSayi,string ilanVerBalkonSayi,string ilanVerIsitmaTip,string ilanVerEsyaliCheck,
+            string ilanVerDaireKat,string ilanVerToplamKat,string ilanVerBinaYas,string ilanVerSiteCheck,string ilanVerKimdenCheck,string ilanVerOdemeTip,string ilanVerAciklama)
 
         {
             KirayaVerme ilan = new KirayaVerme();
@@ -322,23 +336,45 @@ namespace EvlerKiralik.Controllers
             ilan.IlanSokak = sokakadi.FirstOrDefault();
             ilan.IlanDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
             ilan.UserId = Convert.ToInt32(currentuser);
+            ilan.IlanAdi = ilanadi;
+            ilan.EvTip = ilanVerEvTip;
+            ilan.OdaSayisi = ilanVerOdaSayi;
+            ilan.BanyoSayisi = ilanVerBanyoSayi;
+            ilan.Balkon = ilanVerBalkonSayi;
+            ilan.IsitmaTuru = ilanVerIsitmaTip;
+            ilan.Esyali = ilanVerEsyaliCheck;
+            ilan.BulunduguKat = ilanVerDaireKat;
+            ilan.ToplamKat = ilanVerToplamKat;
+            ilan.BinaYasi = ilanVerBinaYas;
+            ilan.SiteIcerisinde = ilanVerSiteCheck;
+            ilan.Kimden = ilanVerKimdenCheck;
+            ilan.OdemeTuru = ilanVerOdemeTip;
+            ilan.Aciklama = ilanVerAciklama;
 
 
-            await _database.AddAsync(ilan);
-           
 
-
-
+			await _database.AddAsync(ilan);        
 
             await _database.SaveChangesAsync();
-          
+
+            var soneklenenilan = ilan.IlanId;
+
 
             //return RedirectToAction("TabPage","Home");,
-           
-               return RedirectToAction("TabPage", "Home");
+
+            return RedirectToAction("GonderiResimEkle", soneklenenilan);
          
             
 
+        }
+
+        [HttpGet]
+        public ActionResult GonderiResimEkle(int? id)
+        {
+            //var GonderiResim = _database.Pictures.Where(x => x.PostId == id).ToList();
+            var gonderiResimler = _database.Pictures.Where(x => x.PostId == id).ToList();
+
+            return View(gonderiResimler);
         }
 
 

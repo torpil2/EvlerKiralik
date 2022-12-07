@@ -1,0 +1,59 @@
+﻿@using EvlerKiralik.DAL.Entities
+
+@using System.Security.Claims
+@model dynamic
+@{
+    ViewData["Title"] = "IlanDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="container-fluid" style="width:90%;border:1px solid red;height:50em;margin-top:3em;">
+   <div class="row">
+        <div class="col-md-7" style="border:1px solid green;">
+       
+              
+                    <img src="" />
+                
+              
+            
+            
+        </div>
+      
+        <div class="col-sm" style="border:1px solid yellow;overflow-y: scroll;height:50em;color:white;">
+
+            @foreach (User gonderiuser in Model.GonderiUser)
+            {
+                <span>
+                    <a>İlan Sahibi:</a> <a>@gonderiuser.UserName</a>
+                </span>
+            }
+            <br />
+     
+                @foreach (KirayaVerme item in Model.GonderiKirayaVerme)
+                    {
+                 <span>
+                  <a>İlan Adı:</a>  <a>@item.IlanAdi </a>
+                </span>
+
+                <span>
+                  <br/>  <span><a style="text-decoration:underline;">Aciklama</a> </span>  <a>  @Html.Raw( @item.Aciklama)</a>
+                </span>
+                    
+                <span>
+                      <a>İlan Şehir:</a>      <a>@item.IlanIl </a>
+                </span>
+                
+   
+                }
+              
+                <span>
+            
+                </span>
+      
+            
+           </div>
+    </div>
+</div>

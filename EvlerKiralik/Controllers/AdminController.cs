@@ -29,6 +29,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis.Differencing;
 using NuGet.Protocol;
+using EvlerKiralik.Model;
 
 namespace EvlerKiralik.Controllers
 {
@@ -428,6 +429,34 @@ namespace EvlerKiralik.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpGet]
+        public IActionResult IlanDetay( int? id) 
+        {
+
+            dynamic model = new ExpandoObject();
+            model.GonderiKirayaVerme = _database.KirayaVermes.Where(x => x.IlanId == id).ToList();
+         var gonderiuserid = _database.KirayaVermes.Where(x=>x.IlanId==id).FirstOrDefault();
+            var idd = gonderiuserid.UserId;
+            model.GonderiPic = _database.Pictures.Where(x => x.PostId == id).ToList();
+           model.GonderiUser = _database.Users.Where(x=>x.UserId==idd).ToList();
+
+
+            //model.GecerliIlan = _database.KirayaVermes.Where(x=>x.IlanId == id).SingleOrDefault();
+            if (model != null)
+            {
+                return View(model);
+
+
+            }
+            else
+            {
+                return View("Index", "Admin");
+            }
+
+            
+		//	return View(Gonderi);
         }
 
     }

@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="@Url.Content("~/css/site.css")" asp-append-version="true" />
 <!-- include libraries(jQuery, bootstrap) -->
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 
 
 @section    Scripts{
@@ -320,6 +323,7 @@ function myFunction() {
   
   border: 1px solid #aaaaaa;
 }
+
 </style>
     <script>
 function allowDrop(ev) {
@@ -389,10 +393,25 @@ function dropgaleri(ev){
         });
     </script>
 
+    <script>
+      //  document.getElementById('yukleme').disabled=true;
+
+      let fileinput=  document.getElementById("gallery-photo-add");
+
+       function deneme(){
+    if($('input[type=file]').val()==''){
+        $('button').attr('disabled',true)
+    } 
+    else{
+      $('button').attr('disabled', false);
+    }
+})
+     
+     
+        </script>
   
 
        }
-
 
 
 
@@ -412,7 +431,10 @@ function dropgaleri(ev){
     </div>
 </div>
 
+
 <div class="warpper">
+
+
     <input class="radio" id="one" name="group" type="radio" checked>
     <input class="radio" id="two" name="group" type="radio">
     <input class="radio" id="three" name="group" type="radio">
@@ -457,7 +479,7 @@ function dropgaleri(ev){
         
     </div>
 
-  
+  <!--HER TAB AYRI BİR PARTIAL VİEWE DÖNÜŞTÜRÜLECEK-->
   
    
 
@@ -508,15 +530,26 @@ function dropgaleri(ev){
         @*TWO PANEL ONE PANEL OLUCAk*@
         <div class="panel" id="two-panel">
             <div class="row" id="kiralikevler">
+                @foreach (KirayaVerme kirailan in Model.KirayaVermeList)
+                {
+                    <div class="card" style="width: 18rem;border-radius:10px;">
+                        <img src="@foreach(Picture kapakpic in Model.ImageListe)if(kapakpic.PostId == kirailan.IlanId && kapakpic.IsKapak == true){@kapakpic.ResimName}" class="card-img-top" alt="..." style="border-radius:20px;">
+                        <div class="card-body">
+                            <h4 class="card-title">@kirailan.IlanAdi</h4>
+                    
+                                <p class="card-text"> <span>@kirailan.IlanIl / @kirailan.IlanIlce 
+                                    
+                               @kirailan.OdaSayisi
+                                    @kirailan.KiraTutari
+                                </span>
+                            <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
+                        </div>
+                    </div>
+                }
+       
 
-            <div class="card" style="width: 18rem;border-radius:10px;">
-                <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
-                <div class="card-body" >
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
-                </div>
-            </div>
+
+
               <div class="card" style="width: 18rem;border-radius:10px;">
                 <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
                 <div class="card-body" >
@@ -610,7 +643,7 @@ function dropgaleri(ev){
             <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
         </div>
-        <div class="panel" id="one-panel">
+        <div class="panel" id="four-panel">
             <div class="panel-title">İlan Oluştur</div>
             
                 <form id="regForm" action="/Home/KiralikIlanOlustur" method="post">
@@ -837,7 +870,7 @@ function dropgaleri(ev){
 
             <form method="post" action="/Home/ImagesUpload" enctype="multipart/form-data">
                 <input type="file"  multiple name="ifiles" id="gallery-photo-add">
-                <input class="btn btn-success" id="yukleme"  type="submit" value="Çoklu Yükle">
+                <input class="btn btn-success" id="yukleme"  type="submit" value="Çoklu Yükle" disabled>
 
             </form>
             
@@ -847,7 +880,7 @@ function dropgaleri(ev){
 
             <form method="post" action="/Home/ImageUpload" enctype="multipart/form-data">
                 <input type="file" class="form-control-file" name="ifile" multiple>
-                <input class="btn btn-success" type="submit" value="Yükle">
+                <input class="btn btn-success"  type="submit" value="Yükle">
             </form>
             <h3>@ViewData["Message"]</h3>
          
@@ -865,8 +898,9 @@ function dropgaleri(ev){
             }
           
         </div>
-        <div class="panel" id="four-panel">
+        <div class="panel" id="one-panel">
             <div class="panel-title">Title4</div>
+      
             
         </div>
     </div>

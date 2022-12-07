@@ -94,7 +94,7 @@ h2 {
     cursor: pointer;
     padding: 10px 20px;
     margin-right: -6rem;
-    background: #eca1a6;
+    background: #252525;
     display: inline-block;
     color: #fff;
     border-radius: 3px 3px 0px 0px;
@@ -185,8 +185,8 @@ img {
     
     height:100%;
     width:100%;
-    max-width:20em;
-    max-width:20em;
+    max-width:21em;
+   
  
 }
 
@@ -240,18 +240,21 @@ img {
 */
 
 #regForm {
-    background-color: #eca1a6;    
-    font-family: Raleway;
+    background-color: #3F3B6C;
+    font-family: monospace,'Global Monospace';
+    color: wheat;
+    font-weight: 700;
     padding: 40px;
     width: 90%;
-   
-    margin:0 auto;
-    align-content:center;
-    align-items:center;
+    margin: 0 auto;
+    align-content: center;
+    align-items: center;
+    border-radius: 1em;
 }
 #regForm input{
     width:40% !important;
     margin:0 auto !important;
+  
 }
 
 h1 {
@@ -264,6 +267,7 @@ input {
     font-size: 17px;
     font-family: Raleway;
     border: 1px solid #aaaaaa;
+    border-radius:2%;
 }
 
     /* Mark input boxes that gets an error on validation: */
@@ -282,13 +286,16 @@ input {
 
 
 button {
-    background-color: #04AA6D;
+    background-color: #647E68;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
     font-size: 17px;
     font-family: Raleway;
     cursor: pointer;
+    border-radius:5%;
+    box-shadow:2px 2px 3px 3px red;
+   
 }
 
     button:hover {
@@ -319,5 +326,11 @@ button {
     .step.finish {
         background-color: #04AA6D;
     }
+
+
+
+    /*siderbar css*/
+
+
 
 
