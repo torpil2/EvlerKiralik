@@ -269,17 +269,17 @@ namespace EvlerKiralik.Controllers
 
 
                 return RedirectToAction("TabPage", "Home");
-            }catch  (Exception ex)
-			{
-				return RedirectToAction("TabPage", "Home");
-			}
+            } catch (Exception ex)
+            {
+                return RedirectToAction("TabPage", "Home");
+            }
 
-		}
+        }
 
 
         [HttpPost]
 
-        public async Task<IActionResult> ImagesUpload(IFormFile[] ifiles, Picture pic)
+        public async Task<IActionResult> ImagesUpload(IFormFile[] ifiles, Picture pic, int postid)
         {
 
             for (int i = 0; i < ifiles.Length; i++)
@@ -287,38 +287,39 @@ namespace EvlerKiralik.Controllers
                 Picture pics = new Picture();
                 var imgext = Path.GetExtension(ifiles[i].FileName);
 
-                             
-              
-         
-            if (imgext == ".jpg" || imgext == ".gif" || imgext == ".jpeg")
-            {
-                var saveimg = Path.Combine(_webHostEnvironment.WebRootPath, "imgs", ifiles[i].FileName);
-                var stream = new FileStream(saveimg, FileMode.Create);
-                await ifiles[i].CopyToAsync(stream);
 
-                pics.ResimName = ifiles[i].FileName;
-                pics.ResimPath = saveimg.ToString();
-                await _database.AddAsync(pics);
-                await _database.SaveChangesAsync();
+
+
+                if (imgext == ".jpg" || imgext == ".gif" || imgext == ".jpeg")
+                {
+                    var saveimg = Path.Combine(_webHostEnvironment.WebRootPath, "imgs", ifiles[i].FileName);
+                    var stream = new FileStream(saveimg, FileMode.Create);
+                    await ifiles[i].CopyToAsync(stream);
+
+                    pics.ResimName = ifiles[i].FileName;
+                    pics.ResimPath = saveimg.ToString();
+                    pics.PostId = postid;
+                    await _database.AddAsync(pics);
+                    await _database.SaveChangesAsync();
 
 
                     ViewData["Message"] = "Selected Image File is Saved into folder & path into database";
-            }
-            else
-            {
-                ViewData["Message"] = "Please Upload only .jpeg,.jpg,.gif Images";
                 }
-            }           
+                else
+                {
+                    ViewData["Message"] = "Please Upload only .jpeg,.jpg,.gif Images";
+                }
+            }
 
-            return RedirectToAction("TabPage", "Home");
+            return RedirectToAction("GonderiResimEkle", new { id = postid });
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> KiralikIlanOlustur(int ilanil, int ilanilce, 
-            int ilanmahalle, int ilansokak,string ilanadi,string ilanVerEvTip,string ilanVerOdaSayi,
-            string ilanVerBanyoSayi,string ilanVerBalkonSayi,string ilanVerIsitmaTip,string ilanVerEsyaliCheck,
-            string ilanVerDaireKat,string ilanVerToplamKat,string ilanVerBinaYas,string ilanVerSiteCheck,string ilanVerKimdenCheck,string ilanVerOdemeTip,string ilanVerAciklama)
+        public async Task<IActionResult> KiralikIlanOlustur(int ilanil, int ilanilce,
+            int ilanmahalle, int ilansokak, string ilanadi, string ilanVerEvTip, string ilanVerOdaSayi,
+            string ilanVerBanyoSayi, string ilanVerBalkonSayi, string ilanVerIsitmaTip, string ilanVerEsyaliCheck,
+            string ilanVerDaireKat, string ilanVerToplamKat, string ilanVerBinaYas, string ilanVerSiteCheck, string ilanVerKimdenCheck, string ilanVerOdemeTip, string ilanVerAciklama)
 
         {
             KirayaVerme ilan = new KirayaVerme();
@@ -327,7 +328,7 @@ namespace EvlerKiralik.Controllers
             var mahalledadi = from c in _database.Mahallelers where c.MahalleId == ilanmahalle select c.MahalleAdi;
             var sokakadi = from d in _database.Sokaklars where d.SokakId == ilansokak select d.SokakAdi;
             var currentuser = User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
-       
+
             //ez game ez life
 
             ilan.IlanIl = ilanili.FirstOrDefault();
@@ -353,30 +354,63 @@ namespace EvlerKiralik.Controllers
 
 
 
-			await _database.AddAsync(ilan);        
+            await _database.AddAsync(ilan);
 
             await _database.SaveChangesAsync();
 
-            var soneklenenilan = ilan.IlanId;
+            var soneklenenilan = _database.KirayaVermes.OrderByDescending(p => p.IlanId).First().IlanId;
 
 
             //return RedirectToAction("TabPage","Home");,
 
-            return RedirectToAction("GonderiResimEkle", soneklenenilan);
-         
-            
+            return RedirectToAction("GonderiResimEkle", new { id = soneklenenilan });
+
+
 
         }
 
         [HttpGet]
         public ActionResult GonderiResimEkle(int? id)
         {
+            dynamic model = new ExpandoObject();
             //var GonderiResim = _database.Pictures.Where(x => x.PostId == id).ToList();
-            var gonderiResimler = _database.Pictures.Where(x => x.PostId == id).ToList();
+            model.ResimGonderiDetay = _database.KirayaVermes.Where(x => x.IlanId == id).ToList();
+            model.KapakResimList = _database.Pictures.Where(x => x.IsKapak == true && x.PostId == id).ToList();
+            model.GonderiResimler = _database.Pictures.Where(x => x.PostId == id).ToList().OrderBy(x=>x.ResimSira);
 
-            return View(gonderiResimler);
+            return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> resimOrder(int[] ids, int kapakresimid, int[] sira)
+        {
+           // var kapakresim = _database.Pictures.Where(x => x.ResimId == kapakresimid).FirstOrDefault();
+            var gecerliilan = _database.Pictures.Where(x => x.ResimId == ids[0]).FirstOrDefault();
+            var ilanid = gecerliilan.PostId;
+         //   kapakresim.IsKapak = true;
+          //  kapakresim.ResimSira = null;
+            for (int i = 0; i < ids.Length; i++)
+            {
+                var resim = _database.Pictures.Where(x => x.ResimId == ids[i]).FirstOrDefault();
+                if(resim.IsKapak!= false || resim.IsKapak != null)
+                {
+                    resim.IsKapak = false;
+                }
+              
+                if(resim.ResimSira!=i+1)
+                {
+                    resim.ResimSira = i + 1;
+                }
+        
+
+            }
+
+            await _database.SaveChangesAsync();
+            return RedirectToAction("GonderiResimEkle", new { id =  ilanid});
+
+        }
+
+     
 
     }
 }

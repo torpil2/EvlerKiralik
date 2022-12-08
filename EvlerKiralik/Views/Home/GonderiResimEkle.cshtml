@@ -1,4 +1,5 @@
-﻿
+﻿@model dynamic
+@using EvlerKiralik.DAL.Entities
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -11,7 +12,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 180px;
-  
+  display:inline;  
 }
 
 div.gallery:hover {
@@ -24,64 +25,186 @@ div.gallery img {
 }
 
 div.desc {
-  padding: 5px;
-  text-align: center;
+  padding: 5px; 
 }
+
 div.col{
-    height:15em;
+    height:20em;
     width:2em;
     border:1px solid red;
-    padding:0;
-    text-align: center;
+    padding:0;    
 
 }
+
 div.row
 {
-      overflow-x : scroll;
+    margin:5px;
+    padding:5px;
+  
+    width: 500px;
+    height: 110px;
+    overflow-x: scroll;
+    text-align:justify;
+    display:flex;
+    float: left;
+   
 }
 .bellnumbers{
-position: absolute;
-font-size:1.2em;
-background-color:black;
-margin : 0 auto;
-padding:0.1em;
-padding-left:0;
-color:#fff;
-
+    position: absolute;
+    font-size:1.2em;
+    background-color:black;
+    margin : 0 auto;
+    padding:0.1em;
+    padding-left:0;
+    color:#fff;
 }
+
 .bell{
     display: inline-block;
     position: relative;
     
 }
-div.col-6
-{
-    height:20em;
-    width:23em;
-    border:2px solid green;
-        text-align: center;
+
+
+li#resim 
+{  
+  float: left;   
 }
-div.resimsirala
+li#resim img
+{        
+    heighT:20em;
+    width:300px;           
+}           
+
+li#resim:hover
 {
-    color:white;
+    opacity:0.5;
 }
+
+ul#sortable
+{
+    width:100%;
+    display:flex;
+    margin:0 auto;
+    overflow-x:scroll;
+}
+
 </style>
 
-<div class=resimsirala>
-    <Span>Resim Sırala</Span>
-    <div class="container-fluid">
-        <div class="row">
-        <div class=col-6><img src="/imgs/kare.png"/> </div>
-  
-      
-    <div class="col"> <img src="/imgs/kare.png"/> </div>
-    <div class="col">Column</div>  
-    <div class="col">Column</div>
-    <div class="col">Column</div>
-  </div>
 
+@section Scripts
+{
+
+<script>
+    $(function () {
+        // Multiple images preview in browser
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+
+            }
+
+        };
+
+        $('#gallery-photo-add').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+
+
+        });
+    });
+</script>
+    <script>
+        $(function () {
+            $("#imageListId").sortable({
+                update: function (event, ui) {
+                    getIdsOfImages();
+                } //end update
+            });
+        });
+
+        function getIdsOfImages() {
+            var values = [];
+            $('.listitemClass').each(function (index) {
+                values.push($(this).attr("id")
+                    .replace("imageNo", ""));
+            });
+            $('#outputvalues').val(values);
+        }
+    </script>
+
+    <script>
+        $(function () {
+            $("ol.example").sortable();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function () {
+         
+
+            $("#sortable").sortable({
+                cursor: "move",
+                 cursorAt: { left:1 },
+             
+
+
+            });
+        });
+    </script>
+  
+}
+
+
+@foreach (KirayaVerme detaygonder in Model.ResimGonderiDetay)
+{
+    <h2>@detaygonder.IlanAdi</h2>
+}
+
+
+   
+    <div class="container-fluid">             
+          
+        
+        <form id="kaydir" method="post" action="/Home/resimOrder">
+            @{
+                string drag = "drag";
+                string div = "div";
+                int i=1;
+                 
+            
+                                   <ul id="sortable">
+            @foreach (Picture resim in Model.GonderiResimler)
+            {
+
+            
+                 
+                    <li id="resim"><img id="@drag@i" src="/imgs/@resim.ResimName" /> <input type="text" name="ids" value="@resim.ResimId" hidden/></li>
+              
+              
+                   
+                    i++;
+                }
+                  </ul>
+               
+            }
+             <button type="submit" style"">Kaydet</button>
+  </form>
+
+       
   <div class = "row">
-<div class="gallery">
+@*<div class="gallery">
   <a target="_blank" href="img_5terre.jpg">
     <img src="/imgs/kare.png" alt="Cinque Terre" width="600" height="400">
   </a>
@@ -103,20 +226,37 @@ div.resimsirala
    </span>
   </a>
   <div class="desc">Add a description of the image here</div>
-</div>
+</div>*@
 
 <div class="gallery">
-  <a target="_blank" href="img_mountains.jpg">
+ @* <a target="_blank" href="img_mountains.jpg">
     <img src="/imgs/kare.png" alt="Mountains" width="600" height="400">
   </a>
-  <div class="desc">Add a description of the image here</div>
+  <div class="desc">Add a description of the image here</div>*@
   </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
   <form method="post" action="/Home/ImagesUpload" enctype="multipart/form-data">
+      @foreach (KirayaVerme gonderikayitid in Model.ResimGonderiDetay)
+        {
+              <input type="hidden" name="postid" value="@gonderikayitid.IlanId" />
+        }
+    
                 <input type="file"  multiple name="ifiles" id="gallery-photo-add">
-                <input class="btn btn-success" id="yukleme"  type="submit" value="Çoklu Yükle" disabled>
+                <input class="btn btn-success" id="yukleme"  type="submit" value="Çoklu Yükle">
   </form>
-</div>
- 
-  </div>
+
+
