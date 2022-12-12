@@ -435,7 +435,7 @@ function dropgaleri(ev){
             @if (User.Identity.Name != null)
             {
 
-                <a style="background-color:violet;">  @User.Identity.Name</a>
+                <a style="background-color:violet;" href="/User/UserDashboard/@User.Claims.FirstOrDefault(c=>c.Type == "UserId").Value">  @User.Identity.Name</a>
                 <a style="background-color:violet;">@User.Claims.FirstOrDefault(c => c.Type == "UserMail").Value</a>
 
 
@@ -515,8 +515,11 @@ function dropgaleri(ev){
             <div class="row" id="kiralikevler">
                 @foreach (KirayaVerme kirailan in Model.KirayaVermeList)
                 {
+                  
+                        
+                   
                     <div class="card" style="width: 18rem;border-radius:10px;">
-                        <img src="@foreach(Picture kapakpic in Model.ImageListe)if(kapakpic.PostId == kirailan.IlanId && kapakpic.IsKapak == true){@kapakpic.ResimName}" class="card-img-top" alt="..." style="border-radius:20px;">
+                        <img src="/imgs/@foreach(Picture kapakpic in Model.ImageListe)if(kapakpic.PostId == kirailan.IlanId && kapakpic.IsKapak == true){@kapakpic.ResimName}" class="card-img-top" alt="..." style="border-radius:20px;">
                         <div class="card-body">
                             <h4 class="card-title">@kirailan.IlanAdi</h4>
                     
@@ -527,49 +530,14 @@ function dropgaleri(ev){
                                 </span>
                             <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
                         </div>
+
                     </div>
+                     
                 }
        
 
 
 
-              <div class="card" style="width: 18rem;border-radius:10px;">
-                <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
-                <div class="card-body" >
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
-                </div>
-            </div>
-                <div class="card" style="width: 18rem;border-radius:10px;">
-                    <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;border-radius:10px;">
-                    <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
-                    </div>
-                </div>
-
-
-                <div class="card" style="width: 18rem;border-radius:10px;">
-                    <img src="/imgs/kare.png" class="card-img-top" alt="..." style="border-radius:20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                      
-                        </p>
-                        <a href="#" class="btn btn-primary" style="float:right;">Go somewhere</a>
-                    </div>
-                </div>
             
 
 

@@ -27,7 +27,7 @@ namespace EvlerKiralik
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                 options.Cookie.Name = "EvlerKiralik.Auth";
-                options.LoginPath = "/Login/Index";
+                options.LoginPath = "/Home/Tabpage";
                // options.AccessDeniedPath = "/Login/Index";
             });
 

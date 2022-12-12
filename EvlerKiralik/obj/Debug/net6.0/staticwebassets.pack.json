@@ -345,24 +345,8 @@
       "PackagePath": "staticwebassets\\font-awesome-4.7.0\\scss\\font-awesome.scss"
     },
     {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\AFİŞ ÖZEL EĞİTİM_page-0001.jpeg",
-      "PackagePath": "staticwebassets\\imgs\\AFİŞ ÖZEL EĞİTİM_page-0001.jpeg"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\GU Harita.jpeg",
-      "PackagePath": "staticwebassets\\imgs\\GU Harita.jpeg"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\cografi_isaretli_urunler - Kopya.jpeg",
-      "PackagePath": "staticwebassets\\imgs\\cografi_isaretli_urunler - Kopya.jpeg"
-    },
-    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\cografi_isaretli_urunler.jpeg",
       "PackagePath": "staticwebassets\\imgs\\cografi_isaretli_urunler.jpeg"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\denemeresim.jpg",
-      "PackagePath": "staticwebassets\\imgs\\denemeresim.jpg"
     },
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\genç_girişimci_kucuk.jpg",
@@ -371,18 +355,6 @@
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kare.png",
       "PackagePath": "staticwebassets\\imgs\\kare.png"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_afis_ozel_egitim.jpg",
-      "PackagePath": "staticwebassets\\imgs\\kucuk_afis_ozel_egitim.jpg"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_cografi_isaretli.jpg",
-      "PackagePath": "staticwebassets\\imgs\\kucuk_cografi_isaretli.jpg"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_resim_turizm_fakültesi.jpg",
-      "PackagePath": "staticwebassets\\imgs\\kucuk_resim_turizm_fakültesi.jpg"
     },
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\js\\site.js",

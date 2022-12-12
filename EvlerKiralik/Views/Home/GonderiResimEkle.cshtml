@@ -69,6 +69,7 @@ div.row
 li#resim 
 {  
   float: left;   
+  margin:0.5em;
 }
 li#resim img
 {        
@@ -171,26 +172,28 @@ ul#sortable
 {
     <h2>@detaygonder.IlanAdi</h2>
 }
-
+s
 
    
-    <div class="container-fluid">             
-          
-        
-        <form id="kaydir" method="post" action="/Home/resimOrder">
+    <div class="container-fluid">
+
+
+    <form id="kaydir" method="post" action="/Home/resimOrder">  </form>
+ 
             @{
                 string drag = "drag";
                 string div = "div";
                 int i=1;
-                 
+                
             
                                    <ul id="sortable">
             @foreach (Picture resim in Model.GonderiResimler)
             {
 
-            
-                 
-                    <li id="resim"><img id="@drag@i" src="/imgs/@resim.ResimName" /> <input type="text" name="ids" value="@resim.ResimId" hidden/></li>
+
+
+                <li id="resim"><img id="@drag@i" src="/imgs/@resim.ResimName" /> <input type="text" name="ids" value="@resim.ResimId" hidden form="kaydir" /> 
+                <form id="resimsil" action="/Home/DeleteImage/" method="post"> <input type="text" name="silinecekresimid" value="@resim.ResimId" hidden  /><input class="btn btn-danger" type="submit" ></form> </li>
               
               
                    
@@ -199,8 +202,8 @@ ul#sortable
                   </ul>
                
             }
-             <button type="submit" style"">Kaydet</button>
-  </form>
+    <input type="submit" class="btn btn-warning" form="kaydir" value="kaydet">Kaydet</>
+
 
        
   <div class = "row">

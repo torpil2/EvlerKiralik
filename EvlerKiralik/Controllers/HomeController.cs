@@ -245,6 +245,8 @@ namespace EvlerKiralik.Controllers
                 string filedirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imgs/");
                 ViewBag.filelist = Directory.EnumerateFiles(filedirectory, "*", SearchOption.AllDirectories).Select(Path.GetFileName);
                 var silinecekresim = from o in _database.Pictures where o.ResimId == silinecekresimid select o;
+                  var postid = _database.Pictures.Where(x=>x.ResimId==silinecekresimid).FirstOrDefault();
+                var postidsi = postid.PostId;
                 foreach (var resim in silinecekresim)
                 {
 
@@ -262,16 +264,24 @@ namespace EvlerKiralik.Controllers
 
                         System.IO.File.Delete(fullpath);
                         //ViewBag.deleteSuccess = "true";
-
+                   
                     }
+                }
+               
+                var toplamresimsayisi = _database.Pictures.Where(x => x.PostId == postidsi).Count();
+                var resimlerinhepsi = _database.Pictures.Where(x => x.PostId == postidsi).ToList();
+                for (int i = 0; i < toplamresimsayisi ; i++)
+                {
+                    resimlerinhepsi[i].ResimSira = i;
                 }
                 _database.SaveChangesAsync();
 
 
-                return RedirectToAction("TabPage", "Home");
-            } catch (Exception ex)
+                return RedirectToAction("GonderiResimEkle", new { id = postidsi });
+            }
+            catch (Exception ex)
             {
-                return RedirectToAction("TabPage", "Home");
+                return View();
             }
 
         }
@@ -282,34 +292,87 @@ namespace EvlerKiralik.Controllers
         public async Task<IActionResult> ImagesUpload(IFormFile[] ifiles, Picture pic, int postid)
         {
 
-            for (int i = 0; i < ifiles.Length; i++)
+
+
+
+            var checkresim = _database.Pictures.Where(x => x.PostId == postid).Count();
+        
+            if (checkresim>0)
             {
-                Picture pics = new Picture();
-                var imgext = Path.GetExtension(ifiles[i].FileName);
-
-
-
-
-                if (imgext == ".jpg" || imgext == ".gif" || imgext == ".jpeg")
+                var toplamresimsira = _database.Pictures.Where(x => x.PostId == postid).OrderBy(resim => resim.ResimSira);
+             var sonresimsira = toplamresimsira.Last().ResimSira;
+                for (int i = 0; i < ifiles.Length; i++)
                 {
-                    var saveimg = Path.Combine(_webHostEnvironment.WebRootPath, "imgs", ifiles[i].FileName);
-                    var stream = new FileStream(saveimg, FileMode.Create);
-                    await ifiles[i].CopyToAsync(stream);
+                    Picture pics = new Picture();
+                    var imgext = Path.GetExtension(ifiles[i].FileName);
 
-                    pics.ResimName = ifiles[i].FileName;
-                    pics.ResimPath = saveimg.ToString();
-                    pics.PostId = postid;
-                    await _database.AddAsync(pics);
-                    await _database.SaveChangesAsync();
+                    sonresimsira++;
 
 
-                    ViewData["Message"] = "Selected Image File is Saved into folder & path into database";
-                }
-                else
-                {
-                    ViewData["Message"] = "Please Upload only .jpeg,.jpg,.gif Images";
+
+                    if (imgext == ".jpg" || imgext == ".gif" || imgext == ".jpeg")
+                    {
+                        var saveimg = Path.Combine(_webHostEnvironment.WebRootPath, "imgs", ifiles[i].FileName);
+                        var stream = new FileStream(saveimg, FileMode.Create);
+                        await ifiles[i].CopyToAsync(stream);
+
+                        pics.ResimName = ifiles[i].FileName;
+                        pics.ResimPath = saveimg.ToString();
+                        pics.PostId = postid;
+                        pics.ResimSira = sonresimsira;
+                        await _database.AddAsync(pics);
+                        await _database.SaveChangesAsync();
+
+
+                        ViewData["Message"] = "Selected Image File is Saved into folder & path into database";
+                    }
+                    else
+                    {
+                        ViewData["Message"] = "Please Upload only .jpeg,.jpg,.gif Images";
+                    }
                 }
             }
+            else
+
+            {
+
+                for (int i = 0; i < ifiles.Length; i++)
+                {
+                    Picture pics = new Picture();
+                    var imgext = Path.GetExtension(ifiles[i].FileName);
+
+
+
+
+
+                    if (imgext == ".jpg" || imgext == ".gif" || imgext == ".jpeg")
+                    {
+                        var saveimg = Path.Combine(_webHostEnvironment.WebRootPath, "imgs", ifiles[i].FileName);
+                        var stream = new FileStream(saveimg, FileMode.Create);
+                        await ifiles[i].CopyToAsync(stream);
+
+                        pics.ResimName = ifiles[i].FileName;
+                        pics.ResimPath = saveimg.ToString();
+                        pics.PostId = postid;
+                        pics.ResimSira = i;
+                        if(i==0)
+                        {
+                            pics.IsKapak = true;
+                        }
+                        await _database.AddAsync(pics);
+                        await _database.SaveChangesAsync();
+
+
+                        ViewData["Message"] = "Selected Image File is Saved into folder & path into database";
+                    }
+                    else
+                    {
+                        ViewData["Message"] = "Please Upload only .jpeg,.jpg,.gif Images";
+                    }
+                }
+            
+            }
+
 
             return RedirectToAction("GonderiResimEkle", new { id = postid });
         }
@@ -389,14 +452,27 @@ namespace EvlerKiralik.Controllers
             var ilanid = gecerliilan.PostId;
          //   kapakresim.IsKapak = true;
           //  kapakresim.ResimSira = null;
+
             for (int i = 0; i < ids.Length; i++)
             {
+
                 var resim = _database.Pictures.Where(x => x.ResimId == ids[i]).FirstOrDefault();
+
                 if(resim.IsKapak!= false || resim.IsKapak != null)
                 {
-                    resim.IsKapak = false;
+                    if (i != 0)
+                    {
+                        resim.IsKapak = false;
+                    }
+                    else
+                    {
+                        resim.IsKapak = true;
+
+                    }
+
                 }
-              
+                
+                
                 if(resim.ResimSira!=i+1)
                 {
                     resim.ResimSira = i + 1;
@@ -404,7 +480,7 @@ namespace EvlerKiralik.Controllers
         
 
             }
-
+           
             await _database.SaveChangesAsync();
             return RedirectToAction("GonderiResimEkle", new { id =  ilanid});
 
