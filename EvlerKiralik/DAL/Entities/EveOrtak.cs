@@ -40,4 +40,6 @@ public partial class EveOrtak
     public bool? IsBoosted { get; set; }
 
     public string? EvTip { get; set; }
+
+    public bool? IsApproved { get; set; }
 }

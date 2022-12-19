@@ -1,0 +1,56 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using System.Security.Claims
+@model IList<KirayaVerme>
+
+@{
+    ViewData["Title"] = "IlanDetay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="@{Url.Content("~/css/table.css")}" asp-append-version="true" />
+
+
+
+ @foreach (KirayaVerme item in Model )
+        @{     
+                  <div id="arraydiv" class="container-fluid" style="display:flex;">
+             
+      
+        <form action="/Admin/GonderiReddet" method="post">
+            <input type="text" value="@item.IlanId" name="gonderiID" hidden>
+        <input type="submit" style="display:block;" class="btn btn-danger" value="Reddet" />
+    </form>
+
+    <form action="/Admin/GonderiOnayla" method="post">
+            <input type="text" value="@item.IlanId" name="gonderiID" hidden>
+        <input type="submit" style="display:block;" class="btn btn-success" value="Onayla" />
+    </form>
+            
+
+
+
+<table id="UserTable">
+    <thead>
+        <tr>
+            <td>
+                İlan adı
+            </td>
+        
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @item.IlanAdi
+         
+            </td>
+         
+        </tr>
+    </tbody>
+    
+
+
+</table>
+  
+    </div>
+    }

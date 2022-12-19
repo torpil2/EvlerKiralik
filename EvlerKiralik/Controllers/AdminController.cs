@@ -30,6 +30,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis.Differencing;
 using NuGet.Protocol;
 using EvlerKiralik.Model;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
+using System.Collections;
 
 namespace EvlerKiralik.Controllers
 {
@@ -458,6 +460,42 @@ namespace EvlerKiralik.Controllers
             
 		//	return View(Gonderi);
         }
+
+
+        public IActionResult GonderiOnay()
+        {
+
+            var list = _database.KirayaVermes.ToList();
+                        
+
+            return View(list);
+        }
+
+       
+
+        [HttpPost]
+        public async Task<IActionResult> GonderiOnayla(int gonderiId)
+        {
+            var gonderi = _database.KirayaVermes.Where(x=>x.IlanId==gonderiId).FirstOrDefault();
+            gonderi.IsApproved =true;
+            await _database.SaveChangesAsync();
+
+            return RedirectToAction("GonderiOnay", "Admin");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GonderiReddet(int gonderiId)
+        {
+            
+            var gonderi = _database.KirayaVermes.Where(x => x.IlanId == gonderiId).FirstOrDefault();
+            gonderi.IsApproved = false;
+            await _database.SaveChangesAsync();
+            return RedirectToAction("GonderiOnay", "Admin");
+        }
+        
+    
+
+
 
     }
     }

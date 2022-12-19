@@ -58,4 +58,6 @@ public partial class KirayaVerme
     public string? ToplamKat { get; set; }
 
     public string? IlanIlce { get; set; }
+
+    public bool? IsApproved { get; set; }
 }

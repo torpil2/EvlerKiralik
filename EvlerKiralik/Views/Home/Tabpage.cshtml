@@ -17,7 +17,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
-
+<link  href="@Url.Content("/fontawesome/css/font-awesome.css")" rel="stylesheet">
+<link href="@Url.Content("/fontawesome/css/brands.css")" rel="stylesheet">
+<link href="@Url.Content("/fontawesome/css/solid.css")" rel="stylesheet">
 
 @section    Scripts{
    
@@ -534,10 +536,34 @@ function dropgaleri(ev){
                     </div>
                      
                 }
-       
+                @foreach(KirayaVerme kirailan in Model.KirayaVermeList)
+                {
 
 
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <img src="/imgs/@foreach(Picture kapakpic in Model.ImageListe)if(kapakpic.PostId == kirailan.IlanId && kapakpic.IsKapak == true){@kapakpic.ResimName}" alt="" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">@kirailan.IlanAdi</h5>
+                                <p class="card-text">@kirailan.IlanIl / @kirailan.IlanIlce</p>
+                                <a href="" class="btn btn-outline-success btn-sm">Read More</a>
+                                <a href="" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-house"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
 
+                <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Sunset</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum sr. Incidunt repellendus praesentium quae!</p>
+                        <a href="" class="btn btn-outline-success btn-sm">Read More</a>
+                            <a href="" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-house"></i></a>
+                    </div>
+                </div>
+            </div>
             
 
 

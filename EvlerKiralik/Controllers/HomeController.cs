@@ -29,6 +29,7 @@ using System.Globalization;
 using System.IO;
 using NuGet.Packaging.Signing;
 using System.Security.Principal;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 
 namespace EvlerKiralik.Controllers
 {
@@ -136,6 +137,10 @@ namespace EvlerKiralik.Controllers
                                 Text = x.SokakAdi,
                                 Value = x.SokakId.ToString()
                             }).OrderBy(x => x.Text).ToList();
+
+        
+            
+            
             return Json(sokaklar);
         }
 
@@ -277,7 +282,7 @@ namespace EvlerKiralik.Controllers
                 _database.SaveChangesAsync();
 
 
-                return RedirectToAction("GonderiResimEkle", new { id = postidsi });
+                return RedirectToAction("EditGonderi", new { id = postidsi });
             }
             catch (Exception ex)
             {
@@ -374,7 +379,7 @@ namespace EvlerKiralik.Controllers
             }
 
 
-            return RedirectToAction("GonderiResimEkle", new { id = postid });
+            return RedirectToAction("EditGonderi", new { id = postid });
         }
 
 
@@ -393,14 +398,14 @@ namespace EvlerKiralik.Controllers
             var currentuser = User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
 
             //ez game ez life
-
+            // GİRİLEN SORGU TÜRÜ DATABASEDE YOKSA KAYDETME İF CHECKLERI İF NOT EQUAL DATABASE VALUE AT PRE PREAPARED
             ilan.IlanIl = ilanili.FirstOrDefault();
             ilan.IlanIlce = ilceadi.FirstOrDefault();
             ilan.IlanMahalle = mahalledadi.FirstOrDefault();
             ilan.IlanSokak = sokakadi.FirstOrDefault();
             ilan.IlanDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
             ilan.UserId = Convert.ToInt32(currentuser);
-            ilan.IlanAdi = ilanadi;
+            ilan.IlanAdi = ilanadi.Trim();
             ilan.EvTip = ilanVerEvTip;
             ilan.OdaSayisi = ilanVerOdaSayi;
             ilan.BanyoSayisi = ilanVerBanyoSayi;
@@ -426,22 +431,103 @@ namespace EvlerKiralik.Controllers
 
             //return RedirectToAction("TabPage","Home");,
 
-            return RedirectToAction("GonderiResimEkle", new { id = soneklenenilan });
+            return RedirectToAction("EditGonderi", new { id = soneklenenilan });
 
 
 
         }
 
         [HttpGet]
-        public ActionResult GonderiResimEkle(int? id)
+        public ActionResult EditGonderi(int? id)
         {
             dynamic model = new ExpandoObject();
             //var GonderiResim = _database.Pictures.Where(x => x.PostId == id).ToList();
-            model.ResimGonderiDetay = _database.KirayaVermes.Where(x => x.IlanId == id).ToList();
+            model.ResimGonderiDetay = _database.KirayaVermes.Where(x => x.IlanId == id).Take(1);
             model.KapakResimList = _database.Pictures.Where(x => x.IsKapak == true && x.PostId == id).ToList();
             model.GonderiResimler = _database.Pictures.Where(x => x.PostId == id).ToList().OrderBy(x=>x.ResimSira);
+            var gonderi = _database.KirayaVermes.Where(x => x.IlanId == id).FirstOrDefault();
+                     
+            
+            model.IlListesi = _database.Illers.ToList();
+            if(gonderi!=null)
+            {
+                model.IlceListesi = _database.Ilcelers.Where(x => x.IlAdi == gonderi.IlanIl).ToList();
+                model.Mahalleler = _database.Mahallelers.Where(x => x.IlceAdi == gonderi.IlanIlce && x.IlAdi == gonderi.IlanIl).ToList();
+                model.Sokaklar = _database.Sokaklars.Where(x => x.MahalleAdi == gonderi.IlanMahalle && x.IlceAdi == gonderi.IlanIlce && x.IlAdi == gonderi.IlanIl).ToList();
+            }
+
+            model.OdaSayiListe = _database.OdaSayisis.ToList();//2
+            model.BinayasiListe = _database.BinaYasis.ToList();//9
+            model.DaireKatListe = _database.DaireKats.ToList();//7
+            model.IsitmaListe = _database.IsitmaTurs.ToList();//5
+            model.BanyoSayiListe = _database.BanyoSayis.ToList(); //3 
+            model.BalkonSayiListe = _database.BalkonSayis.ToList(); //4
+            model.EsyaliCheckListe = _database.IsEsyalis.ToList();//6
+            model.SiteCheckListe = _database.IsinSites.ToList();//10
+            model.KimdenListe = _database.Kimdens.ToList();//11
+            model.OdemeTurListe = _database.OdemeTurs.ToList();//12
+            model.BoostTipListe = _database.BoostTips.ToList();//Optional
+            model.EvTipListe = _database.EvTips.ToList();//1
+            model.ToplamKatListe = _database.ToplamKats.ToList();//8
+            model.ImageListe = _database.Pictures.ToList();
+            model.KirayaVermeList = _database.KirayaVermes.ToList();
+
+
+
 
             return View(model);
+        }
+          
+        [HttpPost]
+        public async Task<IActionResult> GonderiKaydet(int ilanid,int ilanil, int ilanilce,
+            int ilanmahalle, int ilansokak, string ilanadi, string ilanVerEvTip, string ilanVerOdaSayi,
+            string ilanVerBanyoSayi, string ilanVerBalkonSayi, string ilanVerIsitmaTip, string ilanVerEsyaliCheck,
+            string ilanVerDaireKat, string ilanVerToplamKat, string ilanVerBinaYas, string ilanVerSiteCheck, string ilanVerKimdenCheck, string ilanVerOdemeTip, string ilanVerAciklama)
+        {
+            var duzenlenenilan = _database.KirayaVermes.Where(x => x.IlanId == ilanid).FirstOrDefault();
+
+
+
+            // GİRİLEN SORGU TÜRÜ DATABASEDE YOKSA KAYDETME İF CHECKLERI İF NOT EQUAL DATABASE VALUE AT PRE PREAPARED
+
+            var ilanili = _database.Illers.Where(x => x.IlId == ilanil).FirstOrDefault();
+            var ilanilcesi = _database.Ilcelers.Where(x => x.IlceId == ilanilce).FirstOrDefault();
+            var ilanmahallesi = _database.Mahallelers.Where(x => x.MahalleId == ilanmahalle).FirstOrDefault();
+            var ilansokaki = _database.Sokaklars.Where(x => x.SokakId == ilansokak).FirstOrDefault();
+
+
+
+
+
+            //ez game ez life
+            if (duzenlenenilan!=null)
+            {
+
+
+            duzenlenenilan.IlanIl = ilanili.İlAdi;
+            duzenlenenilan.IlanIlce = ilanilcesi.IlceAdi;
+            duzenlenenilan.IlanMahalle = ilanmahallesi.MahalleAdi;
+            duzenlenenilan.IlanSokak = ilansokaki.SokakAdi;
+            duzenlenenilan.IlanDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
+            duzenlenenilan.IlanAdi = ilanadi;
+            duzenlenenilan.EvTip = ilanVerEvTip;
+            duzenlenenilan.OdaSayisi = ilanVerOdaSayi;
+            duzenlenenilan.BanyoSayisi = ilanVerBanyoSayi;
+            duzenlenenilan.Balkon = ilanVerBalkonSayi;
+            duzenlenenilan.IsitmaTuru = ilanVerIsitmaTip;
+            duzenlenenilan.Esyali = ilanVerEsyaliCheck;
+            duzenlenenilan.BulunduguKat = ilanVerDaireKat;
+            duzenlenenilan.ToplamKat = ilanVerToplamKat;
+            duzenlenenilan.BinaYasi = ilanVerBinaYas;
+            duzenlenenilan.SiteIcerisinde = ilanVerSiteCheck;
+            duzenlenenilan.Kimden = ilanVerKimdenCheck;
+            duzenlenenilan.OdemeTuru = ilanVerOdemeTip;
+            duzenlenenilan.Aciklama = ilanVerAciklama;
+              
+            _database.SaveChangesAsync();
+            }
+
+            return RedirectToAction("EditGonderi", new { id = ilanid });
         }
 
         [HttpPost]
@@ -482,7 +568,7 @@ namespace EvlerKiralik.Controllers
             }
            
             await _database.SaveChangesAsync();
-            return RedirectToAction("GonderiResimEkle", new { id =  ilanid});
+            return RedirectToAction("EditGonderi", new { id =  ilanid});
 
         }
 

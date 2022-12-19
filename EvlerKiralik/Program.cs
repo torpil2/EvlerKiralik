@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EvlerKiralik
 {
@@ -30,7 +31,6 @@ namespace EvlerKiralik
                 options.LoginPath = "/Home/Tabpage";
                // options.AccessDeniedPath = "/Login/Index";
             });
-
             builder.Services.AddMvc().AddSessionStateTempDataProvider();
             builder.Services.AddSession();
             //builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -1,0 +1,687 @@
+﻿
+@model dynamic
+@using EvlerKiralik.DAL.Entities
+@{
+    ViewData["Title"] = "EditGonderi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<!-- include libraries(jQuery, bootstrap) -->
+
+
+<link href="@Url.Content("/fontawesome/css/font-awesome.css")" rel="stylesheet">
+<link href="@Url.Content("/fontawesome/css/brands.css")" rel="stylesheet">
+<link href="@Url.Content("/fontawesome/css/solid.css")" rel="stylesheet">
+<style>
+    div.gallery {
+        margin: 5px;
+        border: 1px solid #ccc;
+        float: left;
+        width: 180px;
+        display: inline;
+    }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+    div.desc {
+        padding: 5px;
+    }
+
+    div.col {
+        height: 20em;
+        width: 2em;
+        border: 1px solid red;
+        padding: 0;
+    }
+
+    div.row {
+        margin: 5px;
+        padding: 5px;
+        width: 500px;
+        height: 110px;
+        overflow-x: scroll;
+        text-align: justify;
+        display: flex;
+        float: left;
+    }
+
+    .bellnumbers {
+        position: absolute;
+        font-size: 1.2em;
+        background-color: black;
+        margin: 0 auto;
+        padding: 0.1em;
+        padding-left: 0;
+        color: #fff;
+    }
+
+    .bell {
+        display: inline-block;
+        position: relative;
+    }
+
+
+    li#resim {
+        float: left;
+        margin: 0.5em;
+    }
+
+        li#resim img {
+            heighT: 20em;
+            width: 300px;
+        }
+
+        li#resim:hover {
+            opacity: 0.5;
+        }
+
+    ul#sortable {
+        width: 100%;
+        display: flex;
+        margin: 0 auto;
+        overflow-x: scroll;
+    }
+
+input
+{
+    width:50%;
+}
+span
+{
+    display:inline-block;
+}
+
+select
+{
+    width:100%;
+}
+
+
+</style>
+
+
+@section Scripts
+    {
+
+    <script>
+        $(function () {
+            // Multiple images preview in browser
+            var imagesPreview = function (input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.gallery');
+
+
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#imageListId").sortable({
+                update: function (event, ui) {
+                    getIdsOfImages();
+                } //end update
+            });
+        });
+
+        function getIdsOfImages() {
+            var values = [];
+            $('.listitemClass').each(function (index) {
+                values.push($(this).attr("id")
+                    .replace("imageNo", ""));
+            });
+            $('#outputvalues').val(values);
+        }
+    </script>
+
+    <script>
+        $(function () {
+            $("ol.example").sortable();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function () {
+
+
+            $("#sortable").sortable({
+                cursor: "move",
+                cursorAt: { left: 1 },
+
+
+
+            });
+        });
+    </script>
+
+
+
+    <script>
+        $(function () {
+            $('#brow1').change(function () {
+                var id = $('#brow1').val();
+                $.ajax({
+                    url: '/Home/ilcegetir',
+                    data: { p: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#brow2').empty();
+                         $('#brow2').append("<option selected>İlçe Seçiniz</option>")
+                        for (var i = 0; i < data.length; i++) {
+                            $('#brow2').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('#brow2').change(function () {
+                var id = $('#brow2').val();
+                $.ajax({
+                    url: '/Home/mahallegetir',
+                    data: { m: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#brow3').empty();
+                        $('#brow3').append("<option selected>Mahalle Seçiniz</option>")
+                        for (var i = 0; i < data.length; i++) {
+                            $('#brow3').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#brow3').change(function () {
+                var id = $('#brow3').val();
+                $.ajax({
+                    url: '/Home/sokakgetir',
+                    data: { k: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        $('#brow4').empty();
+                        $('#brow4').append("<option selected>Sokak Seçiniz</option>")
+                        for (var i = 0; i < data.length; i++) {
+                            $('#brow4').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function validateform()
+        {
+
+            let x = document.forms["ilanduzenlemeform"]["ilansokak"].value;
+            let y = document.forms["ilanduzenlemeform"]["ilanilce"].value;
+            let z = document.forms["ilanduzenlemeform"]["ilanmahalle"].value;
+            if (x == "Sokak Seçiniz") {
+            alert("Sokak Seçimi Yapınız");
+            return false;
+        }
+        if(y=="İlçe Seçiniz")
+        {
+            alert("İlçe Seçimi Yapın");
+            return false;
+        }
+        if(z=="Mahalle Seçiniz")
+        {
+            alert("Mahalle Seçimi Yapın");
+            return false;
+        }
+        }
+
+        </script>
+}
+
+
+<div class="container" style="width:100%;float:left;">
+    <div class="col-sm" style="width:75%;">
+        
+    @foreach (KirayaVerme detaygonder in Model.ResimGonderiDetay)
+    {
+            <form name="ilanduzenlemeform" onsubmit="return validateform()" method="post" action="/Home/GonderiKaydet" style="border:3px solid red;padding:5px;background-color:aqua;border-radius:15px;">
+       
+                <input type="text" value="@detaygonder.IlanId" name="ilanid" hidden>
+                <span>
+                    <a>İl Adı</a>
+                </span>
+                <span>
+                    <input class="form-control form-control-sm" type="text" name="ilanadi" value="@detaygonder.IlanAdi" style="width:50%;">
+                </span>
+              
+
+                
+                    <span>İl Adı</span>
+
+
+                    <span>
+                    <select id="brow1" name="ilanil" class="form-control form-control-sm" ">
+                        @foreach (Iller iller in Model.IlListesi)
+                        {@if (iller.İlAdi == detaygonder.IlanIl)
+                            {
+                            <option title="@iller.IlId" id="@iller.IlId" value="@iller.IlId" selected>@iller.İlAdi </option>
+
+
+                            }
+                            else
+                            {
+                             <option title="@iller.IlId" id="@iller.IlId" value="@iller.IlId">@iller.İlAdi </option>
+                            }
+
+                        }
+                    </select>
+                    </span>
+                    
+
+                        
+                                       
+                           <span>
+                                  <a>İlçe Adı</a>
+                    <select id="brow2" name="ilanilce" class="form-control form-control-sm">
+                        @foreach (Ilceler ilceler in Model.IlceListesi)
+                        {
+                            
+                                @if (ilceler.IlceAdi == detaygonder.IlanIlce)
+                                {
+                                    <option title="@ilceler.IlceId" id="@ilceler.IlceId" value="@ilceler.IlceId" selected>@ilceler.IlceAdi </option>
+                                }
+                                else
+                                {
+                                    <option title="@ilceler.IlceId" id="@ilceler.IlceId" value="@ilceler.IlceId">@ilceler.IlceAdi </option>
+                                }
+                            }
+                        
+                    </select>
+                    </span>
+                    
+                    <span>
+                    <select id="brow3" name="ilanmahalle" class="search form-control form-control-sm">
+                        @foreach (Mahalleler mahalleler in Model.Mahalleler)
+                        {@if (mahalleler.MahalleAdi == detaygonder.IlanMahalle)
+                            {
+                                <option title="@mahalleler.MahalleId" id="@mahalleler.MahalleId" value="@mahalleler.MahalleId" selected>@mahalleler.MahalleAdi </option>
+                            }
+                            else
+                            {
+                                <option title="@mahalleler.MahalleId" id="@mahalleler.MahalleId" value="@mahalleler.MahalleId" >@mahalleler.MahalleAdi </option>
+                            }
+
+                        }
+                    </select>
+
+                  
+                    </span>
+
+                    <span>
+                    @* SOKAKLAR*@
+                    <select id="brow4"  name="ilansokak" class=" form-control form-control-sm">
+                        @foreach (Sokaklar sokaklar in Model.Sokaklar)
+                        {@if (sokaklar.SokakAdi == detaygonder.IlanSokak)
+                            {
+                                <option title="@sokaklar.SokakId" id="@sokaklar.SokakId" value="@sokaklar.SokakId" selected>@sokaklar.SokakAdi </option>
+                            }
+                            else
+                            {
+                                <option title="@sokaklar.SokakId" id="@sokaklar.SokakId" value="@sokaklar.SokakId" >@sokaklar.SokakAdi </option>
+                            }
+
+                        }                    </select>
+
+                    Ev Tip:
+
+                <select class="form-control form-control-sm" ="evtiplist" name="ilanVerEvTip" style="width:50%;height:50%;" placeholder="Ev Tip List" autocomplete="off">
+                      
+                            @foreach (EvTip EvTipListe in Model.EvTipListe)
+                        {
+                            
+                        
+                        if(EvTipListe.EvTipName == detaygonder.EvTip)
+                            {
+                                <option selected>@EvTipListe.EvTipName </option>
+                            }
+                            else
+                            {
+                                <option>@EvTipListe.EvTipName </option>
+                            }
+
+                        }
+                    </select>
+                  
+                    Odalist
+
+
+                    <select class="form-control form-control-sm" name="ilanVerOdaSayi" style="width:50%;height:50%;" placeholder="Oda Sayısı List" autocomplete="off">
+
+                            @foreach (OdaSayisi OdaSay in Model.OdaSayiListe)
+                            {
+                      
+
+                             if(OdaSay.OdaSayisi1 == detaygonder.OdaSayisi)
+                            {
+                                <option selected>@OdaSay.OdaSayisi1 </option>
+
+                            }
+                            else
+                            {
+                                <option>@OdaSay.OdaSayisi1 </option>
+                            }
+                           
+                            }
+                    </select>
+
+
+                    Banyo Sayi:
+
+                        <input list="banyosayilist" name="ilanVerBanyoSayi" style="width:100%;height:50%;" placeholder="Banyo Sayı List" autocomplete="off" />
+                        <datalist id="banyosayilist" autocomplete="off">
+                            @foreach (BanyoSayi BanyoSay in Model.BanyoSayiListe)
+                            {
+                            if (BanyoSay.BanyoSayi1 == detaygonder.BanyoSayisi)
+                            {
+                                <option selected>@BanyoSay.BanyoSayi1 </option>
+
+                            }
+                            else
+                            {
+                                <option>@BanyoSay.BanyoSayi1 </option>
+                            }
+                            }
+                        </datalist>
+                
+                        <input list="balkonsayilist" name="ilanVerBalkonSayi" style="width:100%;height:50%;" placeholder="Balkon Sayı List" autocomplete="off" />
+                        <datalist id="balkonsayilist" autocomplete="off">
+                            @foreach (BalkonSayi Balkonsay in Model.BalkonSayiListe)
+                            {
+
+                            
+                            if (Balkonsay.BalkonSayi1 == detaygonder.Balkon)
+                            {
+                                <option selected>@Balkonsay.BalkonSayi1 </option>
+
+                            }
+                            else
+                            {
+                                <option>@Balkonsay.BalkonSayi1 </option>
+                            }
+                            }
+                        </datalist>
+                  
+                        <input list="isitmaturlist" name="ilanVerIsitmaTip" style="width:100%;height:50%;" placeholder="Isıtma Tür List" autocomplete="off" />
+                        <datalist id="isitmaturlist" autocomplete="off">
+                            @foreach (IsitmaTur IsitmaTu in Model.IsitmaListe)
+                            {
+                               if(IsitmaTu.IsitmaTur1 == detaygonder.IsitmaTuru)
+                            {
+                                <option selected>@IsitmaTu.IsitmaTur1 </option>
+
+                            }
+                            else
+                            {
+                                <option>@IsitmaTu.IsitmaTur1 </option>
+                            }}
+
+                        </datalist>
+                   
+                        <span>
+                         Login Info:
+
+                    <select class="form-control form-control-sm" name="ilanVerEsyaliCheck" style="width:100%;height:50%;" placeholder="Eşyalı Check List" autocomplete="off">
+                            @foreach (IsEsyali IsEsyal in Model.EsyaliCheckListe)
+                            if (IsEsyal.IsEsyali1 == detaygonder.Esyali)
+                            {
+                                <option selected>@IsEsyal.IsEsyali1 </option>
+
+                            }
+                            else
+                            {
+                                <option>@IsEsyal.IsEsyali1 </option>
+                            }
+                        </select>
+                  </span>
+                  <span>
+
+                        Daire Kat :
+                        <select list="dairekatlist" name="ilanVerDaireKat" class="form-control form-control-sm" style="width:100%;height:50%;" placeholder="Daire Kat List" autocomplete="off" >
+                   
+                            @foreach (DaireKat DaireKa in Model.DaireKatListe)
+                            if (DaireKa.DaireKat1 == detaygonder.BulunduguKat)
+                            {
+                                <option selected>@DaireKa.DaireKat1</option>
+
+                            }
+                            else
+                            {
+                                <option>@DaireKa.DaireKat1 </option>
+                            }
+                        </select>
+                   
+                        
+                  </span>
+
+                     <br>    Login Info:
+
+                    <select list="toplamkatlist" name="ilanVerToplamKat" class="form-control form-control-sm" style="width:30%;height:50%;" placeholder="Toplam Kat List" autocomplete="off">
+                      
+                            @foreach (ToplamKat ToplamKatList in Model.ToplamKatListe)
+                            if (ToplamKatList.ToplamKatAdi == detaygonder.ToplamKat)
+                            {
+                                <option selected>@ToplamKatList.ToplamKatAdi </option>
+
+                            }
+                            else
+                            {
+                                <option>@ToplamKatList.ToplamKatAdi </option>
+                            }
+                        </select>
+                   
+
+                        <input list="binalist" name="ilanVerBinaYas" style="width:100%;height:50%;" placeholder="Bİna Yasi List" autocomplete="off" />
+                        <datalist id="binalist" autocomplete="off">
+                            @foreach (BinaYasi Binayas in Model.BinayasiListe)
+                            if (Binayas.BinaYasi1 == detaygonder.BinaYasi)
+                            {
+                                <option selected>@Binayas.BinaYasi1 </option>
+
+                            }
+                            else
+                            {
+                                <option>@Binayas.BinaYasi1 </option>
+                            }
+                        </datalist>
+                 
+              
+                        <input list="sitechecklist" name="ilanVerSiteCheck" style="width:100%;height:50%;" placeholder="Site Check List" autocomplete="off" />
+                        <datalist id="sitechecklist" autocomplete="off">
+                            @foreach (IsinSite IsinSit in Model.SiteCheckListe)
+                            if (IsinSit.IsinSite1 == detaygonder.SiteIcerisinde)
+                            {
+                                <option selected>@IsinSit.IsinSite1  </option>
+
+                            }
+                            else
+                            {
+                                <option>@IsinSit.IsinSite1 </option>
+                            }
+                        </datalist>
+
+
+                         <input list="kimdenlist" name="ilanVerKimdenCheck" style="width:100%;height:50%;" placeholder="Kimden List" autocomplete="off" />
+                        <datalist id="kimdenlist" autocomplete="off">
+                            @foreach (Kimden KimdenList in Model.KimdenListe)
+                               if(KimdenList.KimdenAdi == detaygonder.Kimden)
+                            {
+                                <option selected>@KimdenList.KimdenAdi </option>
+
+                            }
+                            else
+                            {
+                                <option>@KimdenList.KimdenAdi </option>
+                            }
+                        </datalist>
+
+                    
+                        <input list="odemeturlist" name="ilanVerOdemeTip" style="width:100%;height:50%;" placeholder="Odeme Tur List" autocomplete="off" />
+                        <datalist id="odemeturlist" autocomplete="off">
+                            @foreach (OdemeTur OdemeTurList in Model.OdemeTurListe)
+                            if (OdemeTurList.OdemeTurName == detaygonder.OdemeTuru)
+                            {
+                                <option selected>@OdemeTurList.OdemeTurName </option>
+
+                            }
+                            else
+                            {
+                                <option>@OdemeTurList.OdemeTurName </option>
+                            }
+                        </datalist>
+
+                    </span>
+                            
+
+                
+                    
+                 
+                 
+            <input type="text" id="long_Description" value="@detaygonder.Aciklama" hidden>
+
+                <textarea id="summernote" name="ilanVerAciklama" style="background-color:white;"></textarea>
+
+
+            <input type="submit" value="Kaydet">
+        </form>
+  
+    }
+        </div>
+</div>
+
+
+<div class="container-fluid">
+
+
+    <form id="kaydir" method="post" action="/Home/resimOrder">  </form>
+
+    
+        string drag = "drag";
+        string div = "div";
+        int i = 1;
+
+
+        <ul id="sortable">
+            @foreach (Picture resim in Model.GonderiResimler)
+            {
+
+
+
+                <li id="resim">
+                    <img id="@drag@i" src="/imgs/@resim.ResimName" /> <input type="text" name="ids" value="@resim.ResimId" hidden form="kaydir" />
+                    <form id="resimsil" action="/Home/DeleteImage/" method="post"> <input type="text" name="silinecekresimid" value="@resim.ResimId" hidden /><input class="btn btn-danger" type="submit"></form>
+                </li>
+
+
+
+                i++;
+            }
+        </ul>
+
+    }
+    <input type="submit" class="btn btn-warning" form="kaydir" value="kaydet">Kaydet</>
+
+
+
+    <div class="row">
+      
+
+        <div class="gallery">
+          
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form method="post" action="/Home/ImagesUpload" enctype="multipart/form-data">
+    @foreach (KirayaVerme gonderikayitid in Model.ResimGonderiDetay)
+    {
+        <input type="hidden" name="postid" value="@gonderikayitid.IlanId" />
+    }
+
+    <input type="file" multiple name="ifiles" id="gallery-photo-add">
+    <input class="btn btn-success" id="yukleme" type="submit" value="Çoklu Yükle">
+</form>
+
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Aciklama ',
+        tabsize: 1,
+        height: 400,
+        disableResizeEditor: true,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font',],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+
+        ]
+
+    });
+
+    var description = $('#long_Description').val();
+    $('#summernote').summernote('code', description);
+</script>

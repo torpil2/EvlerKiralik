@@ -56,7 +56,7 @@
 }
 .card-text
 {
-    height:8rem;        
+        
 
 }
 
@@ -288,8 +288,8 @@ input {
 button {
     background-color: #647E68;
     color: #ffffff;
-    border: none;
-    padding: 10px 20px;
+   
+   
     font-size: 17px;
     font-family: Raleway;
     cursor: pointer;
@@ -330,7 +330,6 @@ button {
 
 
     /*siderbar css*/
-
 
 
 

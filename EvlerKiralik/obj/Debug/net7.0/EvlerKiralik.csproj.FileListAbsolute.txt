@@ -1,0 +1,8 @@
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.csproj.AssemblyReference.cache
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.GeneratedMSBuildEditorConfig.editorconfig
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.AssemblyInfoInputs.cache
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.AssemblyInfo.cs
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.csproj.CoreCompileInputs.cache
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.MvcApplicationPartsAssemblyInfo.cache
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.RazorAssemblyInfo.cache
+D:\evlerkiralik\evlerkiralikgithub\EvlerKiralik\EvlerKiralik\obj\Debug\net7.0\EvlerKiralik.RazorAssemblyInfo.cs
