@@ -7,12 +7,12 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<link rel="stylesheet" href="@{Url.Content("~/css/table.css")}" asp-append-version="true" />
 
 
 
- @foreach (KirayaVerme item in Model )
-        @{     
+
+ foreach (var item in Model )
+             
                   <div id="arraydiv" class="container-fluid" style="display:flex;">
              
       
@@ -53,4 +53,4 @@
 </table>
   
     </div>
-    }
+    
