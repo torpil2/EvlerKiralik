@@ -1,6 +1,6 @@
 ﻿@using EvlerKiralik.DAL.Entities
 @using System.Security.Claims
-@model IList<KirayaVerme>
+@model dynamic
 
 @{
     ViewData["Title"] = "IlanDetay";
@@ -8,21 +8,58 @@
 }
 
 
+<link rel="stylesheet" href="@Url.Content("~/css/table.css")" asp-append-version="true" />
 
+@section scripts
+{
 
+    <script>
+       
+      
+        $(function () {
 
- foreach (var item in Model )
+            $("#getbutton").click(function (e) {
+                            var gonderi;
+            let sayi = document.getElementById("gonderisayi").value;
+                $.ajax({
+                    url: '/Admin/GonderisTek',
+                    data: { p: sayi },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        console.log(sayi);
+                       // $('#arraydiv').empty();
+                      
+                        data = JSON.stringify(data);
+                        gonderi = JSON.parse(data);
+                        console.log("parse data= "+ gonderi.ilanAdi);                      
+                        //$('#arraydiv').append("<input type='text' value='"+ gonderi.ilanAdi +"' />");
+                        $('#redbutton').val(gonderi.ilanId);
+                        $('#onaybutton').val(gonderi.ilanId);
+                        $('#ilanadi').html(gonderi.ilanAdi);
+                     sayi = parseInt(sayi)+ 1;
+                     document.getElementById("gonderisayi").setAttribute('value',sayi);
+                         }
+            });
+        });
+        });
+    </script>
+}
+<input id="gonderisayi" type="number" value="0"/>
+<button type="button" id="getbutton">Sıradaki Gonderi" </button>
              
                   <div id="arraydiv" class="container-fluid" style="display:flex;">
-             
-      
+   
+
         <form action="/Admin/GonderiReddet" method="post">
-            <input type="text" value="@item.IlanId" name="gonderiID" hidden>
+            <input id="redbutton" type="hidden"  name="gonderiID" >
         <input type="submit" style="display:block;" class="btn btn-danger" value="Reddet" />
     </form>
 
     <form action="/Admin/GonderiOnayla" method="post">
-            <input type="text" value="@item.IlanId" name="gonderiID" hidden>
+            <input id="onaybutton" type="hidden"  name="gonderiID" >
         <input type="submit" style="display:block;" class="btn btn-success" value="Onayla" />
     </form>
             
@@ -40,8 +77,8 @@
     </thead>
     <tbody>
         <tr>
-            <td>
-                @item.IlanAdi
+            <td id="ilanadi">
+              
          
             </td>
          
@@ -51,6 +88,7 @@
 
 
 </table>
-  
+  }
     </div>
     
+            

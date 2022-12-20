@@ -464,11 +464,12 @@ namespace EvlerKiralik.Controllers
 
         public IActionResult GonderiOnay()
         {
-
-            var list = _database.KirayaVermes.ToList();
+            dynamic model = new ExpandoObject();
+            model.onayilan = _database.KirayaVermes.Where(x => x.IsApproved == false).ToList().Take(1);
+            //var list = _database.KirayaVermes.Where(x => x.IsApproved == false).FirstOrDefault(); 
                         
 
-            return View(list);
+            return View(model);
         }
 
        
@@ -492,8 +493,31 @@ namespace EvlerKiralik.Controllers
             await _database.SaveChangesAsync();
             return RedirectToAction("GonderiOnay", "Admin");
         }
-        
-    
+
+
+        public JsonResult GonderisTek(int p)
+        {
+            var gonderiler = _database.KirayaVermes.ToList();
+
+            List<KirayaVerme> gonderilist = _database.KirayaVermes.ToList();
+            if(p<gonderilist.Count())
+            {
+
+          
+            var gonder = gonderilist[p];
+  
+            return Json(gonder);
+            }
+            else
+            {
+
+                return Json(gonderilist[0]);
+            }
+
+
+
+
+        }
 
 
 
