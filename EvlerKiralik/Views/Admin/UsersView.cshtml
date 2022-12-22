@@ -8,6 +8,7 @@
 }
 
 <link rel="stylesheet" href="@Url.Content("~/css/table.css")" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 @section scripts
 	{
 	<script>
@@ -33,7 +34,66 @@
 			}
 		}
 	</script>
+
+	<script>
+		$(function CheckType() {
+
+			$('#usertypeid').change(function (e) {
+				let usertip = document.getElementById("usertypeid").value;
+				$.ajax({
+					url: '/Admin/checkRow',
+					data: { type: usertip },
+					type: "POST",
+					dataType: "Json",
+					success: function (data) {
+						if (data == null) {
+							console.log(data);
+							$('#uyariyazidiv').empty();
+							
+						}
+						else {
+							console.log(data);
+							$('#uyariyazidiv').empty();
+							$('#uyariyazidiv').append("<h6 id='uyariyazitext'>" + data + "</h6>");
+							$("#uyariyazitext").addClass('animate__animated animate__flash');
+						}
+
+					}
+				});
+
+			});
+		});
+	</script>
 }
+
+  <div class="row" id="formdiv" style="border:3px solid white;margin:1em;width:60%;align-content:center;padding-left:1%">
+        <label id="editcategoryitem">
+            <a>User Type Liste</a>
+
+        </label>
+	<form action="/Admin/UserTypeSil" method="post" style="width:50%;height:50%;">
+		<input list="usertypelist" id="usertypeid" name="usertyp" style="width:100%;height:50%;" placeholder="User Type list" autocomplete="off" />
+		<datalist id="usertypelist" autocomplete="off">
+
+			@foreach (UserType userTyp in Model.TypeList)
+            {
+				<option>@userTyp.UserTypeName </option>
+            }
+
+        </datalist>
+
+         <button type="submit" class="btn btn-danger" style="float:right;height:10%;width:50%">Sil</button>
+        </form>
+	<form style="width:50%;" action="/Admin/UserTypeEkle" method="post">
+		<input type="text" name="usertyp" class="form-control" autocomplete="off" />
+            <button type="submit" class="btn btn-success" style="float:right;">Ekle</button>
+        </form>
+		<div id="uyariyazidiv" style="color:red;text-decoration:underline;">
+			
+		</div>
+    </div>
+
+
 <label id="editcategoryitem"  style="margin-left:1%;margin-bottom:1em;">Kullanıcı Ara
 <input type="text" id="search" onkeyup="searchTable()" />
 </label>

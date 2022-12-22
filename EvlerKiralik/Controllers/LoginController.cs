@@ -29,7 +29,7 @@ namespace EvlerKiralik.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string txtUserName, string txtPassword)
         {
-            User UserCurrent = new User();
+           
             PostgresContext db = new PostgresContext();
 
             var userget =  _database.Users.Where(x=>x.UserName == txtUserName && x.UserPassword == txtPassword).FirstOrDefault();
@@ -41,7 +41,10 @@ namespace EvlerKiralik.Controllers
                     new Claim(JwtRegisteredClaimNames.NameId,Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Name, userget.UserName),
                     new Claim ("UserMail",userget.UserMail),
-                    new Claim("UserId",userget.UserId.ToString())
+                    new Claim("UserId",userget.UserId.ToString()),
+                    new Claim("UserType", userget.UserType)
+
+
 
             };
                 SecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("evlerkiralik1234"));

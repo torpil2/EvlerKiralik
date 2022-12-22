@@ -30,6 +30,9 @@
     <span> @user.LastLogin</span>
 
     <span>@user.UserPassword</span>
+	
+		<span>@User.Claims.FirstOrDefault(c => c.Type == "UserType").Value</span>
+	
     </div>
 }  
 

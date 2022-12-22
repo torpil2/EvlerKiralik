@@ -39,6 +39,7 @@ namespace EvlerKiralik.Controllers
     {
         public PostgresContext _database;
 
+        public List<KirayaVerme> gonderilist = new List<KirayaVerme>();
 
         public AdminController(PostgresContext database)
         {
@@ -399,18 +400,39 @@ namespace EvlerKiralik.Controllers
             dynamic model = new ExpandoObject();
 
             model.UserList = _database.Users.ToList();
+            model.TypeList = _database.UserTypes.ToList();
             return View(model);
         }
+
+        public async Task<IActionResult> UserTypeEkle(string usertyp)
+        {
+            UserType usertype = new UserType() { UserTypeName = usertyp };
+            _database.UserTypes.Add(usertype);
+            await _database.SaveChangesAsync();
+            return RedirectToAction("UsersView","Admin");
+        }
+        public async Task<IActionResult> UserTypeSil(string usertyp)
+        {
+            var silinecekusertype = from o in _database.UserTypes where o.UserTypeName == usertyp select o;
+            foreach (var type in silinecekusertype)
+            {
+                _database.UserTypes.Remove(type);
+            }
+            await _database.SaveChangesAsync();
+            return RedirectToAction("UsersView", "Admin");
+        }
+
 
 
         [HttpGet]
         public  IActionResult EditUser(int? Id)
         {
+            dynamic model = new ExpandoObject();
 
-
-            var user = _database.Users.Where(x => x.UserId == Id).SingleOrDefault();
+            model.UserList = _database.Users.Where(x => x.UserId == Id).ToList();
+            model.TypeList = _database.UserTypes.ToList();
                        
-            return View(user);
+            return View(model);
         }
 
         [HttpPost]
@@ -425,7 +447,7 @@ namespace EvlerKiralik.Controllers
                 edituser.UserType = userType;
                 _database.Users.Update(edituser);
                 await _database.SaveChangesAsync();
-                return RedirectToAction("UsersView", "Admin");
+                return RedirectToAction("EditUser", new { id = userId });
             }
             else
             {
@@ -449,8 +471,6 @@ namespace EvlerKiralik.Controllers
             if (model != null)
             {
                 return View(model);
-
-
             }
             else
             {
@@ -464,12 +484,9 @@ namespace EvlerKiralik.Controllers
 
         public IActionResult GonderiOnay()
         {
-            dynamic model = new ExpandoObject();
-            model.onayilan = _database.KirayaVermes.Where(x => x.IsApproved == false).ToList().Take(1);
-            //var list = _database.KirayaVermes.Where(x => x.IsApproved == false).FirstOrDefault(); 
-                        
+            
 
-            return View(model);
+            return View();
         }
 
        
@@ -484,12 +501,14 @@ namespace EvlerKiralik.Controllers
             return RedirectToAction("GonderiOnay", "Admin");
         }
 
+
         [HttpPost]
         public async Task<IActionResult> GonderiReddet(int gonderiId)
         {
             
             var gonderi = _database.KirayaVermes.Where(x => x.IlanId == gonderiId).FirstOrDefault();
             gonderi.IsApproved = false;
+            gonderilist.Remove(gonderi);
             await _database.SaveChangesAsync();
             return RedirectToAction("GonderiOnay", "Admin");
         }
@@ -499,27 +518,52 @@ namespace EvlerKiralik.Controllers
         {
             var gonderiler = _database.KirayaVermes.ToList();
 
-            List<KirayaVerme> gonderilist = _database.KirayaVermes.ToList();
-            if(p<gonderilist.Count())
+            for (int i =0; i <gonderiler.Count; i++ )
             {
-
-          
-            var gonder = gonderilist[p];
-  
-            return Json(gonder);
+                gonderilist.Add(gonderiler[i]);
+            }
+            gonderilist = _database.KirayaVermes.Where(x => x.IsApproved == false).ToList();
+            if (p < gonderilist.Count() && p >= 0 )
+            {          
+                var gonder = gonderilist[p];               
+                return Json(gonder);              
             }
             else
-            {
-
-                return Json(gonderilist[0]);
+            { 
+                
+                return Json(null);
             }
-
-
-
-
+          
         }
 
 
+        //User dashboard üzerinden erişilebilir bağlantı ve view oluştur.
+        [HttpGet]
+        public async Task<IActionResult> UserPosts(int postid,int userid)
+        {
+            dynamic model = new ExpandoObject();
+            model.Gonderi = _database.KirayaVermes.Where(x => x.UserId == userid && x.IlanId == postid).FirstOrDefault();
+            model.GonderiResimleri = _database.Pictures.Where(x => x.PostId == postid && x.UserId == userid).ToList();
+            model.User = _database.Users.Where(x => x.UserId == userid).FirstOrDefault();
+
+            
+
+            return View(model);
+        }
+
+        public JsonResult checkRow(string type)
+        {
+            var check = _database.Users.Where(x => x.UserType == type).Count();
+            string uyari = "Seçili Kullanıcı Türüne Ekli Kullanıcılar Bulunmaktadır !";
+            if(check>=1)
+            {
+                return Json(uyari);
+            }
+            else
+            {
+                return Json(null);
+            }
+        }
 
     }
-    }
+}

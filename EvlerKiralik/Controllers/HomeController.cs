@@ -206,7 +206,9 @@ namespace EvlerKiralik.Controllers
             model.EvTipListe = _database.EvTips.ToList();//1
             model.ToplamKatListe = _database.ToplamKats.ToList();//8
             model.ImageListe = _database.Pictures.ToList();
-            model.KirayaVermeList = _database.KirayaVermes.ToList();
+            model.UserList = _database.Users.Where(x => x.UserStatus == "verified");             
+            model.KirayaVermeList = _database.KirayaVermes.Where(x => x.IsApproved == true).ToList();
+            
 
             return View(model);
         }
@@ -419,6 +421,7 @@ namespace EvlerKiralik.Controllers
             ilan.Kimden = ilanVerKimdenCheck;
             ilan.OdemeTuru = ilanVerOdemeTip;
             ilan.Aciklama = ilanVerAciklama;
+            ilan.IsApproved = false;
 
 
 

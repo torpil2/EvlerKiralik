@@ -57,6 +57,8 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UserStatus> UserStatuses { get; set; }
+
     public virtual DbSet<UserType> UserTypes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -407,7 +409,17 @@ public partial class PostgresContext : DbContext
                 .HasColumnName("user_name");
             entity.Property(e => e.UserPassword).HasColumnName("user_password");
             entity.Property(e => e.UserPicture).HasColumnName("user_picture");
+            entity.Property(e => e.UserStatus).HasColumnName("user_status");
             entity.Property(e => e.UserType).HasColumnName("user_type");
+        });
+
+        modelBuilder.Entity<UserStatus>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("User_Status_pkey");
+
+            entity.ToTable("User_Status");
+
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
         });
 
         modelBuilder.Entity<UserType>(entity =>

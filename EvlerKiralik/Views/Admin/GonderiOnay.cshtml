@@ -16,22 +16,27 @@
     <script>
        
       
-        $(function () {
-
-            $("#getbutton").click(function (e) {
+        $(function deneme() {
+         
+            $("#nextpostbutton").click(function (e) {
                             var gonderi;
             let sayi = document.getElementById("gonderisayi").value;
+                sayi = parseInt(sayi) + 1;
                 $.ajax({
                     url: '/Admin/GonderisTek',
                     data: { p: sayi },
                     type: "POST",
                     dataType: "Json",
                     success: function (data) {
-
+                        
                         console.log(data);
                         console.log(sayi);
                        // $('#arraydiv').empty();
-                      
+                      if(data==null)
+                      {
+                                                  $('#ilanadi').html("liste Bitti");
+
+                      }
                         data = JSON.stringify(data);
                         gonderi = JSON.parse(data);
                         console.log("parse data= "+ gonderi.ilanAdi);                      
@@ -39,16 +44,111 @@
                         $('#redbutton').val(gonderi.ilanId);
                         $('#onaybutton').val(gonderi.ilanId);
                         $('#ilanadi').html(gonderi.ilanAdi);
-                     sayi = parseInt(sayi)+ 1;
+                  
                      document.getElementById("gonderisayi").setAttribute('value',sayi);
                          }
+
+                       
             });
         });
         });
     </script>
+    <script>
+            $(function  ikideneme() {
+
+            $("#prevpostbutton").click(function (e) {
+                                var gonderi;
+                let sayi = document.getElementById("gonderisayi").value;
+                if(sayi >=1)
+                {
+                    sayi = parseInt(sayi) - 1;
+                }
+
+                
+                    $.ajax({
+                        url: '/Admin/GonderisTek',
+                        data: { p: sayi },
+                        type: "POST",
+                        dataType: "Json",
+
+                        success: function (data) {
+
+                            console.log(data);
+                            console.log(sayi);
+                           // $('#arraydiv').empty();
+                          if(data==null)
+                          {
+                                 $('#ilanadi').html("liste Bitti");
+                                 $('#redbutton').attr("disabled",true);
+
+                          }
+                            data = JSON.stringify(data);
+                            gonderi = JSON.parse(data);
+                            console.log("parse data= "+ gonderi.ilanAdi);
+                            //$('#arraydiv').append("
+                            //<input type='text' value='"+ gonderi.ilanAdi +"' />");
+                            $('#redbutton').val(gonderi.ilanId);
+                            $('#onaybutton').val(gonderi.ilanId);
+                            $('#ilanadi').html(gonderi.ilanAdi);
+                            document.getElementById("gonderisayi").setAttribute('value', sayi);
+                        
+                             }
+
+                });
+                                    
+
+            });
+
+            });
+        </script>
+
+    <script>
+        $(function onyukleme() {
+
+            $(document).ready(function (e) {
+                var gonderi;
+                let sayi = document.getElementById("gonderisayi").value;
+                 
+                $.ajax({
+                    url: '/Admin/GonderisTek',
+                    data: { p: 0 },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+
+                        console.log(data);
+                        console.log(sayi);
+                        // $('#arraydiv').empty();
+                        if (data == null) {
+                            $('#ilanadi').html("liste Bitti");
+
+                        }
+                        
+                        data = JSON.stringify(data);
+                        gonderi = JSON.parse(data);
+                        console.log("parse data= " + gonderi.ilanAdi);
+                        //$('#arraydiv').append("
+                        //<input type='text' value='"+ gonderi.ilanAdi +"' />");
+                        $('#redbutton').val(gonderi.ilanId);
+                        $('#onaybutton').val(gonderi.ilanId);
+                        $('#ilanadi').html(gonderi.ilanAdi);
+                        document.getElementById("gonderisayi").setAttribute('value', sayi);
+
+                    }
+
+                });
+
+
+            });
+
+        });
+    </script>
 }
-<input id="gonderisayi" type="number" value="0"/>
-<button type="button" id="getbutton">Sıradaki Gonderi" </button>
+
+<button id="prevpostbutton"> < </button>
+
+<input id="gonderisayi" type="number" value="0" readonly/>
+<button id="nextpostbutton">></button>
              
                   <div id="arraydiv" class="container-fluid" style="display:flex;">
    

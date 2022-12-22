@@ -1,4 +1,6 @@
-﻿@model EvlerKiralik.DAL.Entities.User
+﻿@model dynamic
+@using EvlerKiralik.DAL.Entities
+
 @{
     ViewData["Title"] = "EditUser";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -15,36 +17,53 @@
     }
 </style>
 
+<a href="/Admin/USersView"> Back To All Users</a>
+
 <div class="container-fluid d-grid gap-2 d-md-flex justify-content-md-start" style="width:100%;margin-top:5em;padding:1em;">
+    @foreach (User user in Model.UserList)
+    {
+        
+   
     <form method="post" action="/Admin/EditUserAct" style="width:25%;">
 
         <label>Kullanıcı ID</label>
-        <input type="text" class="form-control" name="userId"  value="@Model.UserId" readonly />
+        <input type="text" class="form-control" name="userId"  value="@user.UserId" readonly />
 
         <label>Kullanıcı mail</label>
-        <input class="form-control" type="text" name="userMail" value="@Model.UserMail" />
+        <input class="form-control" type="text" name="userMail" value="@user.UserMail" />
 
         <label>Kullanıcı adı</label>
-        <input class="form-control" type="text" name="userName" value="@Model.UserName" />
+        <input class="form-control" type="text" name="userName" value="@user.UserName" />
 
 
         <label>Kullanıcı Şifresi</label>
-        <input class="form-control" type="text" name="userPassword" value="@Model.UserPassword" />
+        <input class="form-control" type="text" name="userPassword" value="@user.UserPassword" />
            
 
         
         <label>User Type</label>
-        <input list="usertypelist" name="userType"  style="width:100%;" placeholder="Sonra Düzenlenecek" autocomplete="off" />
-            <datalist id="usertypelist" autocomplete="off" >
-            
-         
-                <option selected>Deneme </option>
+            <select name="userType" class="form-control" name="userType" style="width:100%;" placeholder="User Type Seç" autocomplete="off" >
            
 
-        </datalist>
+
+                @foreach (UserType type in Model.TypeList)
+                {
+                    if (type.UserTypeName == user.UserType)
+                    {
+                        <option selected> @type.UserTypeName</option>
+                    }
+                    else
+                    {
+                        <option> @type.UserTypeName</option>
+                    }
+                }
+           
+
+        </select>
 
         <button type="submit" class="btn btn-warning btn-block" style="margin-top:1.5em;" > Düzenle</button>
     </form>
+    }
 </div>
 
 

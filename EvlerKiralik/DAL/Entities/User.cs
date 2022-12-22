@@ -18,4 +18,6 @@ public partial class User
     public DateOnly? LastLogin { get; set; }
 
     public string? UserType { get; set; }
+
+    public string? UserStatus { get; set; }
 }
