@@ -2107,6 +2107,17 @@
     <None Include="wwwroot\fontawesome\webfonts\fa-regular-400.woff2" />
     <None Include="wwwroot\fontawesome\webfonts\fa-solid-900.woff2" />
     <None Include="wwwroot\fontawesome\webfonts\fa-v4compatibility.woff2" />
+    <None Include="wwwroot\Sidebar\img\cd-sprite-1.svg" />
+    <None Include="wwwroot\Sidebar\img\cd-sprite-2.svg" />
+    <None Include="wwwroot\Sidebar\img\cd-sprite-3.svg" />
+    <None Include="wwwroot\Sidebar\js\jquery-2.1.4.js" />
+    <None Include="wwwroot\Sidebar\js\main.js" />
+    <None Include="wwwroot\Sidebar\js\min\main-min.js" />
+    <None Include="wwwroot\Sidebar\js\modernizr.js" />
+    <None Include="wwwroot\Sidebar\partials\_layout.scss" />
+    <None Include="wwwroot\Sidebar\partials\_mixins.scss" />
+    <None Include="wwwroot\Sidebar\partials\_variables.scss" />
+    <None Include="wwwroot\Sidebar\scss\style.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -2118,7 +2129,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.1" />
     <PackageReference Include="Npgsql" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />

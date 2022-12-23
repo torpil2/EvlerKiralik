@@ -23,6 +23,12 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<BoostTip> BoostTips { get; set; }
 
+    public virtual DbSet<Comment> Comments { get; set; }
+
+    public virtual DbSet<Coupon> Coupons { get; set; }
+
+    public virtual DbSet<CouponsDefine> CouponsDefines { get; set; }
+
     public virtual DbSet<DaireKat> DaireKats { get; set; }
 
     public virtual DbSet<EvTip> EvTips { get; set; }
@@ -50,6 +56,8 @@ public partial class PostgresContext : DbContext
     public virtual DbSet<OdemeTur> OdemeTurs { get; set; }
 
     public virtual DbSet<Picture> Pictures { get; set; }
+
+    public virtual DbSet<Reservation> Reservations { get; set; }
 
     public virtual DbSet<Sokaklar> Sokaklars { get; set; }
 
@@ -115,6 +123,54 @@ public partial class PostgresContext : DbContext
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("BoostTip_id");
             entity.Property(e => e.BoostTipAdi).HasColumnName("BoostTip_adi");
+        });
+
+        modelBuilder.Entity<Comment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Comments_pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.CreatedTime).HasColumnName("createdTime");
+            entity.Property(e => e.Createdby).HasColumnName("createdby");
+            entity.Property(e => e.PostId).HasColumnName("post_id");
+            entity.Property(e => e.Rating).HasColumnName("rating");
+            entity.Property(e => e.Text).HasColumnName("text");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+        });
+
+        modelBuilder.Entity<Coupon>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Coupons_pkey");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.Code).HasColumnName("code");
+            entity.Property(e => e.DiscountType).HasColumnName("discount_type");
+            entity.Property(e => e.DiscountValue).HasColumnName("discount_value");
+            entity.Property(e => e.ExpiresDate).HasColumnName("expires_date");
+            entity.Property(e => e.IsUnique).HasColumnName("is_unique");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.UsedCheck).HasColumnName("used_check");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+        });
+
+        modelBuilder.Entity<CouponsDefine>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Coupons_Define_pkey");
+
+            entity.ToTable("Coupons_Define");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.Code).HasColumnName("code");
+            entity.Property(e => e.DiscountType).HasColumnName("discount_type");
+            entity.Property(e => e.DiscountValue).HasColumnName("discount_value");
+            entity.Property(e => e.ExpireDate).HasColumnName("expire_date");
+            entity.Property(e => e.Name).HasColumnName("name");
         });
 
         modelBuilder.Entity<DaireKat>(entity =>
@@ -353,6 +409,25 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.ResimPath).HasColumnName("resim_path");
             entity.Property(e => e.ResimSira).HasColumnName("resim_sira");
             entity.Property(e => e.UploadDate).HasColumnName("upload_date");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+        });
+
+        modelBuilder.Entity<Reservation>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("reservation_pkey");
+
+            entity.ToTable("reservation");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.DiscountCoupon).HasColumnName("discount_coupon");
+            entity.Property(e => e.EndDate).HasColumnName("end_date");
+            entity.Property(e => e.PayCheck).HasColumnName("payCheck");
+            entity.Property(e => e.PostId).HasColumnName("post_id");
+            entity.Property(e => e.ReservationDate).HasColumnName("reservation_date");
+            entity.Property(e => e.StartDate).HasColumnName("start_date");
+            entity.Property(e => e.TotalPrice).HasColumnName("total_price");
             entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 

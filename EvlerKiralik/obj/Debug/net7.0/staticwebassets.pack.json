@@ -181,6 +181,62 @@
       "PackagePath": "staticwebassets\\EvlerKiralik.bundle.scp.css"
     },
     {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\css\\reset.css",
+      "PackagePath": "staticwebassets\\Sidebar\\css\\reset.css"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\css\\style.css",
+      "PackagePath": "staticwebassets\\Sidebar\\css\\style.css"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\img\\cd-sprite-1.svg",
+      "PackagePath": "staticwebassets\\Sidebar\\img\\cd-sprite-1.svg"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\img\\cd-sprite-2.svg",
+      "PackagePath": "staticwebassets\\Sidebar\\img\\cd-sprite-2.svg"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\img\\cd-sprite-3.svg",
+      "PackagePath": "staticwebassets\\Sidebar\\img\\cd-sprite-3.svg"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\img\\img.png",
+      "PackagePath": "staticwebassets\\Sidebar\\img\\img.png"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\js\\jquery-2.1.4.js",
+      "PackagePath": "staticwebassets\\Sidebar\\js\\jquery-2.1.4.js"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\js\\main.js",
+      "PackagePath": "staticwebassets\\Sidebar\\js\\main.js"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\js\\min\\main-min.js",
+      "PackagePath": "staticwebassets\\Sidebar\\js\\min\\main-min.js"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\js\\modernizr.js",
+      "PackagePath": "staticwebassets\\Sidebar\\js\\modernizr.js"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\partials\\_layout.scss",
+      "PackagePath": "staticwebassets\\Sidebar\\partials\\_layout.scss"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\partials\\_mixins.scss",
+      "PackagePath": "staticwebassets\\Sidebar\\partials\\_mixins.scss"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\partials\\_variables.scss",
+      "PackagePath": "staticwebassets\\Sidebar\\partials\\_variables.scss"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\Sidebar\\scss\\style.scss",
+      "PackagePath": "staticwebassets\\Sidebar\\scss\\style.scss"
+    },
+    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\assets\\css\\style.css",
       "PackagePath": "staticwebassets\\assets\\css\\style.css"
     },
@@ -589,8 +645,8 @@
       "PackagePath": "staticwebassets\\css\\adminsite.css"
     },
     {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\registerform.css",
-      "PackagePath": "staticwebassets\\css\\registerform.css"
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\sidebar.css",
+      "PackagePath": "staticwebassets\\css\\sidebar.css"
     },
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\site.css",

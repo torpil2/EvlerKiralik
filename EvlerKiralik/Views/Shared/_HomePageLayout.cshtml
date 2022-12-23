@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DemoApp</title>
+
+
+    <link rel="stylesheet" href="/Sidebar/css/reset.css" /> <!-- CSS reset -->
+    <link rel="stylesheet" href="/Sidebar/css/style.css" /> <!-- Resource style -->
+
+   <!-- Modernizr -->
+    <script src="/Sidebar/js/modernizr.js"></script>
+</head>
+
+
+
+
+
+<body>
+      <header>
+    <nav class="cd-stretchy-nav">
+        <a class="cd-nav-trigger" href="#0">
+            Menu
+            <span aria-hidden="true"></span>
+        </a>
+
+        <ul>
+          
+            <li><a href="#0" class="active"><span>Hoggttgme</span></a></li>
+            <li><a href="#0"><span>Portfolio</span></a></li>
+            <li><a href="#0"><span>Services</span></a></li>
+            <li><a href="#0"><span>Store</span></a></li>
+            <li><a href="#0"><span>Contact</span></a></li>
+        </ul>
+
+        <span aria-hidden="true" class="stretchy-nav-bg"></span>
+    </nav>
+</header>
+
+    <div class="container-fluid" style="background-color:green !important;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+
+        </main>
+  
+    </div>
+    @*
+    <footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2022 - DemoApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    </footer>*@
+
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="/Sidebar/js/jquery-2.1.4.js"></script>
+    <script src="/Sidebar/js/main.js"></script> <!-- Resource jQuery -->
+   
+</body>
+</html>
