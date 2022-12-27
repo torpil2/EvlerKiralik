@@ -1,24 +1,127 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" >
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DemoApp</title>
 
-
+@*
     <link rel="stylesheet" href="/Sidebar/css/reset.css" /> <!-- CSS reset -->
-    <link rel="stylesheet" href="/Sidebar/css/style.css" /> <!-- Resource style -->
-
+    <link rel="stylesheet" href="/Sidebar/css/style.css" /> <!-- Resource style -->*@
+@*    <script src="/Sidebar/js/modernizr.js"></script>
+*@    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
    <!-- Modernizr -->
-    <script src="/Sidebar/js/modernizr.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/mainpage.css" />
+  <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 </head>
 
+@section scripts
+{
+
+}
+    <div class="topnavbar">
+    <img src="https://t3.ftcdn.net/jpg/03/56/46/10/360_F_356461066_rUflx03xPKYXEGe36Ecslg2ilEnWsAHa.jpg" style="height:100%;width:100px;" />
+<nav class="tabs">
+
+    <div class="selector"></div>
+    
+    <a href="#" class="active"><i class="fas fa-house-flag"></i>Evini Kirala</a>
+    <a href="#"><i class="fas fa-person-shelter"></i>Ev Kirala</a>
+    <a href="#"><i class="fas fa-house-user"></i>Ev Arkadaşı Bul</a>
+    <a href="#"><i class="fa fa-people-roof"></i>Ev Arkadaşı Ol</a>
+ 
+    
+</nav>
+    @if (User.Identity.Name != null)
+            {
+             <span> @User.Identity.Name
+             @User.Claims.FirstOrDefault(c => c.Type == "UserMail").Value </span>
+             }
+            else
+            {
+    <a href="#" id="girisyap" style="float:right;margin-right:1em !important;"><i class="fa fa-user"></i>Giriş Yap </a>
+            }
+              @if (User.Identity.Name != null)
+            {
+            <a>
+                <form method="post" action="/Login/LogoutAct">
+                    <button class="btn btn-info">Logout</button>
+
+                </form>
+            </a>
+            }
+</div>
+
+<div class="container animate__animated animate__fadeInUp" id="container">
+
+    <div class="form-container sign-up-container">
+        <form method="post" action="/Login/Register">
+            <h1>Kayıt Ol</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your email for registration</span>
+            <input type="text" name="username" placeholder="Username" />
+            <input type="email" name="email" placeholder="Email" />
+            <input type="text" name="password" placeholder="Password" />
+            <button type="submit">Kaydol</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form method="post" action="/Login/Login">
+            <h1>Giriş Yap</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your account</span>
+            <input type="text" name="txtUserName" placeholder="userName" />
+            <input type="password" name="txtPassword" placeholder="password" />
+            <a href="#">Şifremi Unuttum</a>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Yeni Misin?</h1>
+                <p>Ücretsiz kayıt ol ve hemen tüm hizmetlerimizi kullanmaya başla!</p>
+                <button class="ghost" id="signUp">Kayıt Ol</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="body" onclick="hidepopup()">
+
+<body >
 
 
 
 
-<body>
-      <header>
+
+
+ 
+ 
+
+
+
+
+
+   @*   <header>
     <nav class="cd-stretchy-nav">
         <a class="cd-nav-trigger" href="#0">
             Menu
@@ -32,13 +135,14 @@
             <li><a href="#0"><span>Services</span></a></li>
             <li><a href="#0"><span>Store</span></a></li>
             <li><a href="#0"><span>Contact</span></a></li>
+         
         </ul>
 
         <span aria-hidden="true" class="stretchy-nav-bg"></span>
     </nav>
-</header>
+</header>*@
 
-    <div class="container-fluid" style="background-color:green !important;">
+    <div class="container-fluid" style="background-color:aliceblue !important;">
         <main role="main" class="pb-3">
             @RenderBody()
 
@@ -59,6 +163,73 @@
     @await RenderSectionAsync("Scripts", required: false)
     <script src="/Sidebar/js/jquery-2.1.4.js"></script>
     <script src="/Sidebar/js/main.js"></script> <!-- Resource jQuery -->
-   
+    <script>
+        var tabs = $('.tabs');
+        var selector = $('.tabs').find('a').length;
+        //var selector = $(".tabs").find(".selector");
+        var activeItem = tabs.find('.active');
+        var activeWidth = activeItem.innerWidth();
+        $(".selector").css({
+            "left": activeItem.position.left + "px",
+            "width": activeWidth + "px"
+        });
+
+        $(".tabs").on("click", "a", function (e) {
+            e.preventDefault();
+            $('.tabs a').removeClass("active");
+            $(this).addClass('active');
+            var activeWidth = $(this).innerWidth();
+            var itemPos = $(this).position();
+            $(".selector").css({
+                "left": itemPos.left + "px",
+                "width": activeWidth + "px"
+            });
+        });
+    </script>
+  
+
+
+ 
+
 </body>
+
+    </div>
+
+
+
+  <script>
+        var girisyapbutton = document.getElementById("girisyap")
+        var loginform = document.getElementById("container");
+      
+            girisyapbutton.onclick = function()
+            {
+                loginform.style.display ="block";
+            }
+      
+        
+        </script>
+        <script>
+      const body = document.getElementById("body");
+    var loginform = document.getElementById("container");
+
+      function hidepopup()
+      {
+          
+          loginform.style.display = "none";
+      }
+        </script>
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+</script>
 </html>

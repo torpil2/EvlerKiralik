@@ -91,5 +91,22 @@ namespace EvlerKiralik.Controllers
             await HttpContext.SignOutAsync();
             return RedirectToAction("TabPage", "Home");
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Register(string username,string email,string password)
+        {
+            User newuser = new User();
+            newuser.UserName = username;
+            newuser.UserMail = email;
+            newuser.UserPassword = password;
+            newuser.UserType = "User";
+            _database.Add(newuser);
+            await _database.SaveChangesAsync();
+            return RedirectToAction("Privacy", "Home");
+
+        }
+
+
     }
 }
