@@ -574,8 +574,50 @@ namespace EvlerKiralik.Controllers
             return RedirectToAction("EditGonderi", new { id =  ilanid});
 
         }
+        public IActionResult Anasayfa()
+        {
+            return View();
+        }
 
-     
+        public IActionResult KiralikEvler()
+        {
+            dynamic model = new ExpandoObject();
+            model.KiralıkEvler = _database.KirayaVermes.ToList();
 
+
+            return PartialView(model);
+        }
+
+        public IActionResult IlanOlustur()
+        {
+            dynamic model = new ExpandoObject();
+            model.IlListesi = _database.Illers.ToList();
+            model.IlListesiIlan = _database.Illers.ToList();
+
+            model.OdaSayiListe = _database.OdaSayisis.ToList();//2
+            model.BinayasiListe = _database.BinaYasis.ToList();//9
+            model.DaireKatListe = _database.DaireKats.ToList();//7
+            model.IsitmaListe = _database.IsitmaTurs.ToList();//5
+            model.BanyoSayiListe = _database.BanyoSayis.ToList(); //3 
+            model.BalkonSayiListe = _database.BalkonSayis.ToList(); //4
+            model.EsyaliCheckListe = _database.IsEsyalis.ToList();//6
+            model.SiteCheckListe = _database.IsinSites.ToList();//10
+            model.KimdenListe = _database.Kimdens.ToList();//11
+            model.OdemeTurListe = _database.OdemeTurs.ToList();//12
+            model.BoostTipListe = _database.BoostTips.ToList();//Optional
+            model.EvTipListe = _database.EvTips.ToList();//1
+            model.ToplamKatListe = _database.ToplamKats.ToList();//8
+            model.ImageListe = _database.Pictures.ToList();
+            model.UserList = _database.Users.Where(x => x.UserStatus == "verified");
+
+            return PartialView(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> IlanOlusturAct()
+        {
+            return View();
+        }
     }
 }

@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DemoApp</title>
+    <link rel="shortcut icon" type="image/ico" href="/imgs/kare.png">
+
 
 @*
     <link rel="stylesheet" href="/Sidebar/css/reset.css" /> <!-- CSS reset -->
@@ -29,9 +31,10 @@
 <nav class="tabs">
 
     <div class="selector"></div>
-    
-    <a href="#" class="active"><i class="fas fa-house-flag"></i>Evini Kirala</a>
-    <a href="#"><i class="fas fa-person-shelter"></i>Ev Kirala</a>
+
+        <a href="" id="KiralikEvler" class="active"><i class="fas fa-person-shelter"></i>Ev Kirala</a>
+        <a href="" id="IlanOlustur"><i class="fas fa-house-flag"></i>Evini Kirala</a>
+
     <a href="#"><i class="fas fa-house-user"></i>Ev Arkadaşı Bul</a>
     <a href="#"><i class="fa fa-people-roof"></i>Ev Arkadaşı Ol</a>
  
@@ -143,9 +146,9 @@
 </header>*@
 
     <div class="container-fluid" style="background-color:aliceblue !important;">
-        <main role="main" class="pb-3">
+        <main id="partialviewdiv" role="main" class="pb-3">
             @RenderBody()
-
+            
         </main>
   
     </div>
@@ -186,10 +189,55 @@
             });
         });
     </script>
-  
+        <script>
+    $(document).ready(function () {
+     $.ajax ({
+        type: 'GET',
+        url: '/Home/KiralikEvler',
 
+        success: function(data){
+            $('#partialviewdiv').html("");
+             $('#partialviewdiv').html(data);
+        }
+    });
+});
+        </script>
 
- 
+               <script>
+    $('#IlanOlustur').click(function () {
+     $.ajax ({
+        type: 'GET',
+        url: '/Home/IlanOlustur',
+
+        success: function(data){
+
+                        //SİLMEDEN ÖNCE SAĞA KAYDIRMA EFEKTİ EKLENECEK
+            $('#partialviewdiv').html("");
+             $('#partialviewdiv').html(data);
+                        console.log("AKTİF OLUSTUR = " + data)
+
+        }
+    });
+});
+        </script>
+
+                <script>
+    $('#KiralikEvler').click(function () {
+     $.ajax ({
+        type: 'GET',
+        url: '/Home/KiralikEvler',
+
+        success: function(data){
+                        //SİLMEDEN ÖNCE SAĞA KAYDIRMA EFEKTİ EKLENECEK
+
+            $('#partialviewdiv').html("");
+            
+             $('#partialviewdiv').html(data);
+             console.log("AKTİF EVLER = "+ data)
+        }
+    });
+});
+        </script>
 
 </body>
 

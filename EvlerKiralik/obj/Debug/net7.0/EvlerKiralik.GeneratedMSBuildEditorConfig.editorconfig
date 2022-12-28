@@ -40,12 +40,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnNWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/Anasayfa.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBbmFzYXlmYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/EditGonderi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0R29uZGVyaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/IlanOlustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbGFuT2x1c3R1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/KiralikEvler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxLaXJhbGlrRXZsZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/Privacy.cshtml]
