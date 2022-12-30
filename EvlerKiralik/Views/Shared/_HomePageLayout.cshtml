@@ -15,20 +15,30 @@
    <!-- Modernizr -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/mainpage.css" />
   <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 
 @section scripts
 {
 
 }
+
     <div class="topnavbar">
     <img src="https://t3.ftcdn.net/jpg/03/56/46/10/360_F_356461066_rUflx03xPKYXEGe36Ecslg2ilEnWsAHa.jpg" style="height:100%;width:100px;" />
-<nav class="tabs">
+<nav class="tabs" onclick="hidepopup()">
 
     <div class="selector"></div>
 
@@ -164,8 +174,9 @@
 
 
     @await RenderSectionAsync("Scripts", required: false)
-    <script src="/Sidebar/js/jquery-2.1.4.js"></script>
-    <script src="/Sidebar/js/main.js"></script> <!-- Resource jQuery -->
+    
+   @* alt iki iptal ettik <script src="/Sidebar/js/jquery-2.1.4.js"></script>*@
+   @* <script src="/Sidebar/js/main.js"></script> *@<!-- Resource jQuery -->
     <script>
         var tabs = $('.tabs');
         var selector = $('.tabs').find('a').length;
@@ -259,6 +270,7 @@
         <script>
       const body = document.getElementById("body");
     var loginform = document.getElementById("container");
+    var tabs = document.getElementsByClassName("tabs");
 
       function hidepopup()
       {
@@ -280,4 +292,8 @@
         container.classList.remove("right-panel-active");
     });
 </script>
+
+
+
+
 </html>

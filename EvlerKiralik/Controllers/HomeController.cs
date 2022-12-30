@@ -615,9 +615,71 @@ namespace EvlerKiralik.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> IlanOlusturAct()
+        public async Task<IActionResult> IlanOlusturAct(int ilanil, int ilanilce,
+            int ilanmahalle, int ilansokak, string ilanadi, string ilanVerEvTip, string ilanVerOdaSayi,
+            string ilanVerBanyoSayi, string ilanVerBalkonSayi, string ilanVerIsitmaTip, string ilanVerEsyaliCheck,
+            string ilanVerDaireKat, string ilanVerToplamKat, string ilanVerBinaYas, string ilanVerSiteCheck, string ilanVerKimdenCheck, string ilanVerOdemeTip, string ilanVerAciklama)
         {
-            return View();
+            var claim = User.Claims.FirstOrDefault(c => c.Type=="UserId").Value;
+            var user = _database.Users.Where(x=>x.UserId ==  Convert.ToInt32(claim)).FirstOrDefault();
+            if (user.UserStatus != "Unverified") 
+            {
+
+           
+                KirayaVerme ilan = new KirayaVerme();
+                var ilanili = from o in _database.Illers where o.IlId == ilanil select o.İlAdi;
+                var ilceadi = from b in _database.Ilcelers where b.IlceId == ilanilce select b.IlceAdi;
+                var mahalledadi = from c in _database.Mahallelers where c.MahalleId == ilanmahalle select c.MahalleAdi;
+                var sokakadi = from d in _database.Sokaklars where d.SokakId == ilansokak select d.SokakAdi;
+                var currentuser = User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+
+
+                // GİRİLEN SORGU TÜRÜ DATABASEDE YOKSA KAYDETME İF CHECKLERI İF NOT EQUAL DATABASE VALUE AT PRE PREAPARED
+                ilan.IlanIl = ilanili.FirstOrDefault();
+                ilan.IlanIlce = ilceadi.FirstOrDefault();
+                ilan.IlanMahalle = mahalledadi.FirstOrDefault();
+                ilan.IlanSokak = sokakadi.FirstOrDefault();
+                ilan.IlanDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
+                ilan.UserId = Convert.ToInt32(currentuser);
+                ilan.IlanAdi = ilanadi.Trim();
+                ilan.EvTip = ilanVerEvTip;
+                ilan.OdaSayisi = ilanVerOdaSayi;
+                ilan.BanyoSayisi = ilanVerBanyoSayi;
+                ilan.Balkon = ilanVerBalkonSayi;
+                ilan.IsitmaTuru = ilanVerIsitmaTip;
+                ilan.Esyali = ilanVerEsyaliCheck;
+                ilan.BulunduguKat = ilanVerDaireKat;
+                ilan.ToplamKat = ilanVerToplamKat;
+                ilan.BinaYasi = ilanVerBinaYas;
+                ilan.SiteIcerisinde = ilanVerSiteCheck;
+                ilan.Kimden = ilanVerKimdenCheck;
+                ilan.OdemeTuru = ilanVerOdemeTip;
+                ilan.Aciklama = ilanVerAciklama;
+                ilan.IsApproved = false;
+
+
+
+                await _database.AddAsync(ilan);
+
+                await _database.SaveChangesAsync();
+
+                var soneklenenilan = _database.KirayaVermes.OrderByDescending(p => p.IlanId).First().IlanId;
+
+
+                //return RedirectToAction("TabPage","Home");,
+
+                return RedirectToAction("EditGonderi", new { id = soneklenenilan });
+            }
+            else
+            {
+                return View();
+            }
+            
+       
         }
+   
+    
+    
+    
     }
 }

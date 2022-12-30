@@ -101,6 +101,7 @@ namespace EvlerKiralik.Controllers
             newuser.UserMail = email;
             newuser.UserPassword = password;
             newuser.UserType = "User";
+            newuser.UserStatus = "Unverified";
             _database.Add(newuser);
             await _database.SaveChangesAsync();
             return RedirectToAction("Privacy", "Home");
