@@ -1,43 +1,123 @@
-﻿
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+@model dynamic
 @{
     ViewData["Title"] = "KiralikEvler";
     //Layout = "~/Views/Shared/_HomePageLayout.cshtml";
 }
 
+<script>
+    var filterbutton = document.getElementById("filter");
+    var filterform = document.getElementById("filterform");
+    function showhideform()
+    {
+
+            if(filterform.style.visibility=="visible") {
+            filterform.className = "";
+            filterform.className = "animate__animated animate__fadeOutDown";
+          
+            setTimeout(() => { filterform.style.visibility = "hidden";; }, 500);
+
+              
+           
+
+
+              
+            console.log(" visible " + filterform);
+
+            }
+            else if(filterform.style.visibility=="hidden")
+            {
+                filterform.style.visibility="visible";
+            filterform.className="animate__animated animate__fadeInUp";
+            console.log(" hidden "+filterform);
+
+            }
+        }
+    
+</script>
 
 <div id="animateloadingdiv">
+    
+    <div style="position:absolute;z-index:999;right:5%;top:15%;">
+        <button id="filter" title="Filtrele" onclick="showhideform()"> <i class="fa-solid fa-filter fa-2xl" style=""></i> </button>
+        <form id="filterform" class="" style="background-color:grey;border-radius:10px;visibility:hidden;margin:1em;padding:1em;">
+           
+            <select class="form-control">
+                <option>as</option>
+               
+            </select>
 
-<ul class="cards">
-   
-    <li>
-      
+                 <input class="form-control" type="submit" value="Filtrele" />
+            
+            </form>
+        
+    
+    
+    </div>
+
+    <ul class="cards">
+
+        @foreach (KirayaVerme post in Model.KiralikEv)
+        {
+
+            <li>
+
         <a class="card">
 
-            <i id="likebutton"  class="fa-solid fa-heart fa-2xl" style="position:absolute;right:20px;top:40px;  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;"></i>
+            <i id="likebutton"   class="fa-solid fa-heart fa-2xl" style="position:absolute;right:20px;top:40px;  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;cursor:pointer;"></i>
             <img  href="/Home/Privacy" src="https://i.imgur.com/oYiTqum.jpg" class="card__image" alt="" />
-       
+                  @*  <div id="cardyazi" style="position: absolute;display: flex; flex-direction: column;justify-content: flex-end; background: linear-gradient(to top, rgba(0, 0, 0, 0.70), transparent);top:5%;left:5%;color:;">
+                        <p style=" user-select: none; ">Günlük</p>
+                    </div>*@
             <div class="card__overlay" href="">
             
                 <div class="card__header" >
                     <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
                     <div class="card__header-text">
-                        <h3 class="card__title">Jessica Parker</h3>
+                        <h3 class="card__title">@post.IlanAdi</h3>
                         <span class="card__tagline">
                             <ul id="menu">
-                            <li><i class="fa-solid fa-location-crosshairs"></i> Manisa / Merkez  </li>
-                                <li><i class="fa-solid fa-house-chimney-window"></i> 3+1 </li>
-                                <li><i class="fa-solid fa-house-fire"></i> Doğalgaz</li>
+                            <li><i class="fa-solid fa-location-crosshairs"></i> @post.IlanIl / @post.IlanIlce  </li>
+                                <li><i class="fa-solid fa-house-chimney-window"></i> @post.OdaSayisi </li>
+                                <li><i class="fa-solid fa-money-bill-wave"></i> @post.KiraTutari</li>
                         </ul> </span>
-                        <span class="card__status">1 hour ago</span>
+                        <span class="card__status">@post.IlanDate.Value.GetDateTimeFormats()[4]</span>
                     </div>
                 </div>
-                <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-            </div>
+                        <p class="card__description">
+                            <i class="fa-solid fa-house-fire" title="Isınma Türü"></i> @post.IsitmaTuru | 
+
+                            <i class="fa-solid fa-table" title="Minimum Kiralama Süresi"></i> @post.MinimumSure 3 ay |
+
+                          
+                            @if (post.Esyali == "Eşyalı")
+                          
+                            {
+                                <i class="fa-solid fa-couch"></i>
+
+                                @post.Esyali
+                            }
+                        
+                                <i class="fa-solid fa-vector-square" title="Net m²"></i> @post.M2Net 15 m² |
+
+
+
+                            <i class="fa-solid fa-building" title="Bulunduğu Kat"></i> @post.BulunduguKat
+                         
+                        </p>
+                    </div>
         </a>
     </li>
-
+        }
 
   
+
      
 
 </ul>

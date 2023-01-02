@@ -582,7 +582,18 @@ namespace EvlerKiralik.Controllers
         public IActionResult KiralikEvler()
         {
             dynamic model = new ExpandoObject();
-            model.KiralıkEvler = _database.KirayaVermes.ToList();
+            model.KiralikEv = _database.KirayaVermes.Where(x => x.IsApproved == true).ToList();
+            foreach (KirayaVerme item in model.KiralikEv)
+            {
+                var olusturan = _database.Users.Where(x=>x.UserId==item.UserId).FirstOrDefault();
+                if(olusturan!=null)
+                {
+                if(olusturan.UserStatus!="Verificated" && olusturan!=null)
+                {
+                    model.KiralikEvler.Remove(item);
+                }
+                }
+            }
 
 
             return PartialView(model);
@@ -608,7 +619,7 @@ namespace EvlerKiralik.Controllers
             model.EvTipListe = _database.EvTips.ToList();//1
             model.ToplamKatListe = _database.ToplamKats.ToList();//8
             model.ImageListe = _database.Pictures.ToList();
-            model.UserList = _database.Users.Where(x => x.UserStatus == "verified");
+            model.UserList = _database.Users.Where(x => x.UserStatus == "Verificated");
 
             return PartialView(model);
         }

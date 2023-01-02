@@ -116,7 +116,10 @@
 <div id="animateloadingdiv">
 
 
-
+    @if(User.Identity.Name != null)
+    {
+        
+   
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -147,7 +150,7 @@
                                     <div class="col-5">
                                         <h2 class="steps">Adım 1 - 6</h2>
                                     </div>
-                                </div> <label class="fieldlabels">İlan Adı: *</label> <input type="email" name="email" placeholder="İlan Adı Giriniz..." />
+                                </div> <label class="fieldlabels">İlan Adı: *</label> <input type="text" name="ilanadi" placeholder="İlan Adı Giriniz..." />
                                 <label class="fieldlabels">İlan İl: *</label><select name="ilanil" id="ilan1"  class="search2 form-control form-control-sm">
                             <option selected">İl Seçiniz</option>
 
@@ -383,9 +386,26 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
-     
+    }
+    else
+    {
+        
+        <div class="cardd">
+    <div class="card-header">
+    Featured
+    </div>
+    <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href = "#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    </div>
+  
+
+        <!-- End Cta Section -->
+    }
 
 </div>
 

@@ -60,4 +60,10 @@ public partial class KirayaVerme
     public string? IlanIlce { get; set; }
 
     public bool? IsApproved { get; set; }
+
+    public string? IlanTuru { get; set; }
+
+    public string? KiralamaDonemi { get; set; }
+
+    public string? MinimumSure { get; set; }
 }

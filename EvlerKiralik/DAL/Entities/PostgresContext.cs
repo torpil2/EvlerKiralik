@@ -35,6 +35,8 @@ public partial class PostgresContext : DbContext
 
     public virtual DbSet<EveOrtak> EveOrtaks { get; set; }
 
+    public virtual DbSet<Favourite> Favourites { get; set; }
+
     public virtual DbSet<Ilceler> Ilcelers { get; set; }
 
     public virtual DbSet<Iller> Illers { get; set; }
@@ -228,6 +230,16 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
+        modelBuilder.Entity<Favourite>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Favourites_pkey");
+
+            entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+            entity.Property(e => e.AddDate).HasColumnName("Add_date");
+            entity.Property(e => e.PostId).HasColumnName("Post_id");
+            entity.Property(e => e.UserId).HasColumnName("User_id");
+        });
+
         modelBuilder.Entity<Ilceler>(entity =>
         {
             entity.HasKey(e => e.IlceId).HasName("ilceler_pkey");
@@ -334,12 +346,15 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.IlanIlce).HasColumnName("ilan_ilce");
             entity.Property(e => e.IlanMahalle).HasColumnName("ilan_mahalle");
             entity.Property(e => e.IlanSokak).HasColumnName("ilan_sokak");
+            entity.Property(e => e.IlanTuru).HasColumnName("Ilan_Turu");
             entity.Property(e => e.IsitmaTuru).HasColumnName("isitma_turu");
             entity.Property(e => e.Kimden).HasColumnName("kimden");
             entity.Property(e => e.KiraTutari).HasColumnName("kira_tutari");
+            entity.Property(e => e.KiralamaDonemi).HasColumnName("Kiralama_Donemi");
             entity.Property(e => e.KomisyonTutari).HasColumnName("komisyon_tutari");
             entity.Property(e => e.M2Brut).HasColumnName("m2_brut");
             entity.Property(e => e.M2Net).HasColumnName("m2_net");
+            entity.Property(e => e.MinimumSure).HasColumnName("minimum_sure");
             entity.Property(e => e.OdaSayisi).HasColumnName("oda_sayisi");
             entity.Property(e => e.OdemeTuru).HasColumnName("odeme_turu");
             entity.Property(e => e.SiteIcerisinde).HasColumnName("site_icerisinde");
