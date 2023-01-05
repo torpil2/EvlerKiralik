@@ -11,6 +11,8 @@
     //Layout = "~/Views/Shared/_HomePageLayout.cshtml";
 }
 
+
+
 <script>
     var filterbutton = document.getElementById("filter");
     var filterform = document.getElementById("filterform");
@@ -20,19 +22,17 @@
             if(filterform.style.visibility=="visible") {
             filterform.className = "";
             filterform.className = "animate__animated animate__fadeOutDown";
-          
-            setTimeout(() => { filterform.style.visibility = "hidden";; }, 500);
 
-              
            
-
-
-              
+            setTimeout(() => { filterform.style.visibility = "hidden"; }, 500);
+                          
             console.log(" visible " + filterform);
 
             }
             else if(filterform.style.visibility=="hidden")
             {
+           
+
                 filterform.style.visibility="visible";
             filterform.className="animate__animated animate__fadeInUp";
             console.log(" hidden "+filterform);
@@ -42,12 +42,116 @@
     
 </script>
 
-<div id="animateloadingdiv">
-    
-    <div style="position:absolute;z-index:999;right:5%;top:15%;">
-        <button id="filter" title="Filtrele" onclick="showhideform()"> <i class="fa-solid fa-filter fa-2xl" style=""></i> </button>
-        <form id="filterform" class="" style="background-color:grey;border-radius:10px;visibility:hidden;margin:1em;padding:1em;">
+<script>
+    $(function () {
+        $('#ilan1').change(function () {
+            var id = $('#ilan1').val();
+            console.log(id);
+            $.ajax({
+                url: '/Home/ilcegetirilan',
+                data: { a: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+
+                    console.log(data);
+                    $('#ilan2').empty();
+                    $('#ilan2').append("<option> </option>");
+
+                    for (var i = 0; i < data.length; i++) {
+                        $('#ilan2').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#ilan2').change(function () {
+            var id = $('#ilan2').val();
+            $.ajax({
+                url: '/Home/mahallegetirilan',
+                data: { b: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+
+                    console.log(data);
+                    $('#ilan3').empty();
+                    $('#ilan3').append("<option> </option>");
+
+                    for (var i = 0; i < data.length; i++) {
+                        $('#ilan3').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('#ilan3').change(function () {
+            var id = $('#ilan3').val();
+            $.ajax({
+                url: '/Home/sokakgetirilan',
+                data: { c: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+
+                    console.log(data);
+                    $('#ilan4').empty();
+                  
+                      $('#ilan4').append("<option> </option>");
+                    for (var i = 0; i < data.length; i++) {
+                        $('#ilan4').append("<option value='" + data[i].value + "'>" + data[i].text + "</option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $("#ilan1").change( function () {
+        var search = $("#ilan1 option:selected").text();
+        console.log("function calisti= " +search );
+        $("#posts").show().filter(function () {
            
+            return $("#posts").text().indexOf(search) < 0;
+          
+        }).hide();
+
+    });
+    //DÜZENELENECEK
+</script>
+    
+    <div style="position:fixed;z-index:999;right:-5%;top:15%;">
+        <button id="filter" title="Filtrele" onclick="showhideform()"> <i class="fa-solid fa-filter fa-2xl" style=""></i> </button>
+        <form id="filterform" class="" style="background-color:grey;border-radius:10px;visibility:hidden;margin:1em;padding:1em;;" method="post">
+
+            <select name="ilanil" id="ilan1" class="search2 form-control form-control-sm">
+                <option selected">İl Seçiniz</option>
+
+                @foreach (Iller ililan in Model.IlListesiIlan)
+                {
+
+                    <option title="@ililan.IlId" id="@ililan.IlId" value="@ililan.IlId" title="@ililan.İlAdi">@ililan.İlAdi </option>
+                }
+            </select>
+            <label class="fieldlabels">İlan İLçce: *</label>    <select id="ilan2" name="ilanilce" class="search2 form-control form-control-sm">
+                <option selected">İlçe Seçiniz</option>
+            </select>
+            <label class="fieldlabels"> İlan Mahalle: *</label>  <select name="ilanmahalle" id="ilan3" class="search2 form-control form-control-sm">
+                <option selected">Mahalle Seçiniz</option>
+            </select>
+            <label class="fieldlabels"> İlan Sokak: *</label>    <select name="ilansokak" id="ilan4" class="search2 form-control form-control-sm">
+                <option selected">Sokak Seçiniz</option>
+            </select>
+
+
             <select class="form-control">
                 <option>as</option>
                
@@ -61,20 +165,39 @@
     
     </div>
 
+<div id="animateloadingdiv">
+
+
     <ul class="cards">
 
         @foreach (KirayaVerme post in Model.KiralikEv)
         {
+            <li id="posts">
+                <a class="card" href="/Home/IlanDetay/@post.IlanId" name="ilanId">
 
-            <li>
+            <i id="likebutton"   class="fa-solid fa-heart fa-2xl" style="position:absolute;right:20px;top:40px;  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;cursor:pointer;"></i>
+@*            <img  href="/Home/Privacy" src="https://i.imgur.com/oYiTqum.jpg" class="card__image" alt="" />
 
-        <a class="card">
-
-            <i id="likebutton"   class="fa-solid fa-heart fa-2xl" style="position:absolute;right:20px;top:40px;  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;cursor:pointer;"></i>
-            <img  href="/Home/Privacy" src="https://i.imgur.com/oYiTqum.jpg" class="card__image" alt="" />
-                  @*  <div id="cardyazi" style="position: absolute;display: flex; flex-direction: column;justify-content: flex-end; background: linear-gradient(to top, rgba(0, 0, 0, 0.70), transparent);top:5%;left:5%;color:;">
+*@                  @*  <div id="cardyazi" style="position: absolute;display: flex; flex-direction: column;justify-content: flex-end; background: linear-gradient(to top, rgba(0, 0, 0, 0.70), transparent);top:5%;left:5%;color:;">
                         <p style=" user-select: none; ">Günlük</p>
                     </div>*@
+                     @foreach (Picture pic in Model.PictureList)
+                    {
+                        @if(pic.PostId==post.IlanId && pic.IsKapak==true)
+                         {
+                                var resim = pic.ResimName.ToString();
+
+                            <img  class="card__image" alt="" src="/imgs/@resim" />
+                        }
+                           else
+                         {
+                        
+
+                         }
+                    }
+                        
+                  
+
             <div class="card__overlay" href="">
             
                 <div class="card__header" >
@@ -88,8 +211,8 @@
                                 <li><i class="fa-solid fa-money-bill-wave"></i> @post.KiraTutari</li>
                         </ul> </span>
                         <span class="card__status">@post.IlanDate.Value.GetDateTimeFormats()[4]</span>
-                    </div>
-                </div>
+                 </div>
+            </div>
                         <p class="card__description">
                             <i class="fa-solid fa-house-fire" title="Isınma Türü"></i> @post.IsitmaTuru | 
 

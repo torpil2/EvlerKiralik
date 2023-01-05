@@ -653,6 +653,10 @@
       "PackagePath": "staticwebassets\\css\\mainpage.css"
     },
     {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\menulayout.css",
+      "PackagePath": "staticwebassets\\css\\menulayout.css"
+    },
+    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\sidebar.css",
       "PackagePath": "staticwebassets\\css\\sidebar.css"
     },

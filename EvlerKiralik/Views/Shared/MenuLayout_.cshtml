@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DemoApp</title>
+    <link rel="shortcut icon" type="image/ico" href="/imgs/kare.png">
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+
+    <link type="text/css" rel="stylesheet" href="/css/menulayout.css" />
+    <!-- include libraries(jQuery, bootstrap) -->
+  
+</head>
+
+
+<header class="header" id="header">
+    <nav class="navbar container">
+        <a href="./index.html" class="brand">Evler Kiralık</a>
+        <div class="burger" id="burger">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </div>
+        <span class="overlay"></span>
+        <div class="menu" id="menu">
+            <ul class="menu-inner">
+                <li class="menu-item"><a class="menu-link" href="#">AnaSayfa</a></li>
+                <li class="menu-item"><a class="menu-link" href="#">About</a></li>
+                <li class="menu-item"><a class="menu-link" href="#">Service</a></li>
+                <li class="menu-item"><a class="menu-link" href="#">Project</a></li>
+                <li class="menu-item"><a class="menu-link" href="#"><i class="fa-solid fa-user"></i> Hesap</a></li>
+            </ul>
+        </div>
+        <span><i class="bx bx-search search-toggle"></i></span>
+        <div class="search-block">
+            <form class="search-form">
+                <span><i class="bx bx-arrow-back search-cancel"></i></span>
+                <input type="search" name="search" class="search-input" placeholder="Search here...">
+            </form>
+        </div>
+    </nav>
+</header>
+
+
+<body>
+
+   
+
+
+
+
+
+
+
+    <div class="container-fluid" style="background-color:aliceblue !important;">
+      
+            @RenderBody()
+
+        
+
+    </div>
+
+</body>
+
+<script>
+    const navbarMenu = document.getElementById("menu");
+    const burgerMenu = document.getElementById("burger");
+    const bgOverlay = document.querySelector(".overlay");
+
+    if (burgerMenu && bgOverlay) {
+        burgerMenu.addEventListener("click", () => {
+            navbarMenu.classList.add("is-active");
+            bgOverlay.classList.toggle("is-active");
+        });
+
+        bgOverlay.addEventListener("click", () => {
+            navbarMenu.classList.remove("is-active");
+            bgOverlay.classList.toggle("is-active");
+        });
+    }
+
+    // Close Navbar Menu on Links Click
+    document.querySelectorAll(".menu-link").forEach((link) => {
+        link.addEventListener("click", () => {
+            navbarMenu.classList.remove("is-active");
+            bgOverlay.classList.remove("is-active");
+        });
+    });
+
+    // Open and Close Search Bar Toggle
+    const searchBlock = document.querySelector(".search-block");
+    const searchToggle = document.querySelector(".search-toggle");
+    const searchCancel = document.querySelector(".search-cancel");
+
+    if (searchToggle && searchCancel) {
+        searchToggle.addEventListener("click", () => {
+            searchBlock.classList.add("is-active");
+        });
+
+        searchCancel.addEventListener("click", () => {
+            searchBlock.classList.remove("is-active");
+        });
+    }
+
+</script>
+</html>

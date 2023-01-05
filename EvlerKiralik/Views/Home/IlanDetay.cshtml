@@ -1,0 +1,23 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+
+
+@model dynamic
+@{
+    ViewData["Title"] = "KiralikEvler";
+    Layout = "~/Views/Shared/MenuLayout_.cshtml";
+}
+
+
+<div>
+    @foreach (KirayaVerme post in Model.ilan)
+    {
+        @post.IlanAdi
+        @post.IlanIl
+        @post.IlanIlce
+        @post.UserId
+    }
+
+</div>
