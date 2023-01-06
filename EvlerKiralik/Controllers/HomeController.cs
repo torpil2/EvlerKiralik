@@ -69,6 +69,10 @@ namespace EvlerKiralik.Controllers
             //model.MahalleListesi = _database.Mahallelers.ToList();
             //model.SokakListesi = _database.Sokaklars.ToList();
             model.UserListesi = _database.Users.ToList();
+            model.IlanSayi = _database.KirayaVermes.Count();
+            model.Comments = _database.Comments.ToList();
+            model.PictureList = _database.Pictures.ToList();
+           
 
 
 
@@ -490,16 +494,12 @@ namespace EvlerKiralik.Controllers
         {
             var duzenlenenilan = _database.KirayaVermes.Where(x => x.IlanId == ilanid).FirstOrDefault();
 
-
-
             // GİRİLEN SORGU TÜRÜ DATABASEDE YOKSA KAYDETME İF CHECKLERI İF NOT EQUAL DATABASE VALUE AT PRE PREAPARED
 
             var ilanili = _database.Illers.Where(x => x.IlId == ilanil).FirstOrDefault();
             var ilanilcesi = _database.Ilcelers.Where(x => x.IlceId == ilanilce).FirstOrDefault();
             var ilanmahallesi = _database.Mahallelers.Where(x => x.MahalleId == ilanmahalle).FirstOrDefault();
             var ilansokaki = _database.Sokaklars.Where(x => x.SokakId == ilansokak).FirstOrDefault();
-
-
 
 
 
@@ -563,7 +563,6 @@ namespace EvlerKiralik.Controllers
                     resim.ResimSira = i + 1;
                 }
             }
-
             await _database.SaveChangesAsync();
             return RedirectToAction("EditGonderi", new { id = ilanid });
         }
@@ -634,14 +633,12 @@ namespace EvlerKiralik.Controllers
             if (user.UserStatus != "Unverified")
             {
 
-
                 KirayaVerme ilan = new KirayaVerme();
                 var ilanili = from o in _database.Illers where o.IlId == ilanil select o.İlAdi;
                 var ilceadi = from b in _database.Ilcelers where b.IlceId == ilanilce select b.IlceAdi;
                 var mahalledadi = from c in _database.Mahallelers where c.MahalleId == ilanmahalle select c.MahalleAdi;
                 var sokakadi = from d in _database.Sokaklars where d.SokakId == ilansokak select d.SokakAdi;
                 var currentuser = User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
-
 
                 // GİRİLEN SORGU TÜRÜ DATABASEDE YOKSA KAYDETME İF CHECKLERI İF NOT EQUAL DATABASE VALUE AT PRE PREAPARED
                 ilan.IlanIl = ilanili.FirstOrDefault();
@@ -666,11 +663,9 @@ namespace EvlerKiralik.Controllers
                 ilan.Aciklama = ilanVerAciklama;
                 ilan.IsApproved = false;
 
-
                 await _database.AddAsync(ilan);
                 await _database.SaveChangesAsync();
                 var soneklenenilan = _database.KirayaVermes.OrderByDescending(p => p.IlanId).First().IlanId;
-
 
                 //return RedirectToAction("TabPage","Home");,
 
@@ -688,10 +683,7 @@ namespace EvlerKiralik.Controllers
         {
             dynamic model = new ExpandoObject();
             model.ilan = _database.KirayaVermes.Where(x => x.IlanId == id).ToList();
-                                      
-                        
-                            
-            
+            model.postpics = _database.Pictures.Where(x => x.PostId == id).ToList();
 
             return PartialView(model);
         }

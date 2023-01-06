@@ -148,7 +148,7 @@
                     <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
                         <div class="count-box">
                             <i class="bi bi-emoji-smile"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="@Model.IlanSayi" data-purecounter-duration="1" class="purecounter"></span>
                             <p><strong>Kiralık ev İlanları sayımız</strong> Tüm Türkiyede</p>
                         </div>
                     </div>
@@ -346,20 +346,47 @@
                                 <h4>Designer</h4>
                             </div>
                         </div><!-- End testimonial item -->
-
+                        @foreach (Comment comment in Model.Comments)
+                        {
+                            
+                      
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                                    @comment.Text
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                </p>
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                                <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
+                                </p>  @foreach (User user in Model.UserListesi)
+                                        {
+
+                                        @foreach (Picture pic in Model.PictureList)
+                                        {
+                                            if(pic.UserId==user.UserId)
+                                            {
+                                                
+                                           
+                                                <img src="/imgs/@pic.ResimName" class="testimonial-img" alt="">
+                                            }
+                                            else
+                                            {
+                                                
+                                            }
+                                        }
+
+                      
+                                        @if(user.UserId==comment.UserId)
+                                        {
+                                        <h3>
+                                                @user.UserName                                          
+                                      </h3>
+                                <h4>@user.UserType</h4>
+                                            }
+                                            else
+                                            {}
+                                  }
                             </div>
                         </div><!-- End testimonial item -->
-
+                        }
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <p>

@@ -29,7 +29,6 @@ using System.Globalization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CodeAnalysis.Differencing;
 using NuGet.Protocol;
-using EvlerKiralik.Model;
 using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using System.Collections;
 
@@ -53,12 +52,7 @@ namespace EvlerKiralik.Controllers
 
             dynamic model = new ExpandoObject();
             model.KirayaVermeList = _database.KirayaVermes.ToList();
-            model.UserList = _database.Users.ToList();
-           
-	
-
-
-
+            model.UserList = _database.Users.ToList();     
 
 
 			return View(model);
