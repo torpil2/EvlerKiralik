@@ -134,6 +134,7 @@ public partial class PostgresContext : DbContext
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
+            entity.Property(e => e.CommentStatus).HasColumnName("commentStatus");
             entity.Property(e => e.CreatedTime).HasColumnName("createdTime");
             entity.Property(e => e.Createdby).HasColumnName("createdby");
             entity.Property(e => e.PostId).HasColumnName("post_id");

@@ -641,6 +641,10 @@
       "PackagePath": "staticwebassets\\assets\\vendor\\swiper\\swiper-bundle.min.js.map"
     },
     {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\IlanDetay.css",
+      "PackagePath": "staticwebassets\\css\\IlanDetay.css"
+    },
+    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\adminsite.css",
       "PackagePath": "staticwebassets\\css\\adminsite.css"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KyvCkaHyg5kN8ZRCxmF/TJt+0EkK5sI99cU/bQ+6o+I=",
+  "Hash": "K2ZPqMirmo6L1K/WXFa9XT7+CUQ0Jx/zlXm4XpM1vqo=",
   "Source": "EvlerKiralik",
   "BasePath": "_content/EvlerKiralik",
   "Mode": "Default",
@@ -2548,6 +2548,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\form.css"
+    },
+    {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\IlanDetay.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "css/IlanDetay.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\IlanDetay.css"
     },
     {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\mainpage.css",

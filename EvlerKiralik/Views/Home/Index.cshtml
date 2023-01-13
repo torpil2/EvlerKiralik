@@ -361,31 +361,28 @@
 
                                         @foreach (Picture pic in Model.PictureList)
                                         {
-                                            if(pic.UserId==user.UserId)
+                                            if (pic.UserId == user.UserId)
                                             {
-                                                
-                                           
+
+
                                                 <img src="/imgs/@pic.ResimName" class="testimonial-img" alt="">
                                             }
                                             else
                                             {
-                                                
+
                                             }
                                         }
-
-                      
                                         @if(user.UserId==comment.UserId)
                                         {
                                         <h3>
                                                 @user.UserName                                          
                                       </h3>
                                 <h4>@user.UserType</h4>
-                                            }
-                                            else
-                                            {}
-                                  }
+                                         }
+                                        
+                                     }
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
                         }
                         <div class="swiper-slide">
                             <div class="testimonial-item">

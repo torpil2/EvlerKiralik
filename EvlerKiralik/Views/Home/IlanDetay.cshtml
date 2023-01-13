@@ -9,18 +9,37 @@
     ViewData["Title"] = "KiralikEvler";
     Layout = "~/Views/Shared/MenuLayout_.cshtml";
 }
+<link rel="stylesheet" href="@Url.Content("~/css/IlanDetay.css")" asp-append-version="true" />
 
 
 
 <div>
     @foreach (KirayaVerme post in Model.ilan)
     {
-        @post.IlanAdi
-        @post.IlanIl
-        @post.IlanIlce
-        @post.UserId
+        <div class="headertext"><p>@post.IlanAdi</p>  </div>
+       <div class="row">
+          
+  <div class="column right" style="background-color:#aaa;">
 
- 
+   
+
+  </div>
+
+  <div class="column left" style="background-color:#bbb;">
+    <h2>Column 2</h2>
+                 <span>
+                    @post.IlanIl
+                 </span>  
+                 <span>
+                    @post.IlanIlce
+                 </span>
+                 <span>
+                    @post.UserId
+                </span>
+  </div>
+
+</div>
+
     }
 
 </div>

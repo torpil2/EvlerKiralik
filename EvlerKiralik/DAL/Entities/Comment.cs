@@ -18,4 +18,6 @@ public partial class Comment
     public DateOnly? CreatedTime { get; set; }
 
     public int? Createdby { get; set; }
+
+    public string? CommentStatus { get; set; }
 }
