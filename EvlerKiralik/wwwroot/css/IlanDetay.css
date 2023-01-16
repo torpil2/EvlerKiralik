@@ -6,6 +6,7 @@
     background: #1abc9c;
     color: white;
     font-size: 2em;
+    margin:0 !important;
 }
 /* Create two unequal columns that floats next to each other */
 .column {
@@ -13,22 +14,24 @@
     padding: 10px;
     height: 50rem;
     padding-top: 4em;
+
+}
+
+
+.right {
+    width: 75%;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+
+
 }
 
 .left {
-    width: 40%;
+    width: 25%;
     display: flex;
     align-content: center;
     justify-content: center;
-
-  
-}
-
-.right {
-    width: 60%;
-    align-content: center;
-    justify-content: center;
-    display: flex;
 }
 
 /* Clear floats after the columns */
@@ -38,3 +41,6 @@
     clear: both;
 
 }
+
+
+

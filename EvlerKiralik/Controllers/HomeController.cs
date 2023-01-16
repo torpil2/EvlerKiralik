@@ -31,6 +31,7 @@ using NuGet.Packaging.Signing;
 using System.Security.Principal;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace EvlerKiralik.Controllers
 {
@@ -626,9 +627,57 @@ namespace EvlerKiralik.Controllers
 
 
       
-        public async Task<IActionResult> ReservationRequest(int postid,int userid, DateTime startdate,DateTime enddate,DateTime createTime)
+        public async Task<IActionResult> ReservationRequest(int postid,int userid, DateTime startdate,DateTime enddate,DateTime createTime,string coupon)
         {
-            
+            Reservation reservation = new Reservation();
+            reservation.UserId = userid;
+            reservation.PostId= postid;
+            reservation.StartDate = startdate;
+            reservation.EndDate = enddate;
+            reservation.ReservationDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
+            Coupon kupon = _database.Coupons.Where(x => x.Code == coupon).FirstOrDefault();
+            KirayaVerme ilan = _database.KirayaVermes.Where(x=>x.IlanId==postid).FirstOrDefault();
+            var gunluktutar = Convert.ToInt32(ilan.KiraTutari);
+
+            var kiralanangun = (startdate - enddate).TotalDays;
+            var totalprice = (gunluktutar * kiralanangun);
+            if(reservation.DiscountCoupon!=null)
+            {
+                DateTime currentDate = DateTime.Now;
+                DateTime target;
+                reservation.DiscountCoupon = coupon;
+                bool expiredcheck = kupon.ExpiresDate < DateTime.Now;
+                if(expiredcheck)
+                {
+
+           
+                if (kupon.IsUnique == "Unique")
+                {
+                    _database.Remove(kupon);
+
+                }
+
+                if(kupon.DiscountType=="Percent")
+                {
+                    totalprice = (totalprice - ((totalprice / 100) * Convert.ToInt32(kupon.DiscountValue)));
+                }
+                else if(kupon.DiscountType=="Value")
+                {
+                    totalprice -= Convert.ToInt32(kupon.DiscountValue);
+                }
+
+                reservation.TotalPrice = Convert.ToDecimal(totalprice);
+                }
+                else
+                {
+                    reservation.TotalPrice = Convert.ToDecimal(totalprice);
+
+                }
+                _database.Add(kupon);
+                await _database.SaveChangesAsync();
+            }                                   
+
+
             return View();
         }
 

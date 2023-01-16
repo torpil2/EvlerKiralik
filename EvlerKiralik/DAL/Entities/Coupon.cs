@@ -19,7 +19,7 @@ public partial class Coupon
 
     public string? DiscountValue { get; set; }
 
-    public DateOnly? ExpiresDate { get; set; }
+    public DateTime? ExpiresDate { get; set; }
 
     public bool? UsedCheck { get; set; }
 }
