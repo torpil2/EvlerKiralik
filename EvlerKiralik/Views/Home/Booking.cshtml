@@ -1,0 +1,170 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using EvlerKiralik.DateRangesClass
+
+@model dynamic
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "~/Views/Shared/MenuLayout_.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/css/booking.css")" asp-append-version="true" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<div id="centerdiv" >
+
+    @foreach (KirayaVerme bookingpost in Model.ilan)
+    {         
+    <div id="bookingpic">
+      @foreach (Picture postpic in Model.postpics)
+      {
+        @if(bookingpost.IlanId==postpic.PostId && postpic.IsKapak==true)
+        {
+   
+             <img  src="/imgs/@postpic.ResimName"/>
+
+
+        }
+      }
+    </div>
+       
+
+
+    <div id="bookinginfo">
+              @ViewBag.startDate
+
+            @ViewBag.endDate
+        <p>
+            Rezervasyon Tarihi
+            <input type="text" id="daterangeid" name="datetimes" style="width:100%;"/>
+
+                <input type="text" id="startdateinput" name="startdate">
+                <input type="datetime" id="enddateinput" name="enddate">
+                <script>
+                    var startdateinput = document.getElementById("startdateinput");
+                    var enddateinput = document.getElementById("enddateinput");
+                    $('#daterangeid').on('apply.daterangepicker', function (ev, picker) {
+                        var startDateValue = picker.startDate.format('DD.MM.YYYY');
+                        var endDateValue = picker.endDate.format('DD.MM.YYYY');
+                        console.log(typeof (endDateValue));
+                        console.log("start date= " + startDateValue + " end date= " + endDateValue);
+                        enddateinput.value = "";
+                        enddateinput.value = endDateValue;
+                        startdateinput.value = "";
+                        startdateinput.value = startDateValue;
+
+                    });
+     
+                </script>
+        </p>
+
+        <p>
+                <button class="custom-btn btn-15">Read More</button>
+
+        </p>
+
+    </div>                  
+  
+
+    }
+
+
+</div>
+@foreach (ReservationDates date in Model.dates)
+{
+    <i> @date.startdate </i>
+    <i> @date.enddate </i>
+}
+  
+                    
+<script>
+  
+$(function() {
+  $('input[name="datetimes"]').daterangepicker({
+    timePicker: true,
+    timePicker24Hour: true,
+            startDate: '@ViewBag.startDate',
+            endDate: '@ViewBag.endDate',
+            
+            isInvalidDate: function (date) {
+                var dateRanges = [
+             @foreach (ReservationDates date in Model.dates)
+                 {
+            
+                     <text>{'start': moment('@date.startdate','DD.MM.YYYY'), 'end': moment('@date.enddate','DD.MM.YYYY')}, </text>
+                 }          
+     
+                  ];
+                  return dateRanges.reduce(function (bool, range) {
+                    return bool || (date >= range.start && date <= range.end);
+                }, false)                        
+        
+                 },
+            
+            "locale": {
+                "format": 'DD.MM.YYYY',
+                "separator": " - ",
+                "applyLabel": "Kaydet",
+                "cancelLabel": "Vazgeç",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "daysOfWeek": [
+                    "Cmt",
+                    "Paz",
+                    "Pzt",
+                    "Sal",
+                    "Çar",
+                    "Per",
+                    "Cum",
+                 
+                     
+                ],
+                "monthNames": [
+                    "Ocak",
+                    "Şubat",
+                    "Mart",
+                    "Nisan",
+                    "Mayıs",
+                    "Haziran",
+                    "Temmuz",
+                    "Ağustos",
+                    "Eylül",
+                    "Ekim",
+                    "Kasım",
+                    "Aralık"
+                ],
+                "firstDay": 2,
+             
+            },       
+  
+  });
+});
+
+
+</script>
+<script>
+    var functiontext = `
+                   isInvalidDate: function (ele) {
+                    var currDate = moment(ele._d).format('DD-MM-YYYY');
+
+                    return ["28-02-2023"].indexOf(currDate) != -1; `
+      var startdateinput = document.getElementById("startdateinput");
+    var enddateinput = document.getElementById("enddateinput");
+    startdateinput.value = '@ViewBag.startDate';
+    enddateinput.value = '@ViewBag.endDate';
+</script>
+
+
+
+
+   

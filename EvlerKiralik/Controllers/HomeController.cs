@@ -32,6 +32,7 @@ using System.Security.Principal;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.CodeAnalysis.CSharp;
+using EvlerKiralik.DateRangesClass;
 
 namespace EvlerKiralik.Controllers
 {
@@ -599,6 +600,8 @@ namespace EvlerKiralik.Controllers
                 ilan.OdemeTuru = ilanVerOdemeTip;
                 ilan.Aciklama = ilanVerAciklama;
                 ilan.IsApproved = false;
+                
+
 
                 await _database.AddAsync(ilan);
                 await _database.SaveChangesAsync();
@@ -620,22 +623,65 @@ namespace EvlerKiralik.Controllers
         {
             dynamic model = new ExpandoObject();
             model.ilan = _database.KirayaVermes.Where(x => x.IlanId == id).ToList();
-            model.postpics = _database.Pictures.Where(x => x.PostId == id).ToList();
+            model.postpics = _database.Pictures.Where(x => x.PostId == id).OrderBy(x=>x.ResimSira).ToList();
 
             return PartialView(model);
         }
 
+        [HttpGet]
+        public IActionResult Booking(int postid, int userid, DateTime startdate, DateTime enddate)
+        {
+            dynamic model = new ExpandoObject();
+           
+            model.ilan = _database.KirayaVermes.Where(x => x.IlanId == postid).Take(1);
+            model.postpics = _database.Pictures.Where(x => x.PostId == postid).ToList();
+           
+            ViewBag.startDate = startdate.ToString("d");
+            ViewBag.endDate = enddate.ToString("d");
+            string[,] reservationdates = new string[400,2];
+            var ReservationDatesList = new List<ReservationDates>();
+            
 
-      
+            model.reservations = _database.Reservations.Where(x => x.PostId == postid).ToList();
+            int reservationcount = _database.Reservations.Where(x => x.PostId == postid).Count();
+            if (postid != null)
+            {
+
+
+                for (int i = 0; i < reservationcount; i++)
+                {
+
+                    Reservation res = model.reservations[i];
+                    ReservationDatesList.Add(new ReservationDates
+                    {
+                        ReservationDateId = i,
+                        startdate = (Convert.ToDateTime(res.StartDate).AddDays(1)).ToString("d"),
+                        enddate = (Convert.ToDateTime(res.EndDate).AddDays(1)).ToString("d")
+                    }) ;
+
+                    //reservationdates[i,0] = (Convert.ToDateTime(res.StartDate).AddDays(1)).ToString("d");
+                    //reservationdates[i,1] = (Convert.ToDateTime(res.EndDate).AddDays(1)).ToString("d");                                      
+
+
+                }
+            }
+            model.dates = ReservationDatesList.ToList();
+            model.Coupons = _database.Coupons.Where(x=>x.UserId==userid).ToList();
+            return View(model);
+        }
+
+
+        [HttpPost]
         public async Task<IActionResult> ReservationRequest(int postid,int userid, DateTime startdate,DateTime enddate,DateTime createTime,string coupon)
         {
             Reservation reservation = new Reservation();
+       
             reservation.UserId = userid;
             reservation.PostId= postid;
             reservation.StartDate = startdate;
             reservation.EndDate = enddate;
             reservation.ReservationDate = Convert.ToDateTime(DateTime.Now.ToString("G"));
-            Coupon kupon = _database.Coupons.Where(x => x.Code == coupon).FirstOrDefault();
+            Coupon kupon = _database.Coupons.Where(x => x.Code == coupon && x.UserId==userid).FirstOrDefault();
             KirayaVerme ilan = _database.KirayaVermes.Where(x=>x.IlanId==postid).FirstOrDefault();
             var gunluktutar = Convert.ToInt32(ilan.KiraTutari);
 
@@ -649,12 +695,10 @@ namespace EvlerKiralik.Controllers
                 bool expiredcheck = kupon.ExpiresDate < DateTime.Now;
                 if(expiredcheck)
                 {
-
            
                 if (kupon.IsUnique == "Unique")
                 {
-                    _database.Remove(kupon);
-
+                        kupon.UsedCheck = true;
                 }
 
                 if(kupon.DiscountType=="Percent")
@@ -671,7 +715,6 @@ namespace EvlerKiralik.Controllers
                 else
                 {
                     reservation.TotalPrice = Convert.ToDecimal(totalprice);
-
                 }
                 _database.Add(kupon);
                 await _database.SaveChangesAsync();

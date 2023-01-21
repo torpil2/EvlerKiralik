@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "K2ZPqMirmo6L1K/WXFa9XT7+CUQ0Jx/zlXm4XpM1vqo=",
+  "Hash": "/eBz6phoE+tU225A8LAE6+BRjgEtXpysGjQXnaYRdPM=",
   "Source": "EvlerKiralik",
   "BasePath": "_content/EvlerKiralik",
   "Mode": "Default",
@@ -2533,6 +2533,23 @@
       "OriginalItemSpec": "wwwroot\\css\\adminsite.css"
     },
     {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\booking.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "css/booking.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\booking.css"
+    },
+    {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\form.css",
       "SourceId": "EvlerKiralik",
       "SourceType": "Discovered",
@@ -4333,6 +4350,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\fontawesome\\scss\\_variables.scss"
+    },
+    {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\fontawesome\\scss\\brands.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "fontawesome/scss/brands.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fontawesome\\scss\\brands.css"
     },
     {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\fontawesome\\scss\\brands.scss",

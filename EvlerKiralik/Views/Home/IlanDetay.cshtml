@@ -10,44 +10,224 @@
     Layout = "~/Views/Shared/MenuLayout_.cshtml";
 }
 <link rel="stylesheet" href="@Url.Content("~/css/IlanDetay.css")" asp-append-version="true" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+@*<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            dateFormat: "dd.mm.yy"
+            , duration: "fast"
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $("#datepicker2").datepicker({
+            dateFormat: "DD.MM.YYYY"
+            , duration: "fast"
+        });
+    });
+</script>
+*@
+
+
+<script>
+    $(document).ready(function () {
+        // filter
+        $('nav a').on('click', function (event) {
+            event.preventDefault();
+            // current class
+            $('nav li.current').removeClass('current');
+            $(this).parent().addClass('current');
+
+            // set new heading
+            $('h1.heading').text($(this).text());
+
+            // filter link text
+            var category = $(this).text().toLowerCase().replace(' ', '-');
+
+            // remove hidden class if "all" is selected
+            if (category == 'all-projects') {
+                $('ul#gallery li:hidden').fadeIn('slow').removeClass('hidden');
+            } else {
+                $('ul#gallery li').each(function () {
+                    if (!$(this).hasClass(category)) {
+                        $(this).hide().addClass('hidden');
+                    } else {
+                        $(this).fadeIn('slow').removeClass('hidden');
+                    }
+                });
+            }
+            return false;
+        });
+        // lightbox
+        $('ul#gallery a').on('click', function (event) {
+            event.preventDefault();
+            var link = $(this).find('img').attr('src');
+            $('.gallery img').attr('src', '');
+            $('.gallery img').attr('src', link);
+            $('.gallery').fadeIn('slow');
+        });
+        // close lightbox
+        $('.gallery').on('click', function (event) {
+            event.preventDefault();
+            $('.gallery').fadeOut('slow');
+        });
+    });
+</script>
 
 
 
-<div>
-    @foreach (KirayaVerme post in Model.ilan)
+
+ @foreach (KirayaVerme post in Model.ilan)
     {
+<div>
+   
         <div class="headertext"><p>@post.IlanAdi</p>  </div>
        <div class="row">
-          
-  <div class="column right" style="background-color:#aaa;">
+         
+  <div class="column right" style="background-color:#aaa;">             
+        
+            <div id="projects">
+                <ul id="gallery">
+                         @foreach (Picture kapakpic in Model.postpics)
+                        {
+                            @if(kapakpic.PostId == post.IlanId)
+                            {
+                        <li ><a href="#"><img src="/imgs/@kapakpic.ResimName"></a></li>
+                            }
+                        }
+                 
+                </ul>
+               
+            <!-- modal gallery -->
+            <div class="gallery">
+                <a class="close" href="#">
+                    <i>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    </i>
+                </a>
+                <img src="">
+            </div>
+      
 
 
-
-
+            </div>
   </div>
 
-  <div class="column left" style="background-color:#bbb;">
-   
-              <ul>
-                 <li>
-                   @post.UserId
+            <div class="column left" style="background-color:#bbb;">
+
+                <ul>
+                    <li>
+                        @post.UserId
                     </li>
                     <li>
-                    @post.IlanIl
-                      </li>             
-                <li>
-                    @post.IlanIlce
-                 </li>
-              
-                <li>
-                    <button style="border:1px solid red;" type="button" class="btn btn-success">Success</button>
-                </li>
-             </ul>
-              
-  </div>
-            
-</div>
+                        @post.IlanIl
+                    </li>
+                    <li>
+                        @post.IlanIlce
+                    </li>
 
-    }
+                    <li>
+                        <form method="get" action="/Home/Booking/">
 
+
+                            <input type="text" id="daterangeid" name="datetimes" style="width:100%;" />
+                            <input type="datetime" id="startdateinput" name="startdate">
+                            <input type="datetime" id="enddateinput" name="enddate">
+
+                            <input type="text" value="@post.IlanId" name="postid" hidden>
+                            @if (User.Identity.Name != null)
+                            {
+                                <input type="text" value="@User.Claims.FirstOrDefault(c => c.Type == "UserId").Value" name="userid" hidden>
+                            }
+                            <input type="submit" value="rezervasyon yap">
+                        </form>
+
+                    </li>
+                </ul>
+
+                <script>
+                    var startdateinput = document.getElementById("startdateinput");
+                    var enddateinput = document.getElementById("enddateinput");
+                    $('#daterangeid').on('apply.daterangepicker', function (ev, picker) {
+                        var startDateValue = picker.startDate.format('YYYY-MM-DD');
+                        var endDateValue = picker.endDate.format('YYYY-MM-DD');
+                        console.log(typeof (endDateValue));
+                        console.log("start date= " + startDateValue + " end date= " + endDateValue);
+                        enddateinput.value = "";
+                        enddateinput.value = endDateValue;
+                        startdateinput.value = "";
+                        startdateinput.value = startDateValue;
+
+                    });
+                </script>
+
+
+            </div>
+
+
+  
+
+          
+        </div>
+
+  
 </div>
+}
+
+
+<script>
+    $(function () {
+        $('input[name="datetimes"]').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+
+            "locale": {
+                "format": "DD.MM.YYYY",
+                "separator": " - ",
+                "applyLabel": "Kaydet",
+                "cancelLabel": "Vazgeç",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "daysOfWeek": [
+                    "Cmt",
+                    "Paz",
+                    "Pzt",
+                    "Sal",
+                    "Çar",
+                    "Per",
+                    "Cum",
+
+
+                ],
+                "monthNames": [
+                    "Ocak",
+                    "Şubat",
+                    "Mart",
+                    "Nisan",
+                    "Mayıs",
+                    "Haziran",
+                    "Temmuz",
+                    "Ağustos",
+                    "Eylül",
+                    "Ekim",
+                    "Kasım",
+                    "Aralık"
+                ],
+                "firstDay": 1
+            },
+
+        });
+    });
+</script>

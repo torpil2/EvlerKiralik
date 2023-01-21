@@ -1,0 +1,111 @@
+﻿#centerdiv 
+{
+    background-color: red;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    text-align:center;
+    display: flex;
+    padding:2em;
+    
+}
+
+#bookingpic
+{
+    width:25%;
+    border:10px solid black;
+    justify-content:center;
+    align-content:center;
+    display:flex;
+}
+
+#bookinginfo {
+    display: block;
+    border: 10px solid green;
+    width: 40%;
+    align-content: center;
+    justify-content: center;
+    background-color: #ECECEC;
+    border-top-right-radius: 30px;
+    overflow-y:scroll;
+    
+}
+
+#daterangeid
+{
+    text-align:center;
+    width:100%;
+}
+
+input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+  
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+    input:focus {
+        outline: none;
+    }
+
+
+button {
+    margin: 20px;
+}
+
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+
+.btn-15 {
+    background: #b621fe;
+    border: none;
+    z-index: 1;
+}
+
+    .btn-15:after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        background-color: #663dff;
+        border-radius: 5px;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+        transition: all 0.3s ease;
+    }
+
+    .btn-15:hover {
+        color: #fff;
+    }
+
+        .btn-15:hover:after {
+            left: 0;
+            width: 100%;
+        }
+
+    .btn-15:active {
+        top: 2px;
+    }
+
+    /*
+        REACT DATE RANGE
+    */

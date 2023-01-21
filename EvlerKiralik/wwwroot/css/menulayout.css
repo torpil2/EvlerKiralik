@@ -85,6 +85,7 @@ img {
     padding: 0 1.25rem;
 }
 
+
 .brand {
     font-family: inherit;
     font-size: 1.5rem;
@@ -104,6 +105,7 @@ img {
     margin: 0 auto;
     background-color: var(--color-white);
     box-shadow: var(--shadow-medium);
+    /*  position:fixed; */
 }
 
 .navbar {

@@ -477,9 +477,7 @@ namespace EvlerKiralik.Controllers
 
 
         public IActionResult GonderiOnay()
-        {
-            
-
+        {            
             return View();
         }
 

@@ -649,6 +649,10 @@
       "PackagePath": "staticwebassets\\css\\adminsite.css"
     },
     {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\booking.css",
+      "PackagePath": "staticwebassets\\css\\booking.css"
+    },
+    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\form.css",
       "PackagePath": "staticwebassets\\css\\form.css"
     },
@@ -1067,6 +1071,10 @@
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\fontawesome\\scss\\_variables.scss",
       "PackagePath": "staticwebassets\\fontawesome\\scss\\_variables.scss"
+    },
+    {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\fontawesome\\scss\\brands.css",
+      "PackagePath": "staticwebassets\\fontawesome\\scss\\brands.css"
     },
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\fontawesome\\scss\\brands.scss",
