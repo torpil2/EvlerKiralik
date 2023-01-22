@@ -13,35 +13,63 @@
     float: left;
     padding: 10px;
     height: 50rem;
-    padding-top: 4em;
+    
 
 }
 
 
 .right {
-    width: 75%;
+  
+    width: 70%;
     display: flex;
     align-content: center;
     justify-content: center;
-    display: flex;
-  margin:0 auto;
+  
+    margin:0 auto;
+ 
 
 }
 
 .left {
-    width: 25%;
-    display: flex;
+    width: 30%;
+
     align-content: center;
     justify-content: center;
+    text-align:left;
 }
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+#postdetails {
+    display: block;
+    width: 100%;
+    
+    padding: 1rem;
+    position: relative;
+    background: linear-gradient(to right, red, purple);
+    padding: 10px;
+    font-size:.8em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 }
+.module {
+    background: #222;
+    color: white;
+    padding: 2rem;
+}
+#postdetails li {
+    margin: 1em;
+    border-bottom: 2px solid white;
+    padding: 10px;
+    transition: transform .5s; /* Animation */
+}
+    #postdetails li:hover {
+        transform: scale(1.3);
+        background-color:black;
+    }
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
 
 
 /*DATE PİCKER*/
@@ -64,13 +92,14 @@
 .main-img img,
 .imgs img {
    width:100%;
+  
 
   
 }
 
 .imgs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
 }
 
@@ -93,8 +122,9 @@
 /* Media Queries */
 @media(max-width: 600px) {
     .imgs {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 2fr);
     }
+
 }
 
 
@@ -158,7 +188,7 @@ nav > ul > li > a:hover, .current a {
 
 #projects
 {
-    margin:0 auto;
+  
 }
     #projects > ul > li:hover {
         opacity: 1;
@@ -166,7 +196,9 @@ nav > ul > li > a:hover, .current a {
 
 img {
     max-width: 100%;
-    border-radius: 5px;
+    border-radius: 25px;
+    height:auto;
+    margin:0 auto;
 }
 
 .gallery {
@@ -183,7 +215,7 @@ img {
 }
 
     .gallery > img {
-        height: 100%;
+        height: 90%;
         width: auto;
         margin:auto;
     }
@@ -213,6 +245,32 @@ img {
 @media (max-width: 768px) {
     #projects > ul > li {
         width: 48%;
+    }
+    .column {
+        padding: 10px;
+        height: 100%;
+        display:block;
+        justify-content:center;
+        align-content:center;
+    }
+    .right {
+        width: 100%;
+       text-align:center;
+        align-content: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .left {
+        width: 100%;
+        align-content: center;
+        justify-content: center;
+        text-align: left;
+    }
+    .gallery > img {
+        height: 100%;
+        width: auto;
+        margin: auto;
     }
 }
 

@@ -43,34 +43,22 @@
               @ViewBag.startDate
 
             @ViewBag.endDate
-        <p>
+        
             Rezervasyon Tarihi
+            <form method="post">
+
+          
             <input type="text" id="daterangeid" name="datetimes" style="width:100%;"/>
 
                 <input type="text" id="startdateinput" name="startdate">
                 <input type="datetime" id="enddateinput" name="enddate">
-                <script>
-                    var startdateinput = document.getElementById("startdateinput");
-                    var enddateinput = document.getElementById("enddateinput");
-                    $('#daterangeid').on('apply.daterangepicker', function (ev, picker) {
-                        var startDateValue = picker.startDate.format('DD.MM.YYYY');
-                        var endDateValue = picker.endDate.format('DD.MM.YYYY');
-                        console.log(typeof (endDateValue));
-                        console.log("start date= " + startDateValue + " end date= " + endDateValue);
-                        enddateinput.value = "";
-                        enddateinput.value = endDateValue;
-                        startdateinput.value = "";
-                        startdateinput.value = startDateValue;
+                
+           
+    
+                <button type="submit" class="custom-btn btn-15" >Submit</button>
+                </form>
 
-                    });
-     
-                </script>
-        </p>
-
-        <p>
-                <button class="custom-btn btn-15">Read More</button>
-
-        </p>
+        
 
     </div>                  
   
@@ -79,11 +67,7 @@
 
 
 </div>
-@foreach (ReservationDates date in Model.dates)
-{
-    <i> @date.startdate </i>
-    <i> @date.enddate </i>
-}
+
   
                     
 <script>
@@ -119,13 +103,14 @@ $(function() {
                 "toLabel": "To",
                 "customRangeLabel": "Custom",
                 "daysOfWeek": [
-                    "Cmt",
                     "Paz",
                     "Pzt",
                     "Sal",
                     "Çar",
                     "Per",
                     "Cum",
+                    "Cmt",
+                    
                  
                      
                 ],
@@ -143,7 +128,7 @@ $(function() {
                     "Kasım",
                     "Aralık"
                 ],
-                "firstDay": 2,
+                "firstDay": 1,
              
             },       
   
@@ -153,18 +138,28 @@ $(function() {
 
 </script>
 <script>
-    var functiontext = `
-                   isInvalidDate: function (ele) {
-                    var currDate = moment(ele._d).format('DD-MM-YYYY');
-
-                    return ["28-02-2023"].indexOf(currDate) != -1; `
-      var startdateinput = document.getElementById("startdateinput");
+    var startdateinput = document.getElementById("startdateinput");
     var enddateinput = document.getElementById("enddateinput");
     startdateinput.value = '@ViewBag.startDate';
     enddateinput.value = '@ViewBag.endDate';
 </script>
 
+<script>
+    var startdateinput = document.getElementById("startdateinput");
+    var enddateinput = document.getElementById("enddateinput");
+    $('#daterangeid').on('apply.daterangepicker', function (ev, picker) {
+        var startDateValue = picker.startDate.format('DD.MM.YYYY');
+        var endDateValue = picker.endDate.format('DD.MM.YYYY');
+        console.log(typeof (endDateValue));
+        console.log("start date= " + startDateValue + " end date= " + endDateValue);
+        enddateinput.value = "";
+        enddateinput.value = endDateValue;
+        startdateinput.value = "";
+        startdateinput.value = startDateValue;
 
+    });
+
+</script>
 
 
    

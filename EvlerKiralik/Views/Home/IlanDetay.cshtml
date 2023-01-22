@@ -19,6 +19,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 @*<script>
     $(function () {
         $("#datepicker").datepicker({
@@ -85,6 +87,52 @@
 </script>
 
 
+<script>
+    $(function () {
+        $('input[name="datetimes"]').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+
+            "locale": {
+                "format": "DD.MM.YYYY",
+                "separator": " - ",
+                "applyLabel": "Kaydet",
+                "cancelLabel": "Vazgeç",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "daysOfWeek": [
+                    "Paz",
+                    "Pzt",
+                    "Sal",
+                    "Çar",
+                    "Per",
+                    "Cum",
+                    "Cmt",
+                    
+
+
+                ],
+                "monthNames": [
+                    "Ocak",
+                    "Şubat",
+                    "Mart",
+                    "Nisan",
+                    "Mayıs",
+                    "Haziran",
+                    "Temmuz",
+                    "Ağustos",
+                    "Eylül",
+                    "Ekim",
+                    "Kasım",
+                    "Aralık"
+                ],
+                "firstDay": 1,
+            },
+
+        });
+    });
+</script>
 
 
  @foreach (KirayaVerme post in Model.ilan)
@@ -125,23 +173,34 @@
   </div>
 
             <div class="column left" style="background-color:#bbb;">
-
-                <ul>
+                <ul id="postdetails" class="module">
+                <li>
+                    <i class='bx bx-current-location'></i> @post.IlanIl.ToUpper() / @post.IlanIlce / @post.IlanMahalle / @post.IlanIlce
+                </li>
+      
                     <li>
-                        @post.UserId
+                        <i class="fa-solid fa-building-columns"></i> Ev Türü : @post.EvTip | <i class="fa-solid fa-cube"></i>   m2  @post.M2Brut (brüt) | @post.M2Net (net)
                     </li>
                     <li>
-                        @post.IlanIl
+                        <i class="fa-solid fa-cubes"></i> Oda Sayısı: @post.OdaSayisi | <i class="fa-solid fa-bath"></i> Banyo Sayısı: @post.BanyoSayisi | <i class="fa-solid fa-kaaba"></i> Balkon sayısı: @post.Balkon
                     </li>
                     <li>
-                        @post.IlanIlce
+                  <i class="fa-solid fa-building-shield"></i> Site İçinde : @post.SiteIcerisinde | <i class="fa-solid fa-couch"></i> Eşya Durumu : @post.Esyali | <i class="fa-solid fa-house-fire"></i> Isınma : @post.IsitmaTuru
                     </li>
-
+                    <li>
+                        <i class="fa-solid fa-house-medical-circle-exclamation"></i> Bina Yaşı: @post.BinaYasi | <i class="fa-solid fa-building-flag"></i> Toplam Kat : @post.ToplamKat | <i class="fa-solid fa-monument"></i> Bulunduğu Kat : @post.BulunduguKat
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-hand"></i> Kimden : @post.Kimden | <i class="fa-regular fa-calendar"></i> Kiralama Dönemi : @post.KiralamaDonemi  | <i class="fa-solid fa-toolbox"></i> Aidat : @post.Aidat
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-stopwatch"></i> Minimum Kiralama Süresi : @post.MinimumSure | <i class="fa-solid fa-receipt"></i> Kira Tutarı : @post.KiraTutari
+                    </li>
                     <li>
                         <form method="get" action="/Home/Booking/">
 
 
-                            <input type="text" id="daterangeid" name="datetimes" style="width:100%;" />
+                            <input type="text" id="daterangeid" name="datetimes"  />
                             <input type="datetime" id="startdateinput" name="startdate">
                             <input type="datetime" id="enddateinput" name="enddate">
 
@@ -186,48 +245,3 @@
 }
 
 
-<script>
-    $(function () {
-        $('input[name="datetimes"]').daterangepicker({
-            timePicker: true,
-            timePicker24Hour: true,
-
-            "locale": {
-                "format": "DD.MM.YYYY",
-                "separator": " - ",
-                "applyLabel": "Kaydet",
-                "cancelLabel": "Vazgeç",
-                "fromLabel": "From",
-                "toLabel": "To",
-                "customRangeLabel": "Custom",
-                "daysOfWeek": [
-                    "Cmt",
-                    "Paz",
-                    "Pzt",
-                    "Sal",
-                    "Çar",
-                    "Per",
-                    "Cum",
-
-
-                ],
-                "monthNames": [
-                    "Ocak",
-                    "Şubat",
-                    "Mart",
-                    "Nisan",
-                    "Mayıs",
-                    "Haziran",
-                    "Temmuz",
-                    "Ağustos",
-                    "Eylül",
-                    "Ekim",
-                    "Kasım",
-                    "Aralık"
-                ],
-                "firstDay": 1
-            },
-
-        });
-    });
-</script>
