@@ -53,11 +53,7 @@ namespace EvlerKiralik.Controllers
             _webHostEnvironment = webHostEnvironment;
 
         }
-        public IActionResult ShowSokaks()
-        {
-            return View();
-
-        }
+   
 
 
         public IActionResult Index()
@@ -85,11 +81,7 @@ namespace EvlerKiralik.Controllers
             //var ilceler = _database.Ilcelers.Select(x=>x.IlId.Value=sender)
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+   
         Iller IlClass = new Iller();
         Ilceler IlceClass = new Ilceler();
         PostgresContext db = new PostgresContext();
@@ -264,13 +256,23 @@ namespace EvlerKiralik.Controllers
                         //ViewBag.deleteSuccess = "true";
                     }
                 }
-            
+                bool kapakcheck = true;
                 var toplamresimsayisi = _database.Pictures.Where(x => x.PostId == postidsi).Count();
                 var resimlerinhepsi = _database.Pictures.Where(x => x.PostId == postidsi).ToList();
                 for (int i = 0; i < toplamresimsayisi; i++)
                 {
                     resimlerinhepsi[i].ResimSira = i;
+                    if (resimlerinhepsi[i].IsKapak==true)
+                    {
+                        kapakcheck= false;
+                    
+                    }
                 }
+                if(kapakcheck==false)
+                {
+                    resimlerinhepsi[0].IsKapak = true;
+                }
+                
                 _database.SaveChangesAsync();
 
                 return RedirectToAction("EditGonderi", new { id = postidsi });
@@ -722,6 +724,17 @@ namespace EvlerKiralik.Controllers
 
 
             return View();
+        }
+
+        public JsonResult FiyatHesapla(string p,DateTime startdateT,DateTime enddateT)
+        {//2 farklı yontem 
+            TimeSpan gunsayisi = (enddateT - startdateT);
+            double gunsayiS = gunsayisi.TotalDays;
+
+            int gunsayisiInt = (enddateT.Date - startdateT.Date).Days;
+
+            double Price = (Convert.ToInt32(p) * gunsayiS);
+            return Json(Price);
         }
 
 

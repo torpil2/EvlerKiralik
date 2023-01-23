@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security;
 using System.Text;
 using Newtonsoft.Json;
+using Microsoft.Build.Framework;
 
 namespace EvlerKiralik.Controllers
 {
@@ -68,11 +69,12 @@ namespace EvlerKiralik.Controllers
                 //  CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
                 var newtoken = new JwtSecurityTokenHandler().WriteToken(token);
                 ViewBag.UserId = userget.UserMail;
-                return RedirectToAction("TabPage", "Home");
+                return RedirectToAction("Anasayfa", "Home");
             }
             else
             {
-                return RedirectToAction("TabPage","Home");
+               
+                return RedirectToAction("Anasayfa","Home");
             }
         }
 
@@ -89,7 +91,7 @@ namespace EvlerKiralik.Controllers
 
             
             await HttpContext.SignOutAsync();
-            return RedirectToAction("TabPage", "Home");
+            return RedirectToAction("Anasayfa", "Home");
         }
 
 

@@ -641,6 +641,10 @@
       "PackagePath": "staticwebassets\\assets\\vendor\\swiper\\swiper-bundle.min.js.map"
     },
     {
+      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\EditGonderi.css",
+      "PackagePath": "staticwebassets\\css\\EditGonderi.css"
+    },
+    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\IlanDetay.css",
       "PackagePath": "staticwebassets\\css\\IlanDetay.css"
     },
@@ -9233,20 +9237,12 @@
       "PackagePath": "staticwebassets\\imgs\\cografi_isaretli_urunler - Kopya.jpeg"
     },
     {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\genç_girişimci_kucuk.jpg",
-      "PackagePath": "staticwebassets\\imgs\\genç_girişimci_kucuk.jpg"
-    },
-    {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\homescreentemplate.jpg",
       "PackagePath": "staticwebassets\\imgs\\homescreentemplate.jpg"
     },
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kare.png",
       "PackagePath": "staticwebassets\\imgs\\kare.png"
-    },
-    {
-      "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_afis_ozel_egitim.jpg",
-      "PackagePath": "staticwebassets\\imgs\\kucuk_afis_ozel_egitim.jpg"
     },
     {
       "Id": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_cografi_isaretli.jpg",

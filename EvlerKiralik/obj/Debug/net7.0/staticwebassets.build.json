@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/eBz6phoE+tU225A8LAE6+BRjgEtXpysGjQXnaYRdPM=",
+  "Hash": "VUvyCKb+82Ay6wY4VLj/A51WS9HATeh+ZjWUyDHNQRc=",
   "Source": "EvlerKiralik",
   "BasePath": "_content/EvlerKiralik",
   "Mode": "Default",
@@ -2548,6 +2548,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\booking.css"
+    },
+    {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\EditGonderi.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "css/EditGonderi.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\EditGonderi.css"
     },
     {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\form.css",
@@ -39015,23 +39032,6 @@
       "OriginalItemSpec": "wwwroot\\imgs\\cografi_isaretli_urunler - Kopya.jpeg"
     },
     {
-      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\genç_girişimci_kucuk.jpg",
-      "SourceId": "EvlerKiralik",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
-      "BasePath": "_content/EvlerKiralik",
-      "RelativePath": "imgs/genç_girişimci_kucuk.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imgs\\genç_girişimci_kucuk.jpg"
-    },
-    {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\homescreentemplate.jpg",
       "SourceId": "EvlerKiralik",
       "SourceType": "Discovered",
@@ -39064,23 +39064,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imgs\\kare.png"
-    },
-    {
-      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_afis_ozel_egitim.jpg",
-      "SourceId": "EvlerKiralik",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
-      "BasePath": "_content/EvlerKiralik",
-      "RelativePath": "imgs/kucuk_afis_ozel_egitim.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imgs\\kucuk_afis_ozel_egitim.jpg"
     },
     {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\imgs\\kucuk_cografi_isaretli.jpg",

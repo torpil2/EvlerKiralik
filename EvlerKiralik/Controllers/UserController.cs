@@ -27,31 +27,26 @@ namespace EvlerKiralik.Controllers
 
     
         [HttpGet]
-        public IActionResult UserDashboard(int id)
+        public IActionResult Dashboard()
         {
            
 
-			var LoggedUser = User.Claims.FirstOrDefault(c=>c.Type== "UserId").Value;
+			int LoggedUser = Convert.ToInt32(User.Claims.FirstOrDefault(c=>c.Type== "UserId").Value);
            
-            if(id == Convert.ToInt32(LoggedUser))
-            {
-
+          
         
             dynamic model = new ExpandoObject();
 
-            model.CurrentUser = _database.Users.Where(x => x.UserId == id).ToList();
+            model.CurrentUser = _database.Users.Where(x => x.UserId == LoggedUser).ToList();
 
-            model.CurrentUserPosts = _database.KirayaVermes.Where(x => x.UserId == id).ToList();
+            model.CurrentUserPosts = _database.KirayaVermes.Where(x => x.UserId == LoggedUser).ToList();
 
             
 
             return View(model);
 			}
-            else
-            {
-                return RedirectToAction("TabPage", "Home");
-            }
-		}
+         
+		
 
 
     }

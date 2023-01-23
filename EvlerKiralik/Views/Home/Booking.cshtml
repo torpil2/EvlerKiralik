@@ -23,7 +23,8 @@
 <div id="centerdiv" >
 
     @foreach (KirayaVerme bookingpost in Model.ilan)
-    {         
+    {     
+       
     <div id="bookingpic">
       @foreach (Picture postpic in Model.postpics)
       {
@@ -52,9 +53,18 @@
 
                 <input type="text" id="startdateinput" name="startdate">
                 <input type="datetime" id="enddateinput" name="enddate">
-                
-           
-    
+                @if(User.Claims.FirstOrDefault()!=null)
+                {
+                    <input type="text" name="userid" value=" @User.Claims.FirstOrDefault(c => c.Type == "UserId").Value"> <text>deneme</text>
+                }
+                else
+                {
+                    <span id="formtext"> TÜM AVANTAJLARAN YARARLANMAK İÇİN <a href="#">GİRİŞ YAP </a> </span>
+                }
+               
+
+
+
                 <button type="submit" class="custom-btn btn-15" >Submit</button>
                 </form>
 

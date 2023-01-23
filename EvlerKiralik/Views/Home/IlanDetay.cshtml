@@ -21,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 @*<script>
     $(function () {
         $("#datepicker").datepicker({
@@ -49,6 +51,8 @@
             // current class
             $('nav li.current').removeClass('current');
             $(this).parent().addClass('current');
+            
+       
 
             // set new heading
             $('h1.heading').text($(this).text());
@@ -73,15 +77,19 @@
         // lightbox
         $('ul#gallery a').on('click', function (event) {
             event.preventDefault();
+         
             var link = $(this).find('img').attr('src');
             $('.gallery img').attr('src', '');
             $('.gallery img').attr('src', link);
             $('.gallery').fadeIn('slow');
+            $('#postdetails').attr("style", "visibility:hidden");
         });
         // close lightbox
         $('.gallery').on('click', function (event) {
             event.preventDefault();
             $('.gallery').fadeOut('slow');
+            $('#postdetails').attr("style", "visibility:visible");
+
         });
     });
 </script>
@@ -92,7 +100,7 @@
         $('input[name="datetimes"]').daterangepicker({
             timePicker: true,
             timePicker24Hour: true,
-
+                "opens": "center",
             "locale": {
                 "format": "DD.MM.YYYY",
                 "separator": " - ",
@@ -138,11 +146,11 @@
  @foreach (KirayaVerme post in Model.ilan)
     {
 <div>
-   
-        <div class="headertext"><p>@post.IlanAdi</p>  </div>
+
+        <div class="headertext "><p>@post.IlanAdi</p>  </div>
        <div class="row">
          
-  <div class="column right" style="background-color:#aaa;">             
+  <div class="column rightt" >             
         
             <div id="projects">
                 <ul id="gallery">
@@ -171,49 +179,57 @@
 
             </div>
   </div>
-
-            <div class="column left" style="background-color:#bbb;">
+  <form method="get" action="/Home/Booking/" id="resform">           </form>
+            <div class="column leftt">
                 <ul id="postdetails" class="module">
                 <li>
                     <i class='bx bx-current-location'></i> @post.IlanIl.ToUpper() / @post.IlanIlce / @post.IlanMahalle / @post.IlanIlce
                 </li>
       
                     <li>
-                        <i class="fa-solid fa-building-columns"></i> Ev Türü : @post.EvTip | <i class="fa-solid fa-cube"></i>   m2  @post.M2Brut (brüt) | @post.M2Net (net)
+                        <i class="fa-solid fa-building-columns"></i>  Ev Türü :<a class="aciklama"> @post.EvTip </a>| <i class="fa-solid fa-cube"></i>   m2  <a class="aciklama">@post.M2Brut</a> (brüt) |  <a class="aciklama">@post.M2Net</a> (net)
                     </li>
                     <li>
-                        <i class="fa-solid fa-cubes"></i> Oda Sayısı: @post.OdaSayisi | <i class="fa-solid fa-bath"></i> Banyo Sayısı: @post.BanyoSayisi | <i class="fa-solid fa-kaaba"></i> Balkon sayısı: @post.Balkon
+                        <i class="fa-solid fa-cubes"></i> Oda Sayısı: <a class="aciklama">@post.OdaSayisi</a> | <i class="fa-solid fa-bath"></i> Banyo Sayısı: <a class="aciklama">@post.BanyoSayisi</a> | <i class="fa-solid fa-kaaba"></i> Balkon sayısı: <a class="aciklama">@post.Balkon</a>
                     </li>
                     <li>
-                  <i class="fa-solid fa-building-shield"></i> Site İçinde : @post.SiteIcerisinde | <i class="fa-solid fa-couch"></i> Eşya Durumu : @post.Esyali | <i class="fa-solid fa-house-fire"></i> Isınma : @post.IsitmaTuru
+                        <i class="fa-solid fa-building-shield"></i> Site İçinde : <a class="aciklama">@post.SiteIcerisinde </a>| <i class="fa-solid fa-couch"></i> Eşya Durumu :<a class="aciklama"> @post.Esyali </a>| <i class="fa-solid fa-house-fire"></i> Isınma : <a class="aciklama">@post.IsitmaTuru</a>
                     </li>
                     <li>
-                        <i class="fa-solid fa-house-medical-circle-exclamation"></i> Bina Yaşı: @post.BinaYasi | <i class="fa-solid fa-building-flag"></i> Toplam Kat : @post.ToplamKat | <i class="fa-solid fa-monument"></i> Bulunduğu Kat : @post.BulunduguKat
+                        <i class="fa-solid fa-house-medical-circle-exclamation"></i> Bina Yaşı: <a class="aciklama">@post.BinaYasi</a> | <i class="fa-solid fa-building-flag"></i> Toplam Kat :<a class="aciklama"> @post.ToplamKat</a> | <i class="fa-solid fa-monument"></i> Bulunduğu Kat :<a class="aciklama"> @post.BulunduguKat</a>
                     </li>
                     <li>
-                        <i class="fa-solid fa-hand"></i> Kimden : @post.Kimden | <i class="fa-regular fa-calendar"></i> Kiralama Dönemi : @post.KiralamaDonemi  | <i class="fa-solid fa-toolbox"></i> Aidat : @post.Aidat
+                        <i class="fa-solid fa-hand"></i> Kimden : <a class="aciklama">@post.Kimden </a>| <i class="fa-regular fa-calendar"></i> Kiralama Dönemi :<a class="aciklama"> @post.KiralamaDonemi </a> | <i class="fa-solid fa-toolbox"></i> Aidat : <a class="aciklama">@post.Aidat</a>
                     </li>
                     <li>
-                        <i class="fa-solid fa-stopwatch"></i> Minimum Kiralama Süresi : @post.MinimumSure | <i class="fa-solid fa-receipt"></i> Kira Tutarı : @post.KiraTutari
+                        <i class="fa-solid fa-stopwatch"></i> Minimum Kiralama Süresi :<a class="aciklama"> @post.MinimumSure</a> | <i class="fa-solid fa-receipt"></i> Kira Tutarı :<a class="aciklama" id="kiratutarcallback"> @post.KiraTutari</a>
                     </li>
-                    <li>
-                        <form method="get" action="/Home/Booking/">
+                      
+                    <li >
 
+                        <i class="fa-solid fa-calendar-plus"></i> Rezervasyon Dönemi Seç :
 
-                            <input type="text" id="daterangeid" name="datetimes"  />
-                            <input type="datetime" id="startdateinput" name="startdate">
-                            <input type="datetime" id="enddateinput" name="enddate">
+                            <input type="text" id="daterangeid" name="datetimes"  class=":form-control" form="resform"/>
+                        <input type="datetime" id="startdateinput" name="startdate" form="resform" hidden>
+                        <input type="datetime" id="enddateinput" name="enddate" form="resform" hidden>
 
-                            <input type="text" value="@post.IlanId" name="postid" hidden>
+                        <input type="text" value="@post.IlanId" name="postid" form="resform" hidden>
                             @if (User.Identity.Name != null)
                             {
                                 <input type="text" value="@User.Claims.FirstOrDefault(c => c.Type == "UserId").Value" name="userid" hidden>
                             }
-                            <input type="submit" value="rezervasyon yap">
-                        </form>
+                         
 
                     </li>
+                    <li>
+                        <i class="fa-regular fa-money-bills-simple"></i> Tahmini Fiyat : <div  id="pricecallback"></div>
+                    </li>
                 </ul>
+                       <button type="submit" class="custom-btn btn-15" form="resform">Submit</button>
+                        
+                  
+         
+             
 
                 <script>
                     var startdateinput = document.getElementById("startdateinput");
@@ -228,7 +244,37 @@
                         startdateinput.value = "";
                         startdateinput.value = startDateValue;
 
-                    });
+                      
+                               
+                                   var endDate = endDateValue
+                                   var startDate = startDateValue
+                                   var Price = document.getElementById("kiratutarcallback").innerText;
+                                    console.log(Price)
+                                    $.ajax({
+                                url: '/Home/FiyatHesapla',
+                                data: { p: Price,startdateT : startDate ,enddateT : endDate },
+                                        type: "POST",
+                                        dataType: "Json",
+                                        success: function (data) {
+
+                                            console.log(data);
+                               
+                                    $('#pricecallback').empty();
+                               
+                                console.log("removed");
+
+                                $('#pricecallback').append("<div class='animate__animated animate__bounceInRight'> <a class='aciklama'>   " + data + " ₺ </a></div>");
+
+                                            
+                                        
+                                    }
+                                    });
+                                    });
+                       
+                           
+          
+
+            
                 </script>
 
 

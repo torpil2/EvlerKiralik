@@ -68,10 +68,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxLaXJhbGlrRXZsZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/Home/Tabpage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUYWJwYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -100,8 +96,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/User/UserDashboard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyRGFzaGJvYXJkLmNzaHRtbA==
+[D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/User/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/evlerkiralik/evlerkiralikgithub/EvlerKiralik/EvlerKiralik/Views/_ViewStart.cshtml]

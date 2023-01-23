@@ -1,0 +1,66 @@
+﻿@using EvlerKiralik.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+
+
+
+@model dynamic
+@{
+    ViewData["Title"] = "UserDasboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@Url.Content("~/css/table.css")" asp-append-version="true" />
+
+
+<style>
+    span
+    {
+        display:flex;
+    }
+</style>
+
+@foreach (User user in Model.CurrentUser)
+{
+    <div style="display:block;background-color:white;width:50%">
+    <span >@user.UserName</span>
+
+    <span>@user.UserMail</span>
+
+    <span> @user.LastLogin</span>
+
+    <span>@user.UserPassword</span>
+	
+		<span>@User.Claims.FirstOrDefault(c => c.Type == "UserType").Value</span>
+	
+    </div>
+}  
+
+<table>
+
+	<thead>
+		<tr>
+			<td>Ilan Adı</td>
+			<td>Ilan İl</td>
+			<td>Ilan İlce</td>
+			<td>Ilan Mahalle</td>
+			<td>Ilan Sokak</td>
+			<td>Düzenle</td>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (KirayaVerme kirayavermeposts in Model.CurrentUserPosts)
+		{
+			<tr>
+				<td>@kirayavermeposts.IlanAdi</td>
+				<td>@kirayavermeposts.IlanIl</td>
+				<td>@kirayavermeposts.IlanIlce</td>
+				<td>@kirayavermeposts.IlanMahalle</td>
+				<td>@kirayavermeposts.IlanSokak</td>
+				<td><a href="/Home/EditGonderi/@kirayavermeposts.IlanId">Düzenle</a></td>
+			</tr>
+		}
+	</tbody>
+
+</table>
