@@ -88,7 +88,6 @@ namespace EvlerKiralik.Controllers
         [HttpPost]
         public async Task<IActionResult> LogoutAct()
         {
-
             
             await HttpContext.SignOutAsync();
             return RedirectToAction("Anasayfa", "Home");

@@ -737,6 +737,5 @@ namespace EvlerKiralik.Controllers
             return Json(Price);
         }
 
-
     }
 }

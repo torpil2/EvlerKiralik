@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VUvyCKb+82Ay6wY4VLj/A51WS9HATeh+ZjWUyDHNQRc=",
+  "Hash": "OaLyZ9dbRqJ2nBYSmuy5Lj/wnqErW5JjHqpI77lJtck=",
   "Source": "EvlerKiralik",
   "BasePath": "_content/EvlerKiralik",
   "Mode": "Default",
@@ -2550,6 +2550,23 @@
       "OriginalItemSpec": "wwwroot\\css\\booking.css"
     },
     {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\Dashboard.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "css/Dashboard.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Dashboard.css"
+    },
+    {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\EditGonderi.css",
       "SourceId": "EvlerKiralik",
       "SourceType": "Discovered",
@@ -2635,6 +2652,23 @@
       "OriginalItemSpec": "wwwroot\\css\\menulayout.css"
     },
     {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\reset.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "css/reset.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\reset.css"
+    },
+    {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\sidebar.css",
       "SourceId": "EvlerKiralik",
       "SourceType": "Discovered",
@@ -2684,6 +2718,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\table.css"
+    },
+    {
+      "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\css\\usermenu.css",
+      "SourceId": "EvlerKiralik",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\",
+      "BasePath": "_content/EvlerKiralik",
+      "RelativePath": "css/usermenu.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\usermenu.css"
     },
     {
       "Identity": "D:\\evlerkiralik\\evlerkiralikgithub\\EvlerKiralik\\EvlerKiralik\\wwwroot\\favicon.ico",

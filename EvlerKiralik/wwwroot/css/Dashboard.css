@@ -1,0 +1,174 @@
+﻿
+
+/* ------------------------- Separate line ------------------------- */
+.circular-menu {
+    font-size: 10px;
+    width:3em;
+  
+    right:3%;
+    margin-top: .0em !important;
+    
+    position:absolute;
+}
+
+.circular-menu__button {
+    display: none;
+  
+   
+}
+
+    .circular-menu__button:checked + .circular-menu__icon {
+        transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+
+        .circular-menu__button:checked + .circular-menu__icon > .hamburger-bar:nth-child(1) {
+            transform: translate3d(0, 0, 0) rotate(45deg);
+        }
+
+        .circular-menu__button:checked + .circular-menu__icon > .hamburger-bar:nth-child(2) {
+            transform: translate3d(0, 0, 0) scale(0.1, 1);
+        }
+
+        .circular-menu__button:checked + .circular-menu__icon > .hamburger-bar:nth-child(3) {
+            transform: translate3d(0, 0, 0) rotate(-45deg);
+        }
+
+    .circular-menu__button:checked ~ .circular-menu__item {
+        transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
+    }
+
+        .circular-menu__button:checked ~ .circular-menu__item:nth-of-type(1) {
+            transition-duration: 0.18s;
+            transform: translate3d(-50px, 0px, 0);
+        }
+
+        .circular-menu__button:checked ~ .circular-menu__item:nth-of-type(2) {
+            transition-duration: 0.28s;
+            transform: translate3d(-50px, 55px, 0);
+        }
+
+        .circular-menu__button:checked ~ .circular-menu__item:nth-of-type(3) {
+            transition-duration: 0.38s;
+            transform: translate3d(-50px, 110px, 0);
+        }
+
+        .circular-menu__button:checked ~ .circular-menu__item:nth-of-type(4) {
+            transition-duration: 0.48s;
+            transform: translate3d(-50px, 165px, 0);
+        }
+
+        .circular-menu__button:checked ~ .circular-menu__item:nth-of-type(5) {
+            transition-duration: 0.58s;
+            transform: translate3d(-50px, 220px, 0);
+        }
+
+.circular-menu__icon {
+    background: #dc143c;
+    border-radius: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    margin-left: -30px;
+    position: absolute;
+    text-align: center;
+    top: 35px;
+    transform: translate3d(0, 0, 0);
+    transition: transform ease-out 0.2s;
+    width: 50px;
+    cursor: pointer;
+    transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+}
+
+    .circular-menu__icon:hover {
+        transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+    }
+
+    .circular-menu__icon > .hamburger {
+        background: #fff;
+        display: block;
+        width: 25px;
+        height: 3px;
+        left: 50%;
+        margin-left: -12.5px;
+        margin-top: -1.5px;
+        position: absolute;
+        top: 50%;
+        transition: transform 0.2s;
+    }
+
+    .circular-menu__icon > .hamburger-bar:nth-child(1) {
+        transform: translate3d(0, -8px, 0);
+    }
+
+    .circular-menu__icon > .hamburger-bar:nth-child(2) {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .circular-menu__icon > .hamburger-bar:nth-child(3) {
+        transform: translate3d(0, 8px, 0);
+    }
+
+.circular-menu__item {
+    background: #dc143c;
+    border-radius: 90%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    color: #fff;
+    height: 50px;
+    line-height:50px;
+    margin-left: -30px;
+    position: absolute;
+    text-align: center;
+    top: 35px;    
+    transform: translate3d(0, 0, 0);
+    transition: transform ease-out 0.2s;
+    width: 50px;
+    font-size: 25px;
+}
+
+    .circular-menu__item:nth-of-type(1) {
+        transition-duration: 0.18s;
+    }
+
+    .circular-menu__item:nth-of-type(2) {
+        transition-duration: 0.18s;
+    }
+
+    .circular-menu__item:nth-of-type(3) {
+        transition-duration: 0.18s;
+    }
+
+    .circular-menu__item:nth-of-type(4) {
+        transition-duration: 0.18s;
+    }
+
+    .circular-menu__item:nth-of-type(5) {
+        transition-duration: 0.18s;
+    }
+
+    .circular-menu__item:hover {
+        color: #dc143c;
+        background: #f08080;
+    }
+
+    .circular-menu__item:active,
+    .circular-menu__item:focus {
+        color: #8b0000;
+    }
+
+#contentdiv
+{
+    margin:auto;
+    background-color:red;
+    height:100%;
+    text-align:center;
+    align-content:center;
+    align-items:center;
+    justify-content:center;
+
+}

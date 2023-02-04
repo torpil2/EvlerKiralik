@@ -8,19 +8,30 @@
 @model dynamic
 @{
     ViewData["Title"] = "UserDasboard";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/MenuLayout_.cshtml";
 }
 <link rel="stylesheet" href="@Url.Content("~/css/table.css")" asp-append-version="true" />
 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<!-- include libraries(jQuery, bootstrap) -->
 
-<style>
-    span
-    {
-        display:flex;
-    }
-</style>
 
-@foreach (User user in Model.CurrentUser)
+
+
+<link href="@Url.Content("/fontawesome/css/font-awesome.css")" rel="stylesheet">
+<link href="@Url.Content("/fontawesome/css/brands.css")" rel="stylesheet">
+<link href="@Url.Content("/fontawesome/css/solid.css")" rel="stylesheet" />
+
+<link rel="stylesheet" href="@Url.Content("~/css/Dashboard.css")" asp-append-version="true" />
+
+<link type="text/css" rel="stylesheet" href="/css/menulayout.css" />
+
+
+
+
+@*@foreach (User user in Model.CurrentUser)
 {
     <div style="display:block;background-color:white;width:50%">
     <span >@user.UserName</span>
@@ -63,4 +74,49 @@
 		}
 	</tbody>
 
-</table>
+</table>*@
+
+
+
+<div class="circular-menu">
+    <input class="circular-menu__button" id="circular-menu" type="checkbox" href="javascript: void 0" checked="checked" />
+    <label class="circular-menu__icon" for="circular-menu">
+        <div class="hamburger hamburger-bar"></div>
+        <div class="hamburger hamburger-bar"></div>
+        <div class="hamburger hamburger-bar"></div>
+    </label><a content="DENEME" class="circular-menu__item" href="#"><i   class="fa-solid fa-user"></i></a><a class="circular-menu__item" href="#"><i class="fa-solid fa-building-user"></i></a><a class="circular-menu__item" href="#"><i class="fa-solid fa-envelope-open"></i></a><a class="circular-menu__item" href="#"><i class="fa-solid fa-signs-post"></i></a><a class="circular-menu__item" href="#"><i class="fa-solid fa-star"></i></a>
+</div>
+
+<div id="contentdiv">asdasdass </div>
+
+
+<script type="text/javascript">
+    {
+        let sideBar = document.querySelector('.side-bar');
+        let arrowCollapse = document.querySelector('#logo-name__icon');
+        sideBar.onclick = () => {
+            sideBar.classList.toggle('collapse');
+            arrowCollapse.classList.toggle('collapse');
+            if (arrowCollapse.classList.contains('collapse')) {
+                arrowCollapse.classList =
+                    'bx bx-arrow-from-left logo-name__icon collapse';
+            } else {
+                arrowCollapse.classList = 'bx bx-arrow-from-right logo-name__icon';
+            }
+        };
+    }
+</script>
+ 
+          <script>
+    $(document).ready(function () {
+     $.ajax ({
+        type: 'GET',
+        url: '/Home/KiralikEvler',
+
+        success: function(data){
+            $('#partialviewdiv').html("");
+             $('#partialviewdiv').html(data);
+        }
+    });
+});
+        </script>
